@@ -465,16 +465,18 @@ $name = str_slug($form['label'], '');
                                                     "</td>";
                                                 @elseif($c['type']=='upload')
                                                         @if($c['upload_type']=='image')
-                                                    trRow += "<td class='{{$c['name']}}'>" +
-                                                    "<a data-lightbox='roadtrip' href='{{asset('/')}}" + $('#{{$name.$c["name"]}} .input-id').val() + "'><img data-label='" + $('#{{$name.$c["name"]}} .input-label').val() + "' src='{{asset('/')}}" + $('#{{$name.$c["name"]}} .input-id').val() + "' width='50px' height='50px'/></a>" +
-                                                    "<input type='hidden' name='{{$name}}-{{$c['name']}}[]' value='" + $('#{{$name.$c["name"]}} .input-id').val() + "'/>" +
-                                                    "</td>";
-                                                @else
-                                                    trRow += "<td class='{{$c['name']}}'><a data-label='" + $('#{{$name.$c["name"]}} .input-label').val() + "' href='{{asset('/')}}" + $('#{{$name.$c["name"]}} .input-id').val() + "'>" + $('#{{$name.$c["name"]}} .input-label').val() + "</a>" +
-                                                    "<input type='hidden' name='{{$name}}-{{$c['name']}}[]' value='" + $('#{{$name.$c["name"]}} .input-id').val() + "'/>" +
-                                                    "</td>";
-                                                @endif
+                                                            trRow += "<td class='{{$c['name']}}'>" +
+                                                            "<a data-lightbox='roadtrip' href='{{asset('/')}}" + $('#{{$name.$c["name"]}} .input-id').val() + "'><img data-label='" + $('#{{$name.$c["name"]}} .input-label').val() + "' src='{{asset('/')}}" + $('#{{$name.$c["name"]}} .input-id').val() + "' width='50px' height='50px'/></a>" +
+                                                            "<input type='hidden' name='{{$name}}-{{$c['name']}}[]' value='" + $('#{{$name.$c["name"]}} .input-id').val() + "'/>" +
+                                                            "</td>";
                                                         @else
+                                                            trRow += "<td class='{{$c['name']}}'><a data-label='" + $('#{{$name.$c["name"]}} .input-label').val() + "' href='{{asset('/')}}" + $('#{{$name.$c["name"]}} .input-id').val() + "'>" + $('#{{$name.$c["name"]}} .input-label').val() + "</a>" +
+                                                            "<input type='hidden' name='{{$name}}-{{$c['name']}}[]' value='" + $('#{{$name.$c["name"]}} .input-id').val() + "'/>" +
+                                                            "</td>";
+                                                        @endif
+                                                @elseif($c['type']=='hidden')
+                                                    trRow += "<td class='{{$c['name']}}' style='display:none;'><input type='hidden' name='{{$name}}-{{$c['name']}}[]' value='" + $('#{{$name.$c["name"]}}').val() + "'/></td>";
+                                                @else
                                                     trRow += "<td class='{{$c['name']}}'>" + $('#{{$name.$c["name"]}}').val() +
                                                     "<input type='hidden' name='{{$name}}-{{$c['name']}}[]' value='" + $('#{{$name.$c["name"]}}').val() + "'/>" +
                                                     "</td>";
@@ -517,7 +519,11 @@ $name = str_slug($form['label'], '');
                                 <thead>
                                 <tr>
                                     @foreach($form['columns'] as $col)
-                                        <th>{{$col['label']}}</th>
+                                        @if($col['type']!='hidden')
+                                            <th>{{$col['label']}}</th>
+                                        @else
+                                            <th style="display:none;">{{$col['label']}}</th>
+                                        @endif
                                     @endforeach
                                     <th width="90px">{{cbLang('action_label')}}</th>
                                 </tr>
@@ -550,9 +556,9 @@ $name = str_slug($form['label'], '');
                                 ?>
                                 <tr>
                                     @foreach($form['columns'] as $col)
-                                        <td class="{{$col['name']}}">
                                             <?php
                                             if ($col['type'] == 'select') {
+                                                echo "<td class='".$col['name']."'>";
                                                 if ($col['datatable']) {
                                                     $join_table = explode(',', $col['datatable'])[0];
                                                     $join_field = explode(',', $col['datatable'])[1];
@@ -567,14 +573,18 @@ $name = str_slug($form['label'], '');
                                                     echo "</span>";
                                                     echo "<input type='hidden' name='".$name."-".$col['name']."[]' value='".$d->{$col['name']}."'/>";
                                                 }
+                                                echo "</td>";
                                             } elseif ($col['type'] == 'datamodal') {
+                                                echo "<td class='".$col['name']."'>";
                                                 $datamodal_title = explode(',', $col['datamodal_columns'])[0];
                                                 $datamodal_table = $col['datamodal_table'];
                                                 echo "<span class='td-label'>";
                                                 echo $d->{$datamodal_table.'_'.$datamodal_title};
                                                 echo "</span>";
                                                 echo "<input type='hidden' name='".$name."-".$col['name']."[]' value='".$d->{$col['name']}."'/>";
+                                                echo "</td>";
                                             } elseif ($col['type'] == 'upload') {
+                                                echo "<td class='".$col['name']."'>";
                                                 $filename = basename($d->{$col['name']});
                                                 if ($col['upload_type'] == 'image') {
                                                     echo "<a href='".asset($d->{$col['name']})."' data-lightbox='roadtrip'><img data-label='$filename' src='".asset($d->{$col['name']})."' width='50px' height='50px'/></a>";
@@ -583,14 +593,20 @@ $name = str_slug($form['label'], '');
                                                     echo "<a data-label='$filename' href='".asset($d->{$col['name']})."'>$filename</a>";
                                                     echo "<input type='hidden' name='".$name."-".$col['name']."[]' value='".$d->{$col['name']}."'/>";
                                                 }
+                                                echo "</td>";
+                                            } elseif ($col['type'] == 'hidden') {
+                                                echo "<td class='".$col['name']."'style='display:none;'>";
+                                                echo "<input type='hidden' name='".$name."-".$col['name']."[]' value='".$d->{$col['name']}."'/>";
+                                                echo "</td>";
                                             } else {
+                                                echo "<td class='".$col['name']."'>";
                                                 echo "<span class='td-label'>";
                                                 echo $d->{$col['name']};
                                                 echo "</span>";
                                                 echo "<input type='hidden' name='".$name."-".$col['name']."[]' value='".$d->{$col['name']}."'/>";
+                                                echo "</td>";
                                             }
                                             ?>
-                                        </td>
                                     @endforeach
                                     <td>
                                         <a href='#panel-form-{{$name}}' onclick='editRow{{$name}}(this)' class='btn btn-warning btn-xs'><i
