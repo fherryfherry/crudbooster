@@ -37,12 +37,16 @@
     $color = $a['color'] ?: 'primary';
     $confirmation = $a['confirmation'];
     $target = $a['target'] ?: '_self';
-
+    $extra=$a['extra'];
     $url = $a['url'];
     if (isset($confirmation) && ! empty($confirmation)) {
         $url = "javascript:;";
     }
-
+    if(isset($extra){
+        foreach ($row as $key => $val) {
+            $extra= str_replace("[".$key."]", '"'.$val.'"', $extra);
+        }
+    }
     if (isset($a['showIf'])) {
 
         $query = $a['showIf'];
@@ -52,10 +56,10 @@
         }
 
         @eval("if($query) {
-          echo \"<a class='btn btn-xs btn-\$color' title='\$title' onclick='\$confirm_box' href='\$url' target='\$target'><i class='\$icon'></i> $label</a>&nbsp;\";
+          echo \"<a class='btn btn-xs btn-\$color' title='\$title' onclick='\$confirm_box' href='\$url' target='\$target' \$extra><i class='\$icon'></i> $label</a>&nbsp;\";
       }");
     } else {
-        echo "<a class='btn btn-xs btn-$color' title='$title' onclick='$confirm_box' href='$url' target='$target'><i class='$icon'></i> $label</a>&nbsp;";
+        echo "<a class='btn btn-xs btn-$color' title='$title' onclick='$confirm_box' href='$url' target='$target' $extra><i class='$icon'></i> $label</a>&nbsp;";
     }
     ?>
 @endforeach

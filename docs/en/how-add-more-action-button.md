@@ -19,6 +19,8 @@ It will add **Set Active** button if a row has status 'pending', and the opposit
 
 In the `showIf` attribute, you can fill anything condition with any other operator. You can use `[field_name]` as an alias.
 
+In the `extra` attribute, you can fill any other attribute for the button. You can also use `[field_name]` as an alias.
+
 If the `confirmation` attribute is set to 'true', a confirm dialogue will show before the action takes place.
 
 Then, lets create a method to update the `products` status. Create a method after `cbInit()` method.
