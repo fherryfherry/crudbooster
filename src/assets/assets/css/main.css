@@ -46,7 +46,9 @@
 		font-size: 12px;
 	}
 
-	
+    .table-responsive #table_dashboard {
+        max-width: none !important;
+    }
 
 	.login-box-body {
       box-shadow: 0px 0px 25px #999999;

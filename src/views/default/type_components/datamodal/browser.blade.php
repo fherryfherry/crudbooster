@@ -7,7 +7,7 @@
 <!-- Theme style -->
 <link href="{{ asset("vendor/crudbooster/assets/adminlte/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset("vendor/crudbooster/assets/adminlte/dist/css/skins/_all-skins.min.css")}}" rel="stylesheet" type="text/css"/>
-
+<link href="{{ asset("vendor/crudbooster/assets/css/main.css")}}" rel="stylesheet" type="text/css"/>
 @include('crudbooster::admin_template_plugins')
 
 <?php
@@ -22,7 +22,7 @@ if (count($coloms_alias) < 2 && isset($columns)) {
     <input type="text" placeholder="{{cbLang('datamodal_search_and_enter')}}" name="q" title="{{cbLang('datamodal_enter_to_search')}}"
            value="{{Request::get('q')}}" class="form-control">
 </form>
-
+<div class="table-responsive">
 <table id='table_dashboard' class='table table-striped table-bordered table-condensed' style="margin-bottom: 0px">
     <thead>
     @foreach($coloms_alias as $col)
@@ -67,4 +67,5 @@ if (count($coloms_alias) < 2 && isset($columns)) {
     @endforeach
     </tbody>
 </table>
+</div>
 <div align="center">{!! str_replace("/?","?",$result->appends(Request::all())->render()) !!}</div>
