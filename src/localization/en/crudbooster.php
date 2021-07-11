@@ -221,6 +221,8 @@ return [
     'filter_rows_total' => 'Total rows',
     'filter_rows_to' => 'to',
     'filter_rows_of' => 'of',
+    'filter_date_start'=>'Start Date',
+    'filter_date_end'=>'End Date',
 
     // confirmation
     'confirmation_yes' => 'Yes!',

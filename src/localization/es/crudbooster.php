@@ -209,6 +209,8 @@ return [
     'filter_rows_total' => 'Total de registros',
     'filter_rows_to' => 'a',
     'filter_rows_of' => 'de',
+    'filter_date_start'=>'Fecha Inicio',
+    'filter_date_end'=>'Fecha Fin',
     // confirmation
     'confirmation_yes' => '¡Sí!',
     'confirmation_no' => 'No',
