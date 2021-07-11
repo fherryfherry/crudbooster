@@ -15,6 +15,8 @@ $this->form[] = ['label'=>'Product Name','name'=>'products_id','type'=>'datamoda
 | datamodal_size | E.g : `large` or `default` | popup size |
 | datamodal_height | E.g : `500px` | modal height |
 | datamodal_paginate | E.g : `10` | results pagination |
+| datamodal_orderby | E.g : `field,desc` | orders results |
+| datamodal_search_in | E.g: `field,field2` | search only in specified columns
 
 ## What's Next
 - [Form Input Type: date](./form-date.md)

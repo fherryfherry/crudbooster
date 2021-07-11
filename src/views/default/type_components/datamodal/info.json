@@ -17,6 +17,9 @@
       "datamodal_where": "string where condition",
       "datamodal_module_path": "Module name",
       "datamodal_columns_alias_name": "Column name Alias , sparate with comma ex: 'Name Surname','Age' ",
+      "datamodal_paginate": "Pagination",
+      "datamodal_order_by": "String orderby",
+      "datamodal_search_in": "Columns to search in query",
       "style": "string inline stylesheet",
       "help": "string help-block"
     }

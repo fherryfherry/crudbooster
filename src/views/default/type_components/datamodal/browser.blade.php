@@ -19,7 +19,7 @@ if (count($coloms_alias) < 2 && isset($columns)) {
 ?>
 <form method='get' action="">
     {!! CRUDBooster::getUrlParameters(['q']) !!}
-    <input type="text" placeholder="{{cbLang('datamodal_search_and_enter')}}" name="q" title="{{cbLang('datamodal_enter_to_search')}}"
+    <input type="text" placeholder="{{cbLang('datamodal_search_and_enter')." ".Request::get('search_in')}}" name="q" title="{{cbLang('datamodal_enter_to_search')}}"
            value="{{Request::get('q')}}" class="form-control">
 </form>
 

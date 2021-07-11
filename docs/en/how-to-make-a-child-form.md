@@ -61,7 +61,7 @@ $this->form[] = ['label'=>'Orders Detail','name'=>'orders_detail','type'=>'child
 | select | datatable - e.g : 'tableName,fieldName' |
 | radio | dataenum - e.g : ['a','b','c [, ...]] | 
 | upload | upload_type - (image,file) |
-| datamodal | datamodal_table,datamodal_columns,datamodal_select_to,datamodal_where,datamodal_size,datamodal_height,datamodal_paginate |
+| datamodal | datamodal_table,datamodal_columns,datamodal_select_to,datamodal_where,datamodal_size,datamodal_height,datamodal_paginate,datamodal_orderby |
 
 ## What's Next
 - [How To Make The Graded Select Boxes (Parent Select -> Child Select -> Etc..)](./how-make-graded-select-box.md)

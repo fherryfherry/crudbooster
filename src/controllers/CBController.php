@@ -358,7 +358,7 @@ class CBController extends Controller
                 }
             } else {
 
-                if(isset($field_array[1])) {                    
+                if(isset($field_array[1])) {
                     $result->addselect($table.'.'.$field.' as '.$table.'_'.$field);
                     $columns_table[$index]['type_data'] = CRUDBooster::getFieldType($table, $field);
                     $columns_table[$index]['field'] = $table.'_'.$field;
@@ -369,7 +369,7 @@ class CBController extends Controller
                     $columns_table[$index]['field'] = $field;
                     $columns_table[$index]['field_raw'] = $field;
                 }
-                
+
                 $columns_table[$index]['field_with'] = $table.'.'.$field;
             }
         }
@@ -705,15 +705,22 @@ class CBController extends Controller
         $table = request('table');
         $where = request('where');
         $where = urldecode($where);
+        $orderby = request('order_by');
+        $orderby = urldecode($orderby);
         $columns = request('columns');
         $columns = explode(",", $columns);
+        $searchable_columns=Request::get('search_in') ? explode(',',Request::get('search_in')): NULL;
         $paginate=request('paginate');
         $paginate = urldecode($paginate);
         $table = CRUDBooster::parseSqlTable($table)['table'];
         $tablePK = CB::pk($table);
         $result = DB::table($table);
+        $data['columns'] = $columns;
 
         if (request('q')) {
+            if($searchable_columns){
+                $columns=$searchable_columns;
+            }
             $result->where(function ($where) use ($columns) {
                 foreach ($columns as $c => $col) {
                     if ($c == 0) {
@@ -729,10 +736,14 @@ class CBController extends Controller
             $result->whereraw($where);
         }
 
-        $result->orderby($tablePK, 'desc');
+        if($orderby){
+            $orderby= explode(',',$orderby);
+            $result->orderby($orderby[0],$orderby[1]);
+        }else{
+            $result->orderby($tablePK, 'desc');
+        }
 
         $data['result'] = $result->paginate($paginate?:6);
-        $data['columns'] = $columns;
 
         return view('crudbooster::default.type_components.datamodal.browser', $data);
     }
@@ -1144,7 +1155,7 @@ class CBController extends Controller
         $this->hook_before_add($this->arr);
 
         $lastInsertId = $id = DB::table($this->table)->insertGetId($this->arr);
-        
+
         //fix bug if primary key is uuid
         if(isset($this->arr[$this->primary_key]) && $this->arr[$this->primary_key]!=$id) {
             $id = $this->arr[$this->primary_key];
@@ -1468,9 +1479,9 @@ class CBController extends Controller
             $file = storage_path('app/'.$file);
             $rows = Excel::load($file, function ($reader) {
             })->get();
-            
+
             $countRows = ($rows)?count($rows):0;
-            
+
             Session::put('total_data_import', $countRows);
 
             $data_import_column = [];
