@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Schema;
+use Illuminate\Support\Carbon;
 
 class CBController extends Controller
 {
@@ -358,7 +359,7 @@ class CBController extends Controller
                 }
             } else {
 
-                if(isset($field_array[1])) {                    
+                if(isset($field_array[1])) {
                     $result->addselect($table.'.'.$field.' as '.$table.'_'.$field);
                     $columns_table[$index]['type_data'] = CRUDBooster::getFieldType($table, $field);
                     $columns_table[$index]['field'] = $table.'_'.$field;
@@ -369,7 +370,7 @@ class CBController extends Controller
                     $columns_table[$index]['field'] = $field;
                     $columns_table[$index]['field_raw'] = $field;
                 }
-                
+
                 $columns_table[$index]['field_with'] = $table.'.'.$field;
             }
         }
@@ -457,6 +458,8 @@ class CBController extends Controller
 
                 if ($type == 'between') {
                     if ($key && $value) {
+                        $value[0]=Carbon::parse($value[0]);
+                        $value[1]=Carbon::parse($value[1]);
                         $result->whereBetween($key, $value);
                     }
                 } else {
@@ -1144,7 +1147,7 @@ class CBController extends Controller
         $this->hook_before_add($this->arr);
 
         $lastInsertId = $id = DB::table($this->table)->insertGetId($this->arr);
-        
+
         //fix bug if primary key is uuid
         if(isset($this->arr[$this->primary_key]) && $this->arr[$this->primary_key]!=$id) {
             $id = $this->arr[$this->primary_key];
@@ -1468,9 +1471,9 @@ class CBController extends Controller
             $file = storage_path('app/'.$file);
             $rows = Excel::load($file, function ($reader) {
             })->get();
-            
+
             $countRows = ($rows)?count($rows):0;
-            
+
             Session::put('total_data_import', $countRows);
 
             $data_import_column = [];
