@@ -2,13 +2,15 @@
 
 namespace CrudBooster\Helpers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class SchemaUtil
 {
     public function getTableListing()
     {
-        return collect(Schema::getTableListing())->map(fn($table) => str_replace(DB::getDatabaseName().'.', '', $table))->toArray();
+        // schemaQualified: false so table names come back plain (e.g. "kategori_artikel"),
+        // not schema-prefixed (e.g. SQLite's "main.kategori_artikel") — a prefixed name
+        // breaks anything that uses it as a literal table reference, like a JOIN.
+        return Schema::getTableListing(schemaQualified: false);
     }
 }

@@ -31,41 +31,13 @@
                                 <th class="text-center">
                                     <div class="text-center">Auto Increment</div>
                                 </th>
+                                <th>Relation</th>
                                 <th class="text-center">
                                     <div class="text-center">Action</div>
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control"
-                                               placeholder="E.g: name"
-                                               @input="event.target.value = event.target.value.replace(/[^a-zA-Z0-9_]/g, '')"
-                                               @keyup.enter="$wire.addColumn"
-                                               wire:model="columnName">
-                                        <div class="form-help">Enter new field name</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <select class="form-control" wire:model.live="columnDataType">
-                                            @foreach(getLaravelSchemaTypeList() as $type)
-                                                <option value="{{$type}}">{{$type}}</option>
-                                            @endforeach
-                                        </select>
-                                        <div class="form-help">Select a field data type</div>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td>
-                                </td>
-                                <td class="text-center">
-                                    <a href="javascript:" title="Add column to table" class="text-green-500"
-                                       wire:click="addColumn">{!! Icon::PLUS !!}</a>
-                                </td>
-                            </tr>
                             @foreach($columns as $key => $column)
                                 <tr wire:key="{{$key}}">
                                     <td>
@@ -98,6 +70,21 @@
                                     </td>
                                     <td>
                                         @if(! ($column['disabled'] ?? false))
+                                            <div class="form-group">
+                                                <select class="form-control" wire:model="columns.{{$key}}.config.relation.table">
+                                                    <option value="">- No Relation -</option>
+                                                    @foreach($this->tableList as $relTable)
+                                                        @if($relTable !== ($form['table_name'] ?? $form['table'] ?? null))
+                                                            <option value="{{$relTable}}">{{$relTable}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                                <div class="form-help">Link this field to another table</div>
+                                            </div>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(! ($column['disabled'] ?? false))
                                             <div class="text-center">
                                                 <a href="javascript:"
                                                    wire:click="removeColumn('{{$column['name']??''}}')"
@@ -107,6 +94,39 @@
                                     </td>
                                 </tr>
                             @endforeach
+
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control"
+                                               placeholder="E.g: name"
+                                               @input="event.target.value = event.target.value.replace(/[^a-zA-Z0-9_]/g, '')"
+                                               @keyup.enter="$wire.addColumn"
+                                               wire:model="columnName">
+                                        <div class="form-help">Enter new field name</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" wire:model.live="columnDataType">
+                                            @foreach(getLaravelSchemaTypeList() as $type)
+                                                <option value="{{$type}}">{{$type}}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="form-help">Select a field data type</div>
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td>
+                                </td>
+                                <td>
+                                    <div class="form-help">Save the field first to link a relation</div>
+                                </td>
+                                <td class="text-center">
+                                    <a href="javascript:" title="Add column to table" class="text-green-500"
+                                       wire:click="addColumn">{!! Icon::PLUS !!}</a>
+                                </td>
+                            </tr>
 
                             </tbody>
                         </table>

@@ -237,6 +237,70 @@
             .cb-audit-page .cb-audit-grid { grid-template-columns: 1fr; }
             .cb-audit-page .cb-audit-grid .wide { grid-column: span 1; }
         }
+
+        .dark .cb-audit-page .cb-audit-frame,
+        .dark .cb-audit-page .cb-audit-table-wrap,
+        .dark .cb-audit-page .cb-audit-footer,
+        .dark .cb-audit-page .cb-audit-section,
+        .dark .cb-audit-page .cb-audit-btn,
+        .dark .cb-audit-page .cb-audit-input,
+        .dark .cb-audit-page .cb-coach-btn,
+        .dark .cb-audit-modal {
+            background: #1f2937;
+            border-color: #374151;
+        }
+        .dark .cb-audit-page .cb-audit-title,
+        .dark .cb-audit-page .cb-coach-title,
+        .dark .cb-audit-page .text-slate-900 {
+            color: #e5e7eb;
+        }
+        .dark .cb-audit-page .cb-audit-subtitle,
+        .dark .cb-audit-page .cb-audit-label,
+        .dark .cb-audit-page .cb-muted,
+        .dark .cb-audit-page .cb-coach-step,
+        .dark .cb-audit-page .cb-coach-desc,
+        .dark .cb-audit-page .cb-audit-section-title,
+        .dark .cb-audit-page .cb-audit-btn,
+        .dark .cb-audit-page .cb-coach-btn {
+            color: #9ca3af;
+        }
+        .dark .cb-audit-page .cb-audit-input {
+            color: #d1d5db;
+        }
+        .dark .cb-audit-page .cb-audit-input::placeholder {
+            color: #6b7280;
+        }
+        .dark .cb-audit-page thead th {
+            background: #111827;
+            color: #9ca3af;
+            border-color: #374151;
+        }
+        .dark .cb-audit-page tbody td {
+            color: #d1d5db;
+            border-color: #374151;
+        }
+        .dark .cb-audit-page tbody tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .dark .cb-audit-page .font-semibold {
+            color: #e5e7eb;
+        }
+        .dark .cb-audit-page .cb-audit-json {
+            background: #0b1220;
+            border-color: #374151;
+        }
+        .dark .cb-audit-page .cb-chip-success { color: #4ade80; background: rgba(16, 185, 129, 0.16); }
+        .dark .cb-audit-page .cb-chip-failed { color: #f87171; background: rgba(239, 68, 68, 0.16); }
+        .dark .cb-audit-page .cb-chip-blocked { color: #fbbf24; background: rgba(245, 158, 11, 0.16); }
+        .dark .cb-audit-page .cb-coach-btn-primary {
+            background: #0369a1;
+            border-color: #0369a1;
+            color: #fff;
+        }
+        .dark .cb-audit-page .cb-audit-btn:hover,
+        .dark .cb-audit-page .cb-coach-btn:hover {
+            background: #374151;
+        }
     </style>
 
     <div class="cb-audit-frame">

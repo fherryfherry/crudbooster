@@ -1,4 +1,4 @@
-<div>
+<div x-data="{showCreateQuery: false, createQueryTargetField: 'form.datasets.0.query'}">
     <form wire:submit.prevent="save">
         <div class="form-group">
             <label>Title</label>
@@ -97,23 +97,7 @@
             </div>
             <div class="form-group">
                 <label>Data Query</label>
-                <div class="flex items-center gap-1">
-                    <select wire:model="form.datasets.{{$index}}.query" wire:loading.attr="disabled" wire:target="save"
-                        wire:loading.class="animate-pulse" class="form-control">
-                        <option value="">- Select a Query -</option>
-                        @foreach($this->queryBuilderList as $query)
-                        <option value="{{ $query['id'] }}">{{ $query['name'] }}</option>
-                        @endforeach
-                    </select>
-                    <a href="{{getCmsUrl('query-builder/create')}}" title="Add new query" target="_blank"
-                        class="btn btn-outline-light">
-                        {!! \CrudBooster\Components\Icon\Icon::PLUS !!}
-                    </a>
-                    <a href="javascript:" wire:click="$refresh" title="Refresh" class="btn btn-outline-light">
-                        {!! \CrudBooster\Components\Icon\Icon::REFRESH !!}
-                    </a>
-                </div>
-
+                @include('cb.element::views.query-picker-field', ['field' => 'form.datasets.'.$index.'.query'])
                 <div class="form-help">
                     You have to define the query in the Query Builder module
                 </div>
@@ -203,4 +187,5 @@
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>
+    @include('cb.element::views.query-picker-modal')
 </div>

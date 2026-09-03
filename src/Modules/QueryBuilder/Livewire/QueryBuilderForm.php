@@ -13,6 +13,7 @@ class QueryBuilderForm extends Component
     use WithAlertMessage;
 
     public $id;
+    public $embedded = false;
     public $createdAt;
     public $modelList;
     public $modelName;
@@ -35,9 +36,10 @@ class QueryBuilderForm extends Component
     protected $__aggregationType = 'ARRAY';
     public $aggregationColumn; // Column to apply aggregation
 
-    public function mount($id = null)
+    public function mount($id = null, $embedded = false)
     {
         $this->id = $id;
+        $this->embedded = $embedded;
         $this->modelList = getModelList();
         $this->builderMode = "QUERY_BUILDER";
         if ($id) {
@@ -162,7 +164,9 @@ class QueryBuilderForm extends Component
 
         if(config('cb.demo_mode')) {
             $this->showAlertMessage('This feature is disabled in demo mode', 'danger');
-            $this->redirectIntended(getCmsUrl('query-builder'), navigate: true);
+            if (!$this->embedded) {
+                $this->redirectIntended(getCmsUrl('query-builder'), navigate: true);
+            }
             return;
         }
 
@@ -208,10 +212,16 @@ class QueryBuilderForm extends Component
             CbQueryBuilder::where('id', $this->id)->update($form);
         } else {
             $form['created_at'] = now();
-            CbQueryBuilder::create($form);
+            $this->id = CbQueryBuilder::create($form)->id;
         }
 
         $this->showAlertMessage('Query Builder saved successfully', 'success');
+
+        if ($this->embedded) {
+            $this->dispatch('query-saved', id: $this->id, name: $this->name);
+            return;
+        }
+
         $this->redirect(getCmsUrl('query-builder'), navigate: true);
     }
 

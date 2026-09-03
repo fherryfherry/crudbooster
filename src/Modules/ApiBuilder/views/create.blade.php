@@ -1,4 +1,59 @@
 <div class="p-6">
+    <style>
+        .dark .cb-api-builder-create .text-gray-800,
+        .dark .cb-api-builder-create .text-gray-700,
+        .dark .cb-api-builder-create .text-slate-700,
+        .dark .cb-api-builder-create .text-slate-800 { color: #e5e7eb; }
+
+        .dark .cb-api-builder-create .text-gray-600,
+        .dark .cb-api-builder-create .text-gray-500,
+        .dark .cb-api-builder-create .text-slate-600,
+        .dark .cb-api-builder-create .text-slate-500 { color: #9ca3af; }
+
+        .dark .cb-api-builder-create .text-gray-400,
+        .dark .cb-api-builder-create .text-gray-300,
+        .dark .cb-api-builder-create .text-slate-400 { color: #6b7280; }
+
+        .dark .cb-api-builder-create .bg-gray-50,
+        .dark .cb-api-builder-create .bg-gray-100,
+        .dark .cb-api-builder-create .bg-slate-50,
+        .dark .cb-api-builder-create .bg-slate-100 { background-color: #1f2937; }
+
+        .dark .cb-api-builder-create .border-gray-100,
+        .dark .cb-api-builder-create .border-gray-200,
+        .dark .cb-api-builder-create .border-gray-300,
+        .dark .cb-api-builder-create .border-slate-100,
+        .dark .cb-api-builder-create .border-slate-200 { border-color: #374151; }
+
+        .dark .cb-api-builder-create .text-blue-500,
+        .dark .cb-api-builder-create .text-blue-600,
+        .dark .cb-api-builder-create .text-blue-700,
+        .dark .cb-api-builder-create .text-blue-800 { color: #38bdf8; }
+        .dark .cb-api-builder-create .bg-blue-50,
+        .dark .cb-api-builder-create .bg-blue-100,
+        .dark .cb-api-builder-create .bg-blue-300 { background-color: rgba(56, 189, 248, .12); }
+        .dark .cb-api-builder-create .border-blue-100,
+        .dark .cb-api-builder-create .border-blue-200 { border-color: rgba(56, 189, 248, .35); }
+
+        .dark .cb-api-builder-create .text-red-500,
+        .dark .cb-api-builder-create .text-red-600,
+        .dark .cb-api-builder-create .text-red-800,
+        .dark .cb-api-builder-create .text-red-900 { color: #f87171; }
+        .dark .cb-api-builder-create .bg-red-50,
+        .dark .cb-api-builder-create .bg-red-100 { background-color: rgba(248, 113, 113, .12); }
+        .dark .cb-api-builder-create .border-red-100,
+        .dark .cb-api-builder-create .border-red-200,
+        .dark .cb-api-builder-create .border-red-300 { border-color: rgba(248, 113, 113, .35); }
+
+        .dark .cb-api-builder-create .text-green-600 { color: #4ade80; }
+        .dark .cb-api-builder-create .bg-green-100 { background-color: rgba(74, 222, 128, .12); }
+
+        .dark .cb-api-builder-create .text-amber-600,
+        .dark .cb-api-builder-create .text-amber-900 { color: #fbbf24; }
+        .dark .cb-api-builder-create .bg-amber-50,
+        .dark .cb-api-builder-create .bg-amber-100 { background-color: rgba(251, 191, 36, .12); }
+        .dark .cb-api-builder-create .border-amber-100 { border-color: rgba(251, 191, 36, .35); }
+    </style>
     <div class="cb-api-builder-create" style="max-width: 1024px; margin-left: auto; margin-right: auto;">
         {{-- Breadcrumb & Header --}}
         <div class="mb-8 flex justify-between items-start">

@@ -70,7 +70,11 @@ class BaseFormComponent extends BaseModuleAbstract
         
         // Handle encrypted parent-module parameter
         $this->handleEncryptedParentModule();
-        
+
+        // Re-show a flashed alert (e.g. the "created successfully" message from
+        // Save & Add More, which redirects back here instead of to a browse page).
+        $this->__alertMessageBrowseMounting();
+
         // Call anything attribute OnFormMounting
         $this->callOnFormMounting($this->modelName);
         // Check authorization

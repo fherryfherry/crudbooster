@@ -1,9 +1,40 @@
 <div>
+    @unless($embedded)
     <div class="mb-4" wire:ignore>
         @include('cb.query-builder::form_top')
     </div>
+    @endunless
 
-    <div x-data="queryBuilder()" class="panel">
+    <div x-data="{
+        showResultDialog: false,
+        testQuery() {
+            this.showResultDialog = true;
+            @this.runQuery()
+            anime({
+                targets: '#results-container',
+                translateY: [100, 0],
+                duration: 1000,
+                easing: 'easeOutExpo'
+            });
+        },
+        closeResultDialog() {
+            setTimeout(() => {
+                this.showResultDialog = false;
+            }, 500);
+            anime({
+                targets: '#results-container',
+                translateY: [0, window.innerHeight],
+                easing: 'easeOutExpo'
+            });
+        },
+        init() {
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    this.closeResultDialog();
+                }
+            });
+        }
+    }" class="panel">
         <div class="panel-header">
             <h3 class="panel-title">Query Builder Form</h3>
         </div>
@@ -428,7 +459,11 @@
 
                 <hr>
                 <div class="flex justify-between items-center mt-4">
-                    <a href="{{getCmsUrl('query-builder')}}" wire:navigate class="btn btn-default">Cancel</a>
+                    @if($embedded)
+                        <a href="javascript:" @click="$dispatch('close-query-modal')" class="btn btn-default">Cancel</a>
+                    @else
+                        <a href="{{getCmsUrl('query-builder')}}" wire:navigate class="btn btn-default">Cancel</a>
+                    @endif
                     <div class="flex justify-end items-center gap-1">
                         <button type="button" @click="testQuery" class="btn btn-primary">
                             {!! \CrudBooster\Components\Icon\Icon::BOLT !!} Test Query
@@ -485,38 +520,4 @@
             </div>
         </div>
     </div>
-    <script>
-        function queryBuilder() {
-            return {
-                showResultDialog: false,
-                testQuery() {
-                    this.showResultDialog = true;
-                @this.runQuery()
-                    anime({
-                        targets: '#results-container',
-                        translateY: [100, 0],
-                        duration: 1000,
-                        easing: 'easeOutExpo'
-                    });
-                },
-                closeResultDialog() {
-                    setTimeout(() => {
-                        this.showResultDialog = false;
-                    }, 500);
-                    anime({
-                        targets: '#results-container',
-                        translateY: [0, window.innerHeight],
-                        easing: 'easeOutExpo'
-                    });
-                },
-                init() {
-                    document.addEventListener('keydown', (event) => {
-                        if (event.key === 'Escape') {
-                            this.closeResultDialog();
-                        }
-                    });
-                }
-            }
-        }
-    </script>
 </div>

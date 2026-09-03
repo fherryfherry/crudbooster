@@ -7,6 +7,7 @@ use CrudBooster\Components\ConfirmMessage\WithConfirmMessage;
 use CrudBooster\Components\Type\CBTypeRegistrar;
 use CrudBooster\Components\Type\TypeOptionAbstract;
 use CrudBooster\Modules\ModuleBuilder\Models\CbModule;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use ReflectionClass;
 
@@ -34,6 +35,27 @@ class ModuleFormFormDesign extends ModuleForm
         $this->uuid = $uuid;
         $this->form = CbModule::where('uuid', $uuid)->first()?->config ?? [];
         $this->columns = array_filter($this->form['formDesignList'] ?? []);
+    }
+
+    /**
+     * Column names of the model currently picked in a "model" option (Select::model() and
+     * friends), so Key/Label params can be filled by picking instead of guessing/typo-ing.
+     */
+    public function relationFieldSuggestions($optName): array
+    {
+        if ($optName !== 'model') {
+            return [];
+        }
+        $modelClass = $this->input['options']['model']['ModelName'] ?? null;
+        if (!$modelClass || !class_exists($modelClass)) {
+            return [];
+        }
+        try {
+            $table = (new $modelClass)->getTable();
+            return Schema::getColumnListing($table);
+        } catch (\Throwable $e) {
+            return [];
+        }
     }
 
     public function listInputOption()

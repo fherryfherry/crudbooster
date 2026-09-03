@@ -942,6 +942,153 @@
             .cb-table { min-width: 860px; }
             .cb-log-metric-grid { grid-template-columns: 1fr; }
         }
+
+        /* Dark mode */
+        .dark .cb-api-frame { background: #111827; border-color: #374151; }
+        .dark .cb-api-title { color: #e5e7eb; }
+        .dark .cb-api-subtitle { color: #9ca3af; }
+        .dark .cb-tab-wrap { border-color: #374151; }
+        .dark .cb-tab-btn { color: #9ca3af; }
+        .dark .cb-tab-btn:hover { color: #e5e7eb; }
+        .dark .cb-tab-btn.active,
+        .dark .cb-tab-btn.active::after { color: #38bdf8; background: #38bdf8; }
+        .dark .cb-table-frame { background: #1f2937; border-color: #374151; }
+        .dark .cb-table thead th { background: #111827; color: #9ca3af; border-color: #374151; }
+        .dark .cb-table tbody td { border-color: #374151; }
+        .dark .cb-api-name { color: #e5e7eb; }
+        .dark .cb-api-meta { color: #9ca3af; }
+        .dark .cb-endpoint-pill { background: rgba(56, 189, 248, .12); color: #7dd3fc; border-color: rgba(56, 189, 248, .3); }
+
+        .dark .cb-method-get { background: rgba(16, 185, 129, .15); color: #34d399; border-color: rgba(16, 185, 129, .35); }
+        .dark .cb-method-post { background: rgba(56, 189, 248, .15); color: #7dd3fc; border-color: rgba(56, 189, 248, .35); }
+        .dark .cb-method-put { background: rgba(167, 139, 250, .15); color: #c4b5fd; border-color: rgba(167, 139, 250, .35); }
+        .dark .cb-method-delete { background: rgba(248, 113, 113, .15); color: #f87171; border-color: rgba(248, 113, 113, .35); }
+        .dark .cb-method-any { background: #1f2937; color: #9ca3af; border-color: #374151; }
+
+        .dark .cb-status { color: #d1d5db; }
+        .dark .cb-status-active .cb-status-dot { box-shadow: 0 0 0 4px rgba(16, 185, 129, .25); }
+        .dark .cb-status-testing .cb-status-dot { box-shadow: 0 0 0 4px rgba(245, 158, 11, .25); }
+        .dark .cb-status-disabled .cb-status-dot { box-shadow: 0 0 0 4px rgba(148, 163, 184, .25); }
+
+        .dark .cb-row-action-btn { border-color: #374151; background: #1f2937; color: #9ca3af; }
+        .dark .cb-row-action-btn:hover { background: #374151; border-color: #4b5563; color: #e5e7eb; }
+        .dark .cb-row-action-btn.primary { color: #38bdf8; border-color: rgba(56, 189, 248, .35); background: rgba(56, 189, 248, .12); }
+        .dark .cb-row-action-btn.primary:hover { background: rgba(56, 189, 248, .22); border-color: rgba(56, 189, 248, .5); }
+        .dark .cb-row-action-btn.danger { color: #f87171; border-color: rgba(248, 113, 113, .35); background: rgba(248, 113, 113, .12); }
+        .dark .cb-row-action-btn.danger:hover { background: rgba(248, 113, 113, .22); border-color: rgba(248, 113, 113, .5); }
+
+        .dark .cb-footer { border-color: #374151; background: #1f2937; }
+        .dark .cb-result-count { color: #9ca3af; }
+        .dark .cb-sort-btn { border-color: #374151; background: #1f2937; color: #9ca3af; }
+        .dark .cb-sort-btn:hover { background: #374151; border-color: #4b5563; }
+
+        .dark .cb-coachmark-card { background: #1f2937; border-color: #374151; }
+        .dark .cb-coachmark-card::before { background: #1f2937; border-color: #374151; }
+        .dark .cb-coachmark-title { color: #e5e7eb; }
+        .dark .cb-coachmark-desc { color: #9ca3af; }
+        .dark .cb-coachmark-dismiss { border-color: #374151; background: #1f2937; color: #9ca3af; }
+
+        .dark .cb-list-stat-card { background: #1f2937; border-color: #374151; }
+        .dark .cb-list-stat-label { color: #9ca3af; }
+        .dark .cb-list-stat-value { color: #e5e7eb; }
+        .dark .cb-list-stat-note { color: #9ca3af; }
+
+        .dark .cb-token-panel { background: #1f2937; border-color: #374151; }
+        .dark .cb-token-kicker { color: #7dd3fc; background: rgba(56, 189, 248, .15); }
+        .dark .cb-token-title { color: #e5e7eb; }
+        .dark .cb-token-desc { color: #9ca3af; }
+        .dark .cb-token-insight-card { background: #1f2937; border-color: #374151; }
+        .dark .cb-token-insight-title { color: #e5e7eb; }
+        .dark .cb-token-insight-box { border-color: #374151; background: #111827; }
+        .dark .cb-token-name { color: #e5e7eb; }
+        .dark .cb-token-token { border-color: rgba(56, 189, 248, .35); background: rgba(56, 189, 248, .12); color: #7dd3fc; }
+
+        .dark .cb-page-btn { border-color: #374151; background: #1f2937; color: #9ca3af; }
+        .dark .cb-api-key-cell { color: #7dd3fc; background: rgba(56, 189, 248, .1); border-color: rgba(56, 189, 248, .3); }
+        .dark .cb-copy-btn { border-color: #374151; color: #d1d5db; background: #1f2937; }
+        .dark .cb-token-action-btn { border-color: #374151; background: #1f2937; color: #9ca3af; }
+        .dark .cb-token-action-btn.danger { border-color: rgba(248, 113, 113, .35); color: #f87171; background: rgba(248, 113, 113, .12); }
+
+        .dark .cb-logs-placeholder { background: #1f2937; border-color: #374151; }
+        .dark .cb-log-metric-card { background: #1f2937; border-color: #374151; }
+        .dark .cb-log-metric-label { color: #9ca3af; }
+        .dark .cb-log-metric-value { color: #e5e7eb; }
+        .dark .cb-log-metric-note { color: #4ade80; }
+
+        .dark .cb-log-panel { background: #1f2937; border-color: #374151; }
+        .dark .cb-log-title { color: #e5e7eb; }
+        .dark .cb-log-btn-ghost { border-color: #374151; background: #1f2937; color: #9ca3af; }
+
+        .dark .cb-log-method.GET { background: rgba(16, 185, 129, .15); color: #34d399; }
+        .dark .cb-log-method.POST { background: rgba(56, 189, 248, .15); color: #7dd3fc; }
+        .dark .cb-log-method.PUT { background: rgba(167, 139, 250, .15); color: #c4b5fd; }
+        .dark .cb-log-method.PATCH { background: rgba(245, 158, 11, .15); color: #fbbf24; }
+        .dark .cb-log-method.DELETE { background: rgba(248, 113, 113, .15); color: #f87171; }
+
+        .dark .cb-log-status-ok { color: #4ade80; }
+        .dark .cb-log-status-warn { color: #fb923c; }
+        .dark .cb-log-status-error { color: #f87171; }
+
+        .dark .cb-load-more { color: #7dd3fc; }
+        .dark .cb-error-bar-wrap { background: #374151; }
+        .dark .cb-error-note { border-color: #374151; color: #9ca3af; }
+
+        .dark .cb-token-modal-overlay { background: rgba(0, 0, 0, .6); }
+        .dark .cb-token-modal { background: #1f2937; border-color: #374151; }
+        .dark .cb-api-mode-card { border-color: #374151; background: #111827; }
+        .dark .cb-api-mode-card:hover { border-color: #4b5563; background: #1f2937; }
+        .dark .cb-api-mode-card.selected { background: rgba(56, 189, 248, .12); }
+        .dark .cb-api-mode-card.selected .font-bold { color: #7dd3fc; }
+
+        .dark .cb-table-select select {
+            border-color: #374151;
+            background-color: #1f2937;
+            color: #d1d5db;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .dark .cb-token-modal-cancel { border-color: #374151; color: #9ca3af; background: #1f2937; }
+        .dark .cb-token-modal-title { color: #e5e7eb; }
+        .dark .cb-token-modal-subtitle { color: #9ca3af; }
+
+        .dark .cb-form-label { color: #d1d5db; }
+        .dark .cb-form-input,
+        .dark .cb-form-select { border-color: #374151; color: #e5e7eb; background: #111827; }
+
+        .cb-test-token-overlay { background: rgba(255, 255, 255, .95); }
+        .dark .cb-test-token-overlay { background: rgba(17, 24, 39, .92); }
+
+        .dark .cb-api-list-page .text-slate-800,
+        .dark .cb-api-list-page .text-slate-700,
+        .dark .cb-api-list-page .text-gray-800 { color: #e5e7eb; }
+        .dark .cb-api-list-page .text-slate-600,
+        .dark .cb-api-list-page .text-slate-500,
+        .dark .cb-api-list-page .text-gray-600,
+        .dark .cb-api-list-page .text-gray-500 { color: #9ca3af; }
+        .dark .cb-api-list-page .text-slate-400,
+        .dark .cb-api-list-page .text-gray-400 { color: #6b7280; }
+        .dark .cb-api-list-page .text-blue-600 { color: #38bdf8; }
+        .dark .cb-api-list-page .text-green-600,
+        .dark .cb-api-list-page .text-green-400 { color: #4ade80; }
+        .dark .cb-api-list-page .text-red-600,
+        .dark .cb-api-list-page .text-red-800,
+        .dark .cb-api-list-page .text-red-400 { color: #f87171; }
+        .dark .cb-api-list-page .text-orange-600 { color: #fb923c; }
+        .dark .cb-api-list-page .text-amber-500 { color: #fbbf24; }
+        .dark .cb-api-list-page .text-rose-700 { color: #fb7185; }
+        .dark .cb-api-list-page .bg-slate-50,
+        .dark .cb-api-list-page .bg-slate-100 { background-color: #111827; }
+        .dark .cb-api-list-page .bg-white { background-color: #1f2937; }
+        .dark .cb-api-list-page .border-slate-100,
+        .dark .cb-api-list-page .border-slate-200,
+        .dark .cb-api-list-page .border-slate-300 { border-color: #374151; }
+        .dark .cb-api-list-page .bg-slate-900\/50 { background-color: rgba(2, 6, 23, .7); }
+        .dark .cb-api-list-page .bg-red-500\/20 { background-color: rgba(248, 113, 113, .2); }
+        .dark .cb-api-list-page .bg-green-500\/20 { background-color: rgba(74, 222, 128, .2); }
+        .dark .cb-api-list-page .hover\:bg-slate-100:hover { background-color: #374151; }
+        .dark .cb-api-list-page .hover\:text-slate-600:hover,
+        .dark .cb-api-list-page .hover\:text-gray-600:hover { color: #e5e7eb; }
+        .dark .cb-api-list-page .hover\:text-red-800:hover { color: #fca5a5; }
     </style>
 
     <div class="cb-api-frame space-y-6">
@@ -1706,7 +1853,7 @@
                 }
              }">
             <div class="cb-token-modal cb-test-api-modal" style="max-height: 90vh; overflow-y: auto;">
-                <div x-show="showTokenPrompt" x-cloak class="absolute inset-0 flex items-center justify-center rounded-xl" style="z-index: 50; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(4px);">
+                <div x-show="showTokenPrompt" x-cloak class="absolute inset-0 flex items-center justify-center rounded-xl cb-test-token-overlay" style="z-index: 50; backdrop-filter: blur(4px);">
                     <div class="text-center max-w-sm mx-auto p-6">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />

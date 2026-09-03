@@ -15,6 +15,7 @@ class BoxCounterElement extends Component
     public $colIndex;
     public $config;
     public $id;
+    public $showCreateQueryModal = false;
 
     public function mount($id = null, $rowIndex = null, $colIndex = null)
     {

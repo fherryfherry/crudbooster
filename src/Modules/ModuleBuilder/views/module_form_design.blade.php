@@ -210,7 +210,7 @@
                                                                                 class="text-left">{{$param['name']}}</label>
                                                                             @if(str_contains($param['description'],'App\Models'))
                                                                                 <select
-                                                                                    wire:model="input.options.{{$opt['name']}}.{{$param['name']}}"
+                                                                                    wire:model.live="input.options.{{$opt['name']}}.{{$param['name']}}"
                                                                                     class="form-control">
                                                                                     <option value="">- Select a Model
                                                                                         -
@@ -230,6 +230,17 @@
                                                                                           wire:model="input.options.{{$opt['name']}}.{{$param['name']}}"
                                                                                           placeholder="{{$param['placeholder']}}"
                                                                                           class="form-control"></textarea>
+                                                                            @elseif(in_array($param['name'], ['Key','Label']) && $this->relationFieldSuggestions($opt['name']))
+                                                                                <input type="text"
+                                                                                       placeholder="{{$param['placeholder']}}"
+                                                                                       list="relation-field-suggestions-{{$opt['name']}}-{{$param['name']}}"
+                                                                                       wire:model="input.options.{{$opt['name']}}.{{$param['name']}}"
+                                                                                       class="form-control">
+                                                                                <datalist id="relation-field-suggestions-{{$opt['name']}}-{{$param['name']}}">
+                                                                                    @foreach($this->relationFieldSuggestions($opt['name']) as $field)
+                                                                                        <option value="{{$field}}"></option>
+                                                                                    @endforeach
+                                                                                </datalist>
                                                                             @else
                                                                                 <input type="text"
                                                                                        placeholder="{{$param['placeholder']}}"

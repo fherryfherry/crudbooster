@@ -97,8 +97,8 @@
 
                         <div class="form-group">
                             <label for="name">Browse Button Available</label>
-                            <div class="flex mt-2 gap-10">
-                                <div class="space-y-2">
+                            <div class="flex flex-wrap mt-2 gap-10">
+                                <div class="space-y-2 w-48">
                                     <label class="input-checkbox-group">
                                         <input type="checkbox"
                                                @disabled(!isset($form['name'])) wire:model="form.button_create"
@@ -124,7 +124,7 @@
                                         <span>Import</span>
                                     </label>
                                 </div>
-                                <div class="space-y-2">
+                                <div class="space-y-2 w-48">
                                     <label class="input-checkbox-group">
                                         <input type="checkbox"
                                                @disabled(!isset($form['name'])) wire:model="form.button_export_xls"
@@ -150,7 +150,7 @@
                                         <span>Bulk Action</span>
                                     </label>
                                 </div>
-                                <div class="space-y-2">
+                                <div class="space-y-2 w-48">
                                     <label class="input-checkbox-group">
                                         <input type="checkbox"
                                                @disabled(!isset($form['name'])) wire:model="form.button_edit"
@@ -175,26 +175,26 @@
 
                         <div class="form-group">
                             <label for="name">Permission Available</label>
-                            <div class="flex mt-2">
-                                <label class="input-checkbox-group w-20">
+                            <div class="flex flex-wrap mt-2 gap-10">
+                                <label class="input-checkbox-group w-24">
                                     <input type="checkbox"
                                            @disabled(!isset($form['name'])) wire:model="form.permission_create"
                                            class="cursor-pointer">
                                     <span>Create</span>
                                 </label>
-                                <label class="input-checkbox-group w-20">
+                                <label class="input-checkbox-group w-24">
                                     <input type="checkbox"
                                            @disabled(!isset($form['name'])) wire:model="form.permission_read"
                                            class="cursor-pointer">
                                     <span>Read</span>
                                 </label>
-                                <label class="input-checkbox-group w-20">
+                                <label class="input-checkbox-group w-24">
                                     <input type="checkbox"
                                            @disabled(!isset($form['name'])) wire:model="form.permission_update"
                                            class="cursor-pointer">
                                     <span>Update</span>
                                 </label>
-                                <label class="input-checkbox-group w-20">
+                                <label class="input-checkbox-group w-24">
                                     <input type="checkbox"
                                            @disabled(!isset($form['name'])) wire:model="form.permission_delete"
                                            class="cursor-pointer">

@@ -140,16 +140,116 @@ class ModuleFormTableSchema extends ModuleForm
         $this->form['schema'] = $this->columns;
         CbModule::where('uuid', $this->uuid)->update(['config' => $this->form]);
 
-        // Create default browse column and form column
-        if(!isset($this->form['browse_columns'])) {
-            $this->createDefaultBrowseColumn($this->form['table_name'] ?? $this->form['table'], $this->columns);
-        }
-        if(!isset($this->form['formDesignList'])) {
-            $this->createDefaultFormColumn($this->form['table_name'] ?? $this->form['table'], $this->columns);
-        }
+        // Any column linked to another table (via the "Relation" picker) gets its join
+        // auto-added to the Relationship step, so the user never has to define it twice.
+        $this->syncRelationsFromSchema($this->form['table_name'] ?? $this->form['table'], $this->columns);
+
+        // Create default browse column and form column for any column that doesn't have one yet,
+        // so newly added columns on a re-saved schema also get sensible defaults.
+        $this->createDefaultBrowseColumn($this->form['table_name'] ?? $this->form['table'], $this->columns);
+        $this->createDefaultFormColumn($this->form['table_name'] ?? $this->form['table'], $this->columns);
 
         $this->showAlertMessage('Schema saved successfully');
         $this->redirect(getCmsUrl('module-builder/' . $this->uuid . '/relationship'), navigate: true);
+    }
+
+    /**
+     * Look up what we know about another table: its column names and primary key,
+     * either from a module already built with this wizard (config['schema']),
+     * or from the live database if the table already physically exists.
+     */
+    private function resolveTargetTableMeta($table)
+    {
+        $module = CbModule::query()->get()->first(function ($m) use ($table) {
+            $cfg = $m->config ?? [];
+            return ($cfg['table_name'] ?? $cfg['table'] ?? null) === $table;
+        });
+
+        if ($module) {
+            $cfg = $module->config;
+            return [
+                'fields' => collect($cfg['schema'] ?? [])->pluck('name')->filter()->values()->all(),
+                'primaryKey' => $cfg['primaryKey'] ?? 'id',
+                'name' => $cfg['name'] ?? Str::title(str_replace('_', ' ', $table)),
+            ];
+        }
+
+        if (Schema::hasTable($table)) {
+            return [
+                'fields' => Schema::getColumnListing($table),
+                'primaryKey' => 'id',
+                'name' => Str::title(str_replace('_', ' ', $table)),
+            ];
+        }
+
+        return ['fields' => [], 'primaryKey' => 'id', 'name' => Str::title(str_replace('_', ' ', $table))];
+    }
+
+    /**
+     * Best-effort guess for which field of a related table is worth showing
+     * to a human (e.g. "name" instead of the raw foreign key id).
+     */
+    private function guessDisplayField(array $fields): string
+    {
+        $preferred = ['name', 'title', 'label', 'email', 'username'];
+        foreach ($preferred as $field) {
+            if (in_array($field, $fields)) {
+                return $field;
+            }
+        }
+        foreach ($fields as $field) {
+            if (!in_array($field, ['id', 'uuid', 'created_at', 'updated_at', 'deleted_at'])) {
+                return $field;
+            }
+        }
+        return 'id';
+    }
+
+    /**
+     * For every schema column linked to another table (config.relation.table),
+     * make sure a matching join exists in the Relationship step. Existing
+     * relationships (including ones the user has since edited by hand) are left alone.
+     */
+    private function syncRelationsFromSchema($table, $columns)
+    {
+        $relationships = $this->form['relationships'] ?? [];
+        $existingPairs = collect($relationships)
+            ->map(fn($r) => ($r['tableFirst'] ?? '') . '|' . ($r['secondField'] ?? ''))
+            ->all();
+
+        $changed = false;
+        foreach ($columns as $column) {
+            $targetTable = $column['config']['relation']['table'] ?? null;
+            if (!$targetTable) {
+                continue;
+            }
+
+            $pairKey = $targetTable . '|' . $column['name'];
+            if (in_array($pairKey, $existingPairs)) {
+                continue;
+            }
+
+            $meta = $this->resolveTargetTableMeta($targetTable);
+            $index = count($relationships);
+            $relationships[] = [
+                'key' => Str::singular($targetTable) . $index,
+                'tableFirst' => $targetTable,
+                'firstField' => $meta['primaryKey'],
+                'tableSecond' => $table,
+                'secondField' => $column['name'],
+                'operator' => '=',
+                'type' => 'left',
+                'tableFirstFields' => $meta['fields'],
+                'tableSecondFields' => collect($columns)->pluck('name')->toArray(),
+            ];
+            $existingPairs[] = $pairKey;
+            $changed = true;
+        }
+
+        if ($changed) {
+            $this->form['relationships'] = $relationships;
+            CbModule::where('uuid', $this->uuid)->update(['config' => $this->form]);
+        }
     }
 
     private function createDefaultBrowseColumn($table, $columns)
@@ -158,16 +258,42 @@ class ModuleFormTableSchema extends ModuleForm
         $columns = array_filter($columns, function ($column) {
             return !in_array($column['name'], ['id', 'uuid', 'created_at', 'updated_at', 'deleted_at']);
         });
-        $browseColumns = [];
+
+        $browseColumns = $this->form['browse_columns'] ?? [];
+        $existingKeys = array_column($browseColumns, 'key');
+        $relationships = $this->form['relationships'] ?? [];
+
         foreach ($columns as $column) {
+            $targetTable = $column['config']['relation']['table'] ?? null;
+
+            if ($targetTable) {
+                // Show a field from the linked table (e.g. category name) instead of the raw id,
+                // reusing the join already added to the Relationship step.
+                $relation = collect($relationships)->first(fn($r) => ($r['tableFirst'] ?? '') === $targetTable && ($r['secondField'] ?? '') === $column['name']);
+                if (!$relation) {
+                    continue;
+                }
+                $meta = $this->resolveTargetTableMeta($targetTable);
+                $displayField = $this->guessDisplayField($meta['fields']);
+                $key = $relation['key'] . '.' . $displayField;
+                $label = Str::title(str_replace('_id', '', $column['name']));
+            } else {
+                $key = $table . '.' . $column['name'];
+                $label = $column['name'];
+            }
+
+            if (in_array($key, $existingKeys)) {
+                continue;
+            }
             $browseColumns[] = [
-                'key' => $table . '.' . $column['name'],
-                'label' => $column['name'],
-                'sortable' => true,
+                'key' => $key,
+                'label' => $label,
+                'sortable' => !$targetTable,
                 'exportable' => true,
                 'filterable' => true,
-                'searchable' => true
+                'searchable' => !$targetTable
             ];
+            $existingKeys[] = $key;
         }
         $this->form['browse_columns'] = $browseColumns;
         CbModule::where('uuid', $this->uuid)->update(['config' => $this->form]);
@@ -211,22 +337,67 @@ class ModuleFormTableSchema extends ModuleForm
         $columns = array_filter($columns, function ($column) {
             return !$this->passwordTypeCheck($column['type']);
         });
-        $formColumns = [];
+
+        $formColumns = $this->form['formDesignList'] ?? [];
+        $existingKeys = [];
+        foreach ($formColumns as $row) {
+            foreach ($row as $field) {
+                $existingKeys[] = $field['key'] ?? null;
+            }
+        }
+
         foreach ($columns as $column) {
+            $key = $table . '.' . $column['name'];
+            if (in_array($key, $existingKeys)) {
+                continue;
+            }
             $label = Str::title(str_replace('_',' ',$column['name']));
             $type = $this->getFormType($column['type']);
-            $formColumns[] = [[
-                'key' => $table . '.' . $column['name'],
+            $field = [
+                'key' => $key,
                 'type' => $type,
                 'label' => $label,
                 'helpText' => 'Input the ' . $label . ' here',
                 'showCreate' => true,
                 'showEdit' => true,
                 'showDetail' => true
-            ]];
+            ];
+
+            $targetTable = $column['config']['relation']['table'] ?? null;
+            if ($targetTable) {
+                $field = $this->buildRelationSelectField($targetTable, $field);
+            }
+
+            $formColumns[] = [$field];
         }
         $this->form['formDesignList'] = $formColumns;
         CbModule::where('uuid', $this->uuid)->update(['config' => $this->form]);
+    }
+
+    /**
+     * Turn a plain form field into a "select from related table" field. The target model
+     * class is resolved from the module already registered for that table if there is one
+     * (accurate even before that module is built), otherwise guessed from the table name
+     * using this wizard's own naming convention. If the target module hasn't been built yet,
+     * the select won't have data to query until it is — same as wiring it up manually.
+     */
+    private function buildRelationSelectField($targetTable, array $field): array
+    {
+        $meta = $this->resolveTargetTableMeta($targetTable);
+        $modelClass = 'App\\Cb\\Modules\\' . Str::studly($meta['name']) . '\\Models\\' . Str::studly($targetTable);
+        $displayField = $this->guessDisplayField($meta['fields']);
+
+        $field['type'] = 'select';
+        $field['helpText'] = 'Select the related ' . Str::title(str_replace('_', ' ', $targetTable)) . ' here';
+        $field['options'] = [
+            'model' => [
+                'enable' => true,
+                'ModelName' => $modelClass,
+                'Key' => $meta['primaryKey'],
+                'Label' => $displayField,
+            ],
+        ];
+        return $field;
     }
 
     private function getFormType($schemaType): string
