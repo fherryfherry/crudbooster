@@ -44,3 +44,4 @@ configuration. Full details (system requirements, Docker setup, troubleshooting)
 
 - [Codebase Documentation](CODEBASE_DOCUMENTATION.md)
 - [Usage Documentation](doc_cb.md)
+- [Changelog](CHANGELOG.md)
