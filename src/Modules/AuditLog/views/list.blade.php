@@ -126,6 +126,7 @@
         .cb-audit-modal-overlay {
             position: fixed;
             inset: 0;
+            margin: 0 !important;
             background: rgba(15, 23, 42, 0.62);
             z-index: 10050;
             display: flex;
@@ -239,59 +240,59 @@
     </style>
 
     <div class="cb-audit-frame">
-        <div class="cb-audit-title" data-coach-target="audit-title">{{ __('cb::audit_log.title') }}</div>
-        <div class="cb-audit-subtitle">{{ __('cb::audit_log.subtitle') }}</div>
+        <div class="cb-audit-title" data-coach-target="audit-title">{{ __('audit_log::audit_log.title') }}</div>
+        <div class="cb-audit-subtitle">{{ __('audit_log::audit_log.subtitle') }}</div>
 
         <div class="cb-audit-grid">
             <div data-coach-target="audit-filter-user">
-                <label class="cb-audit-label">{{ __('cb::audit_log.filters.user') }}</label>
-                <input type="text" wire:model.live.debounce.300ms="filterUser" class="cb-audit-input" placeholder="{{ __('cb::audit_log.filters.user_placeholder') }}">
+                <label class="cb-audit-label">{{ __('audit_log::audit_log.filters.user') }}</label>
+                <input type="text" wire:model.live.debounce.300ms="filterUser" class="cb-audit-input" placeholder="{{ __('audit_log::audit_log.filters.user_placeholder') }}">
             </div>
             <div data-coach-target="audit-filter-action">
-                <label class="cb-audit-label">{{ __('cb::audit_log.filters.action') }}</label>
+                <label class="cb-audit-label">{{ __('audit_log::audit_log.filters.action') }}</label>
                 <select wire:model.live="filterAction" class="cb-audit-input">
-                    <option value="">{{ __('cb::audit_log.filters.all') }}</option>
+                    <option value="">{{ __('audit_log::audit_log.filters.all') }}</option>
                     @foreach($actionOptions as $action)
                         <option value="{{ $action }}">{{ strtoupper($action) }}</option>
                     @endforeach
                 </select>
             </div>
             <div data-coach-target="audit-filter-module">
-                <label class="cb-audit-label">{{ __('cb::audit_log.filters.module') }}</label>
+                <label class="cb-audit-label">{{ __('audit_log::audit_log.filters.module') }}</label>
                 <select wire:model.live="filterModule" class="cb-audit-input">
-                    <option value="">{{ __('cb::audit_log.filters.all') }}</option>
+                    <option value="">{{ __('audit_log::audit_log.filters.all') }}</option>
                     @foreach($moduleOptions as $moduleOption)
                         <option value="{{ $moduleOption }}">{{ $moduleOption }}</option>
                     @endforeach
                 </select>
             </div>
             <div data-coach-target="audit-filter-outcome">
-                <label class="cb-audit-label">{{ __('cb::audit_log.filters.outcome') }}</label>
+                <label class="cb-audit-label">{{ __('audit_log::audit_log.filters.outcome') }}</label>
                 <select wire:model.live="filterOutcome" class="cb-audit-input">
-                    <option value="">{{ __('cb::audit_log.filters.all') }}</option>
-                    <option value="success">{{ __('cb::audit_log.outcome.success') }}</option>
-                    <option value="failed">{{ __('cb::audit_log.outcome.failed') }}</option>
-                    <option value="blocked">{{ __('cb::audit_log.outcome.blocked') }}</option>
+                    <option value="">{{ __('audit_log::audit_log.filters.all') }}</option>
+                    <option value="success">{{ __('audit_log::audit_log.outcome.success') }}</option>
+                    <option value="failed">{{ __('audit_log::audit_log.outcome.failed') }}</option>
+                    <option value="blocked">{{ __('audit_log::audit_log.outcome.blocked') }}</option>
                 </select>
             </div>
             <div class="wide" data-coach-target="audit-filter-path">
-                <label class="cb-audit-label">{{ __('cb::audit_log.filters.path') }}</label>
-                <input type="text" wire:model.live.debounce.300ms="filterPath" class="cb-audit-input" placeholder="{{ __('cb::audit_log.filters.path_placeholder') }}">
+                <label class="cb-audit-label">{{ __('audit_log::audit_log.filters.path') }}</label>
+                <input type="text" wire:model.live.debounce.300ms="filterPath" class="cb-audit-input" placeholder="{{ __('audit_log::audit_log.filters.path_placeholder') }}">
             </div>
             <div>
-                <label class="cb-audit-label">{{ __('cb::audit_log.filters.date_from') }}</label>
+                <label class="cb-audit-label">{{ __('audit_log::audit_log.filters.date_from') }}</label>
                 <input type="date" wire:model.live="filterDateFrom" class="cb-audit-input">
             </div>
             <div>
-                <label class="cb-audit-label">{{ __('cb::audit_log.filters.date_to') }}</label>
+                <label class="cb-audit-label">{{ __('audit_log::audit_log.filters.date_to') }}</label>
                 <input type="date" wire:model.live="filterDateTo" class="cb-audit-input">
             </div>
         </div>
 
         <div class="cb-audit-actions" data-coach-target="audit-actions">
-            <button type="button" wire:click="$refresh" class="cb-audit-btn">{{ __('cb::audit_log.actions.refresh') }}</button>
-            <button type="button" wire:click="exportCsv" class="cb-audit-btn">{{ __('cb::audit_log.actions.export_csv') }}</button>
-            <button type="button" wire:click="clearFilters" class="cb-audit-btn">{{ __('cb::audit_log.actions.clear_filters') }}</button>
+            <button type="button" wire:click="$refresh" class="cb-audit-btn">{{ __('audit_log::audit_log.actions.refresh') }}</button>
+            <button type="button" wire:click="exportCsv" class="cb-audit-btn">{{ __('audit_log::audit_log.actions.export_csv') }}</button>
+            <button type="button" wire:click="clearFilters" class="cb-audit-btn">{{ __('audit_log::audit_log.actions.clear_filters') }}</button>
         </div>
     </div>
 
@@ -299,14 +300,14 @@
         <table>
             <thead>
                 <tr>
-                    <th>{{ __('cb::audit_log.table.time') }}</th>
-                    <th>{{ __('cb::audit_log.table.user') }}</th>
-                    <th>{{ __('cb::audit_log.table.action') }}</th>
-                    <th>{{ __('cb::audit_log.table.module') }}</th>
-                    <th>{{ __('cb::audit_log.table.path') }}</th>
-                    <th>{{ __('cb::audit_log.table.outcome') }}</th>
-                    <th>{{ __('cb::audit_log.table.ip') }}</th>
-                    <th>{{ __('cb::audit_log.table.details') }}</th>
+                    <th>{{ __('audit_log::audit_log.table.time') }}</th>
+                    <th>{{ __('audit_log::audit_log.table.user') }}</th>
+                    <th>{{ __('audit_log::audit_log.table.action') }}</th>
+                    <th>{{ __('audit_log::audit_log.table.module') }}</th>
+                    <th>{{ __('audit_log::audit_log.table.path') }}</th>
+                    <th>{{ __('audit_log::audit_log.table.outcome') }}</th>
+                    <th>{{ __('audit_log::audit_log.table.ip') }}</th>
+                    <th>{{ __('audit_log::audit_log.table.details') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -322,7 +323,7 @@
                         <td class="font-mono text-xs">{{ $log->path ?: '-' }}</td>
                         <td>
                             <span class="cb-chip cb-chip-{{ $log->outcome }}">
-                                {{ __('cb::audit_log.outcome.' . $log->outcome) }}
+                                {{ __('audit_log::audit_log.outcome.' . $log->outcome) }}
                             </span>
                         </td>
                         <td>{{ $log->ip_address ?: '-' }}</td>
@@ -331,24 +332,24 @@
                                     wire:click="openDetail('{{ $log->id }}')"
                                     class="cb-audit-btn"
                                     @if($loop->first) data-coach-target="audit-row-view" @endif>
-                                {{ __('cb::audit_log.actions.view') }}
+                                {{ __('audit_log::audit_log.actions.view') }}
                             </button>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center cb-muted py-8">{{ __('cb::audit_log.empty') }}</td>
+                        <td colspan="8" class="text-center cb-muted py-8">{{ __('audit_log::audit_log.empty') }}</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
         <div class="cb-audit-footer">
             <div class="cb-muted">
-                {{ __('cb::audit_log.showing', ['from' => $logs->firstItem() ?? 0, 'to' => $logs->lastItem() ?? 0, 'total' => $logs->total()]) }}
+                {{ __('audit_log::audit_log.showing', ['from' => $logs->firstItem() ?? 0, 'to' => $logs->lastItem() ?? 0, 'total' => $logs->total()]) }}
             </div>
             <div class="flex items-center gap-2">
-                <button type="button" wire:click="previousPage" class="cb-audit-btn" @disabled($logs->onFirstPage())>{{ __('cb::audit_log.actions.previous') }}</button>
-                <button type="button" wire:click="nextPage" class="cb-audit-btn" @disabled(!$logs->hasMorePages())>{{ __('cb::audit_log.actions.next') }}</button>
+                <button type="button" wire:click="previousPage" class="cb-audit-btn" @disabled($logs->onFirstPage())>{{ __('audit_log::audit_log.actions.previous') }}</button>
+                <button type="button" wire:click="nextPage" class="cb-audit-btn" @disabled(!$logs->hasMorePages())>{{ __('audit_log::audit_log.actions.next') }}</button>
             </div>
         </div>
     </div>
@@ -358,53 +359,53 @@
             <div class="cb-audit-modal" data-coach-target="audit-detail-modal">
                 <div class="flex items-start justify-between gap-3">
                     <div>
-                        <div class="text-xl font-bold text-slate-900">{{ __('cb::audit_log.detail.title') }}</div>
-                        <div class="cb-muted mt-1">{{ __('cb::audit_log.detail.labels.log_id') }}: {{ $selectedLog['id'] ?? '-' }}</div>
+                        <div class="text-xl font-bold text-slate-900">{{ __('audit_log::audit_log.detail.title') }}</div>
+                        <div class="cb-muted mt-1">{{ __('audit_log::audit_log.detail.labels.log_id') }}: {{ $selectedLog['id'] ?? '-' }}</div>
                     </div>
-                    <button type="button" wire:click="closeDetail" class="cb-audit-btn">{{ __('cb::audit_log.actions.close') }}</button>
+                    <button type="button" wire:click="closeDetail" class="cb-audit-btn">{{ __('audit_log::audit_log.actions.close') }}</button>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-4">
                     <div class="cb-audit-section">
-                        <div class="cb-audit-section-title">{{ __('cb::audit_log.detail.actor') }}</div>
-                        <div class="text-sm"><strong>{{ __('cb::audit_log.table.user') }}:</strong> {{ $selectedLog['user_name'] ?? '-' }}</div>
-                        <div class="text-sm"><strong>{{ __('cb::audit_log.detail.labels.email') }}:</strong> {{ $selectedLog['user_email'] ?? '-' }}</div>
-                        <div class="text-sm"><strong>{{ __('cb::audit_log.detail.labels.id') }}:</strong> {{ $selectedLog['user_id'] ?? '-' }}</div>
+                        <div class="cb-audit-section-title">{{ __('audit_log::audit_log.detail.actor') }}</div>
+                        <div class="text-sm"><strong>{{ __('audit_log::audit_log.table.user') }}:</strong> {{ $selectedLog['user_name'] ?? '-' }}</div>
+                        <div class="text-sm"><strong>{{ __('audit_log::audit_log.detail.labels.email') }}:</strong> {{ $selectedLog['user_email'] ?? '-' }}</div>
+                        <div class="text-sm"><strong>{{ __('audit_log::audit_log.detail.labels.id') }}:</strong> {{ $selectedLog['user_id'] ?? '-' }}</div>
                     </div>
                     <div class="cb-audit-section">
-                        <div class="cb-audit-section-title">{{ __('cb::audit_log.detail.request') }}</div>
-                        <div class="text-sm"><strong>{{ __('cb::audit_log.detail.labels.method') }}:</strong> {{ $selectedLog['http_method'] ?? '-' }}</div>
-                        <div class="text-sm"><strong>{{ __('cb::audit_log.table.path') }}:</strong> <span class="font-mono text-xs">{{ $selectedLog['path'] ?? '-' }}</span></div>
-                        <div class="text-sm"><strong>{{ __('cb::audit_log.detail.labels.ip') }}:</strong> {{ $selectedLog['ip_address'] ?? '-' }}</div>
-                        <div class="text-sm"><strong>{{ __('cb::audit_log.detail.labels.request_id') }}:</strong> <span class="font-mono text-xs">{{ $selectedLog['request_id'] ?? '-' }}</span></div>
+                        <div class="cb-audit-section-title">{{ __('audit_log::audit_log.detail.request') }}</div>
+                        <div class="text-sm"><strong>{{ __('audit_log::audit_log.detail.labels.method') }}:</strong> {{ $selectedLog['http_method'] ?? '-' }}</div>
+                        <div class="text-sm"><strong>{{ __('audit_log::audit_log.table.path') }}:</strong> <span class="font-mono text-xs">{{ $selectedLog['path'] ?? '-' }}</span></div>
+                        <div class="text-sm"><strong>{{ __('audit_log::audit_log.detail.labels.ip') }}:</strong> {{ $selectedLog['ip_address'] ?? '-' }}</div>
+                        <div class="text-sm"><strong>{{ __('audit_log::audit_log.detail.labels.request_id') }}:</strong> <span class="font-mono text-xs">{{ $selectedLog['request_id'] ?? '-' }}</span></div>
                     </div>
                     <div class="cb-audit-section">
-                        <div class="cb-audit-section-title">{{ __('cb::audit_log.detail.context') }}</div>
-                        <div class="text-sm"><strong>{{ __('cb::audit_log.table.action') }}:</strong> {{ strtoupper($selectedLog['action'] ?? '-') }}</div>
-                        <div class="text-sm"><strong>{{ __('cb::audit_log.table.module') }}:</strong> {{ $selectedLog['module_key'] ?? '-' }}</div>
-                        <div class="text-sm"><strong>{{ __('cb::audit_log.detail.labels.entity') }}:</strong> {{ $selectedLog['entity_type'] ?? '-' }}</div>
-                        <div class="text-sm"><strong>{{ __('cb::audit_log.detail.labels.entity_id') }}:</strong> {{ $selectedLog['entity_id'] ?? '-' }}</div>
+                        <div class="cb-audit-section-title">{{ __('audit_log::audit_log.detail.context') }}</div>
+                        <div class="text-sm"><strong>{{ __('audit_log::audit_log.table.action') }}:</strong> {{ strtoupper($selectedLog['action'] ?? '-') }}</div>
+                        <div class="text-sm"><strong>{{ __('audit_log::audit_log.table.module') }}:</strong> {{ $selectedLog['module_key'] ?? '-' }}</div>
+                        <div class="text-sm"><strong>{{ __('audit_log::audit_log.detail.labels.entity') }}:</strong> {{ $selectedLog['entity_type'] ?? '-' }}</div>
+                        <div class="text-sm"><strong>{{ __('audit_log::audit_log.detail.labels.entity_id') }}:</strong> {{ $selectedLog['entity_id'] ?? '-' }}</div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3" data-coach-target="audit-detail-changed-fields">
                     <div class="cb-audit-section">
-                        <div class="cb-audit-section-title">{{ __('cb::audit_log.detail.changed_fields') }}</div>
+                        <div class="cb-audit-section-title">{{ __('audit_log::audit_log.detail.changed_fields') }}</div>
                         <div class="cb-audit-json">{{ $this->prettyJson($selectedLog['changed_fields'] ?? []) }}</div>
                     </div>
                     <div class="cb-audit-section">
-                        <div class="cb-audit-section-title">{{ __('cb::audit_log.detail.request_payload') }}</div>
+                        <div class="cb-audit-section-title">{{ __('audit_log::audit_log.detail.request_payload') }}</div>
                         <div class="cb-audit-json">{{ $this->prettyJson($selectedLog['request_payload'] ?? []) }}</div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3" data-coach-target="audit-detail-before-after">
                     <div class="cb-audit-section">
-                        <div class="cb-audit-section-title">{{ __('cb::audit_log.detail.before') }}</div>
+                        <div class="cb-audit-section-title">{{ __('audit_log::audit_log.detail.before') }}</div>
                         <div class="cb-audit-json">{{ $this->prettyJson($selectedLog['before_data'] ?? []) }}</div>
                     </div>
                     <div class="cb-audit-section">
-                        <div class="cb-audit-section-title">{{ __('cb::audit_log.detail.after') }}</div>
+                        <div class="cb-audit-section-title">{{ __('audit_log::audit_log.detail.after') }}</div>
                         <div class="cb-audit-json">{{ $this->prettyJson($selectedLog['after_data'] ?? []) }}</div>
                     </div>
                 </div>
@@ -439,25 +440,25 @@
         'firstLogId' => $logs->first()?->id,
         'localStorageKey' => 'cb_audit_log_coachmark_v2',
         'steps' => [
-            ['target' => '[data-coach-target="audit-title"]', 'title' => __('cb::audit_log.coachmark.step_1_title'), 'desc' => __('cb::audit_log.coachmark.step_1_desc')],
-            ['target' => '[data-coach-target="audit-filter-user"]', 'title' => __('cb::audit_log.coachmark.step_2_title'), 'desc' => __('cb::audit_log.coachmark.step_2_desc')],
-            ['target' => '[data-coach-target="audit-filter-action"]', 'title' => __('cb::audit_log.coachmark.step_3_title'), 'desc' => __('cb::audit_log.coachmark.step_3_desc')],
-            ['target' => '[data-coach-target="audit-filter-module"]', 'title' => __('cb::audit_log.coachmark.step_4_title'), 'desc' => __('cb::audit_log.coachmark.step_4_desc')],
-            ['target' => '[data-coach-target="audit-filter-outcome"]', 'title' => __('cb::audit_log.coachmark.step_5_title'), 'desc' => __('cb::audit_log.coachmark.step_5_desc')],
-            ['target' => '[data-coach-target="audit-filter-path"]', 'title' => __('cb::audit_log.coachmark.step_6_title'), 'desc' => __('cb::audit_log.coachmark.step_6_desc')],
-            ['target' => '[data-coach-target="audit-actions"]', 'title' => __('cb::audit_log.coachmark.step_7_title'), 'desc' => __('cb::audit_log.coachmark.step_7_desc')],
-            ['target' => '[data-coach-target="audit-table"]', 'title' => __('cb::audit_log.coachmark.step_8_title'), 'desc' => __('cb::audit_log.coachmark.step_8_desc')],
-            ['target' => '[data-coach-target="audit-row-view"]', 'title' => __('cb::audit_log.coachmark.step_9_title'), 'desc' => __('cb::audit_log.coachmark.step_9_desc'), 'action' => 'open-detail'],
-            ['target' => '[data-coach-target="audit-detail-modal"]', 'title' => __('cb::audit_log.coachmark.step_10_title'), 'desc' => __('cb::audit_log.coachmark.step_10_desc')],
-            ['target' => '[data-coach-target="audit-detail-changed-fields"]', 'title' => __('cb::audit_log.coachmark.step_11_title'), 'desc' => __('cb::audit_log.coachmark.step_11_desc')],
-            ['target' => '[data-coach-target="audit-detail-before-after"]', 'title' => __('cb::audit_log.coachmark.step_12_title'), 'desc' => __('cb::audit_log.coachmark.step_12_desc'), 'action' => 'close-detail'],
+            ['target' => '[data-coach-target="audit-title"]', 'title' => __('audit_log::audit_log.coachmark.step_1_title'), 'desc' => __('audit_log::audit_log.coachmark.step_1_desc')],
+            ['target' => '[data-coach-target="audit-filter-user"]', 'title' => __('audit_log::audit_log.coachmark.step_2_title'), 'desc' => __('audit_log::audit_log.coachmark.step_2_desc')],
+            ['target' => '[data-coach-target="audit-filter-action"]', 'title' => __('audit_log::audit_log.coachmark.step_3_title'), 'desc' => __('audit_log::audit_log.coachmark.step_3_desc')],
+            ['target' => '[data-coach-target="audit-filter-module"]', 'title' => __('audit_log::audit_log.coachmark.step_4_title'), 'desc' => __('audit_log::audit_log.coachmark.step_4_desc')],
+            ['target' => '[data-coach-target="audit-filter-outcome"]', 'title' => __('audit_log::audit_log.coachmark.step_5_title'), 'desc' => __('audit_log::audit_log.coachmark.step_5_desc')],
+            ['target' => '[data-coach-target="audit-filter-path"]', 'title' => __('audit_log::audit_log.coachmark.step_6_title'), 'desc' => __('audit_log::audit_log.coachmark.step_6_desc')],
+            ['target' => '[data-coach-target="audit-actions"]', 'title' => __('audit_log::audit_log.coachmark.step_7_title'), 'desc' => __('audit_log::audit_log.coachmark.step_7_desc')],
+            ['target' => '[data-coach-target="audit-table"]', 'title' => __('audit_log::audit_log.coachmark.step_8_title'), 'desc' => __('audit_log::audit_log.coachmark.step_8_desc')],
+            ['target' => '[data-coach-target="audit-row-view"]', 'title' => __('audit_log::audit_log.coachmark.step_9_title'), 'desc' => __('audit_log::audit_log.coachmark.step_9_desc'), 'action' => 'open-detail'],
+            ['target' => '[data-coach-target="audit-detail-modal"]', 'title' => __('audit_log::audit_log.coachmark.step_10_title'), 'desc' => __('audit_log::audit_log.coachmark.step_10_desc')],
+            ['target' => '[data-coach-target="audit-detail-changed-fields"]', 'title' => __('audit_log::audit_log.coachmark.step_11_title'), 'desc' => __('audit_log::audit_log.coachmark.step_11_desc')],
+            ['target' => '[data-coach-target="audit-detail-before-after"]', 'title' => __('audit_log::audit_log.coachmark.step_12_title'), 'desc' => __('audit_log::audit_log.coachmark.step_12_desc'), 'action' => 'close-detail'],
         ],
         'labels' => [
-            'dismiss' => __('cb::audit_log.coachmark.dismiss'),
-            'back' => __('cb::audit_log.coachmark.back'),
-            'next' => __('cb::audit_log.coachmark.next'),
-            'finish' => __('cb::audit_log.coachmark.finish'),
-            'step' => __('cb::audit_log.coachmark.step'),
+            'dismiss' => __('audit_log::audit_log.coachmark.dismiss'),
+            'back' => __('audit_log::audit_log.coachmark.back'),
+            'next' => __('audit_log::audit_log.coachmark.next'),
+            'finish' => __('audit_log::audit_log.coachmark.finish'),
+            'step' => __('audit_log::audit_log.coachmark.step'),
         ],
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!};
 

@@ -4,28 +4,28 @@
         <div class="mb-8 flex justify-between items-start">
             <div>
                 <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                    <a href="{{ getCmsUrl('api-builder') }}" wire:navigate class="hover:text-blue-600 transition-colors">{{ __('cb::api_builder.tabs.list') }}</a>
+                    <a href="{{ getCmsUrl('api-builder') }}" wire:navigate class="hover:text-blue-600 transition-colors">{{ __('api_builder::api_builder.tabs.list') }}</a>
                     <span>/</span>
-                    <span class="text-gray-800 font-medium">{{ $editingApiId ? __('cb::api_builder.create.title_edit') : __('cb::api_builder.create.title') }}</span>
+                    <span class="text-gray-800 font-medium">{{ $editingApiId ? __('api_builder::api_builder.create.title_edit') : __('api_builder::api_builder.create.title') }}</span>
                 </div>
-                <h1 class="text-3xl font-bold text-gray-800">{{ $editingApiId ? __('cb::api_builder.create.title_edit') : __('cb::api_builder.create.title') }}</h1>
-                <p class="text-gray-600 mt-1">{{ $editingApiId ? __('cb::api_builder.create.subtitle_edit') : __('cb::api_builder.create.subtitle') }}</p>
+                <h1 class="text-3xl font-bold text-gray-800">{{ $editingApiId ? __('api_builder::api_builder.create.title_edit') : __('api_builder::api_builder.create.title') }}</h1>
+                <p class="text-gray-600 mt-1">{{ $editingApiId ? __('api_builder::api_builder.create.subtitle_edit') : __('api_builder::api_builder.create.subtitle') }}</p>
             </div>
             <div class="flex gap-2">
-                <a href="{{ getCmsUrl('api-builder') }}" wire:navigate class="btn btn-default">{{ __('cb::api_builder.actions.cancel_project') }}</a>
-                <button type="button" class="btn btn-primary" wire:click="saveDraft">{{ __('cb::api_builder.actions.save') }}</button>
+                <a href="{{ getCmsUrl('api-builder') }}" wire:navigate class="btn btn-default">{{ __('api_builder::api_builder.actions.cancel_project') }}</a>
+                <button type="button" class="btn btn-primary" wire:click="saveDraft">{{ __('api_builder::api_builder.actions.save') }}</button>
             </div>
         </div>
 
         {{-- Step Indicator --}}
         <div class="mb-8">
             <div class="flex justify-between text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
-                <div>{{ __('cb::api_builder.create.step_of', ['step' => $step]) }}</div>
+                <div>{{ __('api_builder::api_builder.create.step_of', ['step' => $step]) }}</div>
                 <div class="text-blue-600">
-                    @if($step === 1) {{ __('cb::api_builder.create.step_title.1') }}
-                    @elseif($step === 2) {{ __('cb::api_builder.create.step_title.2') }}
-                    @elseif($step === 3) {{ __('cb::api_builder.create.step_title.3') }}
-                    @else {{ __('cb::api_builder.create.step_title.4') }}
+                    @if($step === 1) {{ __('api_builder::api_builder.create.step_title.1') }}
+                    @elseif($step === 2) {{ __('api_builder::api_builder.create.step_title.2') }}
+                    @elseif($step === 3) {{ __('api_builder::api_builder.create.step_title.3') }}
+                    @else {{ __('api_builder::api_builder.create.step_title.4') }}
                     @endif
                 </div>
             </div>
@@ -37,29 +37,29 @@
         {{-- Step 1: Basic Information --}}
         @if($step === 1)
             <div class="panel">
-                <div class="panel-header"><h3 class="panel-title">{{ __('cb::api_builder.create.step1.title') }}</h3></div>
+                <div class="panel-header"><h3 class="panel-title">{{ __('api_builder::api_builder.create.step1.title') }}</h3></div>
                 <div class="panel-body p-6 space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
                         <div class="space-y-3">
-                            <label class="font-semibold text-gray-800">{{ __('cb::api_builder.create.step1.api_name') }}</label>
-                            <div class="text-sm text-gray-500">{{ __('cb::api_builder.create.step1.api_name_desc') }}</div>
-                            <input wire:model.defer="name" class="form-control" placeholder="{{ __('cb::api_builder.create.step1.placeholder_api_name') }}">
+                            <label class="font-semibold text-gray-800">{{ __('api_builder::api_builder.create.step1.api_name') }}</label>
+                            <div class="text-sm text-gray-500">{{ __('api_builder::api_builder.create.step1.api_name_desc') }}</div>
+                            <input wire:model.defer="name" class="form-control" placeholder="{{ __('api_builder::api_builder.create.step1.placeholder_api_name') }}">
                             @error('name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                         <div class="space-y-3 mt-6 md:mt-0">
-                            <label class="font-semibold text-gray-800">{{ __('cb::api_builder.create.step1.endpoint_path') }}</label>
-                            <div class="text-sm text-gray-500">{{ __('cb::api_builder.create.step1.endpoint_path_desc') }}</div>
+                            <label class="font-semibold text-gray-800">{{ __('api_builder::api_builder.create.step1.endpoint_path') }}</label>
+                            <div class="text-sm text-gray-500">{{ __('api_builder::api_builder.create.step1.endpoint_path_desc') }}</div>
                             <div class="flex shadow-sm rounded-md">
                                 <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">/api/</span>
-                                <input wire:model.defer="endpointPath" class="form-control !rounded-l-none" placeholder="{{ __('cb::api_builder.create.step1.placeholder_endpoint') }}">
+                                <input wire:model.defer="endpointPath" class="form-control !rounded-l-none" placeholder="{{ __('api_builder::api_builder.create.step1.placeholder_endpoint') }}">
                             </div>
                             @error('endpointPath') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
                         <div class="space-y-3">
-                            <label class="font-semibold text-gray-800">{{ __('cb::api_builder.create.step1.method') }}</label>
-                            <div class="text-sm text-gray-500">{{ __('cb::api_builder.create.step1.method_desc') }}</div>
+                            <label class="font-semibold text-gray-800">{{ __('api_builder::api_builder.create.step1.method') }}</label>
+                            <div class="text-sm text-gray-500">{{ __('api_builder::api_builder.create.step1.method_desc') }}</div>
                             <select wire:model.defer="method" class="form-control">
                                 <option value="GET">GET - Fetch resources</option>
                                 <option value="POST">POST - Create resources</option>
@@ -71,23 +71,23 @@
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <label class="font-semibold text-gray-800">{{ __('cb::api_builder.create.step1.description') }}</label>
-                        <div class="text-sm text-gray-500">{{ __('cb::api_builder.create.step1.description_desc') }}</div>
-                        <textarea wire:model.defer="description" rows="4" class="form-control" placeholder="{{ __('cb::api_builder.create.step1.placeholder_description') }}"></textarea>
+                        <label class="font-semibold text-gray-800">{{ __('api_builder::api_builder.create.step1.description') }}</label>
+                        <div class="text-sm text-gray-500">{{ __('api_builder::api_builder.create.step1.description_desc') }}</div>
+                        <textarea wire:model.defer="description" rows="4" class="form-control" placeholder="{{ __('api_builder::api_builder.create.step1.placeholder_description') }}"></textarea>
                     </div>
                     <div class="pt-4 border-t border-gray-100">
                         <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
                             <div class="mt-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
                             <div class="flex-1">
-                                <label class="font-semibold text-gray-800">{{ __('cb::api_builder.create.step1.traffic_controls') }}</label>
-                                <div class="text-sm text-gray-500">{{ __('cb::api_builder.create.step1.traffic_controls_desc') }}</div>
+                                <label class="font-semibold text-gray-800">{{ __('api_builder::api_builder.create.step1.traffic_controls') }}</label>
+                                <div class="text-sm text-gray-500">{{ __('api_builder::api_builder.create.step1.traffic_controls_desc') }}</div>
                                 <div class="mt-4 space-y-4">
                                     <div class="flex items-center gap-3">
                                         <input type="checkbox" wire:model.defer="rateLimitEnabled" class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                        <span class="text-sm text-gray-700 font-medium cursor-pointer">{{ __('cb::api_builder.create.step1.enable_rate_limit') }}</span>
+                                        <span class="text-sm text-gray-700 font-medium cursor-pointer">{{ __('api_builder::api_builder.create.step1.enable_rate_limit') }}</span>
                                     </div>
                                     <div class="pl-7">
-                                        <div class="text-xs uppercase tracking-wide text-gray-500 mb-1">{{ __('cb::api_builder.create.step1.requests_per_minute') }}</div>
+                                        <div class="text-xs uppercase tracking-wide text-gray-500 mb-1">{{ __('api_builder::api_builder.create.step1.requests_per_minute') }}</div>
                                         <input type="number" wire:model.defer="rateLimitRpm" class="form-control max-w-[200px]" placeholder="60">
                                     </div>
                                 </div>
@@ -102,21 +102,21 @@
         @if($step === 2)
             <div class="panel">
                 <div class="panel-header flex justify-between items-center">
-                    <h3 class="panel-title">{{ __('cb::api_builder.create.step2.title') }}</h3>
+                    <h3 class="panel-title">{{ __('api_builder::api_builder.create.step2.title') }}</h3>
                 </div>
                 <div class="panel-body p-6">
                     <div class="mb-6 flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100">
-                        <div class="text-gray-600 text-sm">{{ __('cb::api_builder.create.step2.desc') }}</div>
-                        <button type="button" wire:click="addPayloadField" class="btn btn-primary">{{ __('cb::api_builder.actions.add_input_field') }}</button>
+                        <div class="text-gray-600 text-sm">{{ __('api_builder::api_builder.create.step2.desc') }}</div>
+                        <button type="button" wire:click="addPayloadField" class="btn btn-primary">{{ __('api_builder::api_builder.actions.add_input_field') }}</button>
                     </div>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>{{ __('cb::api_builder.create.step2.headers.key') }}</th>
-                                <th>{{ __('cb::api_builder.create.step2.headers.type') }}</th>
-                                <th class="text-center">{{ __('cb::api_builder.create.step2.headers.required') }}</th>
-                                <th>{{ __('cb::api_builder.create.step2.headers.description') }}</th>
-                                <th class="text-right">{{ __('cb::api_builder.create.step2.headers.action') }}</th>
+                                <th>{{ __('api_builder::api_builder.create.step2.headers.key') }}</th>
+                                <th>{{ __('api_builder::api_builder.create.step2.headers.type') }}</th>
+                                <th class="text-center">{{ __('api_builder::api_builder.create.step2.headers.required') }}</th>
+                                <th>{{ __('api_builder::api_builder.create.step2.headers.description') }}</th>
+                                <th class="text-right">{{ __('api_builder::api_builder.create.step2.headers.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -136,15 +136,15 @@
                                     <td class="text-center w-24">
                                         <input type="checkbox" wire:model.defer="payloadFields.{{ $index }}.required" class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                     </td>
-                                    <td><input wire:model.defer="payloadFields.{{ $index }}.description" class="form-control" placeholder="{{ __('cb::api_builder.create.step2.sample_email_input') }}"></td>
-                                    <td class="text-right"><button type="button" class="btn btn-danger btn-sm" wire:click="removePayloadField({{ $index }})">{{ __('cb::api_builder.actions.delete') }}</button></td>
+                                    <td><input wire:model.defer="payloadFields.{{ $index }}.description" class="form-control" placeholder="{{ __('api_builder::api_builder.create.step2.sample_email_input') }}"></td>
+                                    <td class="text-right"><button type="button" class="btn btn-danger btn-sm" wire:click="removePayloadField({{ $index }})">{{ __('api_builder::api_builder.actions.delete') }}</button></td>
                                 </tr>
                             @empty
                                 <tr>
                                     <td colspan="5" class="text-center py-12 text-gray-500 bg-gray-50 rounded-xl">
                                         <div class="flex flex-col items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-300 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.58 4 8 4s8-1.79 8-4M4 7c0-2.21 3.58-4 8-4s8 1.79 8 4m0 5c0 2.21-3.58 4-8 4s-8-1.79-8-4" /></svg>
-                                            <p>{{ __('cb::api_builder.create.step2.empty') }}</p>
+                                            <p>{{ __('api_builder::api_builder.create.step2.empty') }}</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -160,14 +160,14 @@
         @if($step === 3)
             <div class="panel">
                 <div class="panel-header flex justify-between items-center">
-                    <h3 class="panel-title">{{ __('cb::api_builder.create.step3.title') }}</h3>
+                    <h3 class="panel-title">{{ __('api_builder::api_builder.create.step3.title') }}</h3>
                 </div>
                 <div class="panel-body p-6">
                     <div class="mb-6 flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100">
-                        <div class="text-gray-600 text-sm">{{ __('cb::api_builder.create.step3.desc') }}</div>
+                        <div class="text-gray-600 text-sm">{{ __('api_builder::api_builder.create.step3.desc') }}</div>
                         <div class="flex gap-2">
-                             <button type="button" class="btn btn-default" wire:click="openCheckUpModal()">{{ __('cb::api_builder.create.check_up.check_up') }}</button>
-                             <button type="button" class="btn btn-primary" wire:click="openAddActionModal()">{{ __('cb::api_builder.actions.add_action') }}</button>
+                             <button type="button" class="btn btn-default" wire:click="openCheckUpModal()">{{ __('api_builder::api_builder.create.check_up.check_up') }}</button>
+                             <button type="button" class="btn btn-primary" wire:click="openAddActionModal()">{{ __('api_builder::api_builder.actions.add_action') }}</button>
                         </div>
                     </div>
 
@@ -179,14 +179,14 @@
                                 </div>
                                 <div class="flex-grow min-w-0">
                                     <div class="font-bold text-gray-800 flex items-center gap-2 truncate">
-                                        {{ __('cb::api_builder.create.step3.action_type.' . $action['action_type']) }}
+                                        {{ __('api_builder::api_builder.create.step3.action_type.' . $action['action_type']) }}
                                         <span class="text-gray-400 font-normal">({{ $action['alias'] }})</span>
                                     </div>
                                     <div class="text-sm text-gray-500 mt-1">
                                         @if(in_array($action['action_type'], ['select','insert','update','delete']))
-                                            {{ __('cb::api_builder.create.step3.target_table', ['table' => $action['target_table'] ?: __('cb::api_builder.misc.dash')]) }}
+                                            {{ __('api_builder::api_builder.create.step3.target_table', ['table' => $action['target_table'] ?: __('api_builder::api_builder.misc.dash')]) }}
                                         @elseif($action['action_type'] === 'call_api')
-                                            {{ __('cb::api_builder.create.step3.url_method', ['url' => $action['http_url'] ?: __('cb::api_builder.misc.dash'), 'method' => $action['http_method']]) }}
+                                            {{ __('api_builder::api_builder.create.step3.url_method', ['url' => $action['http_url'] ?: __('api_builder::api_builder.misc.dash'), 'method' => $action['http_method']]) }}
                                         @elseif($action['action_type'] === 'condition')
                                             @php
                                                 $logicalOp = strtoupper($action['condition_logical_operator'] ?? 'and');
@@ -243,8 +243,8 @@
                                 <div class="flex gap-2">
                                     <button class="btn btn-default btn-sm" wire:click="moveActionUp({{ $index }})">&uarr;</button>
                                     <button class="btn btn-default btn-sm" wire:click="moveActionDown({{ $index }})">&darr;</button>
-                                    <button class="btn btn-primary btn-sm" wire:click="openEditActionModal({{ $index }})">{{ __('cb::api_builder.actions.edit') }}</button>
-                                    <button class="btn btn-danger btn-sm" wire:click="deleteAction({{ $index }})">{{ __('cb::api_builder.actions.delete') }}</button>
+                                    <button class="btn btn-primary btn-sm" wire:click="openEditActionModal({{ $index }})">{{ __('api_builder::api_builder.actions.edit') }}</button>
+                                    <button class="btn btn-danger btn-sm" wire:click="deleteAction({{ $index }})">{{ __('api_builder::api_builder.actions.delete') }}</button>
                                 </div>
                             </div>
                         @empty
@@ -253,7 +253,7 @@
                                     <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-4 text-gray-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                                     </div>
-                                    <p class="text-gray-500 font-medium">{{ __('cb::api_builder.create.step3.empty') }}</p>
+                                    <p class="text-gray-500 font-medium">{{ __('api_builder::api_builder.create.step3.empty') }}</p>
                                 </div>
                             </div>
                         @endforelse
@@ -265,27 +265,27 @@
         {{-- Step 4: Output Mapper --}}
         @if($step === 4)
             <div class="panel">
-                <div class="panel-header"><h3 class="panel-title">{{ __('cb::api_builder.create.step4.title') }}</h3></div>
+                <div class="panel-header"><h3 class="panel-title">{{ __('api_builder::api_builder.create.step4.title') }}</h3></div>
                 <div class="panel-body p-6 space-y-6">
                     <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
-                        <label class="text-sm font-semibold">{{ __('cb::api_builder.create.step4.response_mode') }}</label>
+                        <label class="text-sm font-semibold">{{ __('api_builder::api_builder.create.step4.response_mode') }}</label>
                         <select wire:model.defer="responseMode" class="form-control max-w-[220px] mt-2 shadow-sm">
-                            <option value="custom">{{ __('cb::api_builder.create.step4.custom_mapper') }}</option>
-                            <option value="last_action">{{ __('cb::api_builder.create.step4.use_last_action') }}</option>
+                            <option value="custom">{{ __('api_builder::api_builder.create.step4.custom_mapper') }}</option>
+                            <option value="last_action">{{ __('api_builder::api_builder.create.step4.use_last_action') }}</option>
                         </select>
                     </div>
 
                     @if($responseMode === 'custom')
                         <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100">
                             <div class="text-gray-600 text-sm">Define custom JSON structure for API response.</div>
-                            <button type="button" class="btn btn-primary" wire:click="addResponseMapping">{{ __('cb::api_builder.actions.add_response_mapping') }}</button>
+                            <button type="button" class="btn btn-primary" wire:click="addResponseMapping">{{ __('api_builder::api_builder.actions.add_response_mapping') }}</button>
                         </div>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>{{ __('cb::api_builder.create.step4.headers.output_key') }}</th>
-                                    <th>{{ __('cb::api_builder.create.step4.headers.source_ref') }}</th>
-                                    <th class="text-right">{{ __('cb::api_builder.create.step4.headers.action') }}</th>
+                                    <th>{{ __('api_builder::api_builder.create.step4.headers.output_key') }}</th>
+                                    <th>{{ __('api_builder::api_builder.create.step4.headers.source_ref') }}</th>
+                                    <th class="text-right">{{ __('api_builder::api_builder.create.step4.headers.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -295,10 +295,10 @@
                                         <td>
                                             <input wire:model.defer="responseMappings.{{ $index }}.source_ref" class="form-control" placeholder="action_alias.field">
                                         </td>
-                                        <td class="text-right"><button class="btn btn-danger btn-sm" wire:click="removeResponseMapping({{ $index }})">{{ __('cb::api_builder.actions.delete') }}</button></td>
+                                        <td class="text-right"><button class="btn btn-danger btn-sm" wire:click="removeResponseMapping({{ $index }})">{{ __('api_builder::api_builder.actions.delete') }}</button></td>
                                     </tr>
                                 @empty
-                                    <tr><td colspan="3" class="text-center text-gray-500 py-12 bg-gray-50 rounded-xl">{{ __('cb::api_builder.create.step4.empty') }}</td></tr>
+                                    <tr><td colspan="3" class="text-center text-gray-500 py-12 bg-gray-50 rounded-xl">{{ __('api_builder::api_builder.create.step4.empty') }}</td></tr>
                                 @endforelse
                             </tbody>
                         </table>
@@ -308,7 +308,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                             </div>
                             <div class="text-sm text-blue-800 font-medium">
-                                {{ __('cb::api_builder.create.step4.fallback_note') }}
+                                {{ __('api_builder::api_builder.create.step4.fallback_note') }}
                             </div>
                         </div>
                     @endif
@@ -317,8 +317,8 @@
                         <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
                             <div class="shrink-0 mt-0.5"><input type="checkbox" id="cacheResponse" wire:model.defer="cacheResponseEnabled" class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"></div>
                             <div>
-                                <label for="cacheResponse" class="text-sm font-bold text-gray-800 cursor-pointer">{{ __('cb::api_builder.create.step4.cache_response') }}</label>
-                                <p class="mt-1 text-xs text-gray-500 leading-relaxed">{{ __('cb::api_builder.create.step4.cache_response_desc') }}</p>
+                                <label for="cacheResponse" class="text-sm font-bold text-gray-800 cursor-pointer">{{ __('api_builder::api_builder.create.step4.cache_response') }}</label>
+                                <p class="mt-1 text-xs text-gray-500 leading-relaxed">{{ __('api_builder::api_builder.create.step4.cache_response_desc') }}</p>
                             </div>
                         </div>
                     </div>
@@ -328,13 +328,13 @@
 
         {{-- Footer Controls --}}
         <div class="mt-8 flex justify-between items-center py-6 border-t border-gray-100">
-            <button type="button" class="btn btn-default h-12 px-8" wire:click="prevStep" @disabled($step === 1)>{{ __('cb::api_builder.actions.back') }}</button>
+            <button type="button" class="btn btn-default h-12 px-8" wire:click="prevStep" @disabled($step === 1)>{{ __('api_builder::api_builder.actions.back') }}</button>
             <div class="flex gap-3">
                 @if($step < 4)
-                    <button type="button" class="btn btn-primary h-12 px-10" wire:click="nextStep">{{ __('cb::api_builder.actions.save_and_continue') }}</button>
+                    <button type="button" class="btn btn-primary h-12 px-10" wire:click="nextStep">{{ __('api_builder::api_builder.actions.save_and_continue') }}</button>
                 @else
-                    <button type="button" class="btn btn-default h-12 px-8" wire:click="saveDraft">{{ __('cb::api_builder.actions.save_api_draft') }}</button>
-                    <button type="button" class="btn btn-primary h-12 px-10" wire:click="publishApi">{{ __('cb::api_builder.actions.publish') }}</button>
+                    <button type="button" class="btn btn-default h-12 px-8" wire:click="saveDraft">{{ __('api_builder::api_builder.actions.save_api_draft') }}</button>
+                    <button type="button" class="btn btn-primary h-12 px-10" wire:click="publishApi">{{ __('api_builder::api_builder.actions.publish') }}</button>
                 @endif
             </div>
         </div>
@@ -345,7 +345,7 @@
         <div class="fixed inset-0 z-[100] flex items-center justify-center p-4" style="background: rgba(2, 6, 23, 0.72);">
             <div class="bg-white rounded-2xl shadow-2xl transition-all transform scale-100 flex flex-col" style="width:min(760px,92vw);max-height:calc(100vh - 40px);">
                 <div class="p-5 border-b flex justify-between items-center">
-                    <h3 class="font-semibold text-base text-slate-800">{{ $editingActionIndex === null ? __('cb::api_builder.create.step3.modal.add_title') : __('cb::api_builder.create.step3.modal.edit_title') }}</h3>
+                    <h3 class="font-semibold text-base text-slate-800">{{ $editingActionIndex === null ? __('api_builder::api_builder.create.step3.modal.add_title') : __('api_builder::api_builder.create.step3.modal.edit_title') }}</h3>
                     <button type="button" class="text-slate-400 hover:text-slate-600 transition-colors" wire:click="closeActionModal">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -353,28 +353,28 @@
                 <div class="p-5 space-y-5 overflow-y-auto flex-1 min-h-0">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="text-sm font-semibold mb-1 block">{{ __('cb::api_builder.create.step3.modal.alias') }}</label>
+                            <label class="text-sm font-semibold mb-1 block">{{ __('api_builder::api_builder.create.step3.modal.alias') }}</label>
                             <input class="form-control" wire:model.defer="actionForm.alias">
                         </div>
                         <div>
-                            <label class="text-sm font-semibold mb-1 block">{{ __('cb::api_builder.create.step3.modal.action_type') }}</label>
+                            <label class="text-sm font-semibold mb-1 block">{{ __('api_builder::api_builder.create.step3.modal.action_type') }}</label>
                             <select class="form-control" wire:model.live="actionForm.action_type">
-                                <option value="select">{{ __('cb::api_builder.create.step3.action_type.select') }}</option>
-                                <option value="insert">{{ __('cb::api_builder.create.step3.action_type.insert') }}</option>
-                                <option value="update">{{ __('cb::api_builder.create.step3.action_type.update') }}</option>
-                                <option value="delete">{{ __('cb::api_builder.create.step3.action_type.delete') }}</option>
-                                <option value="call_api">{{ __('cb::api_builder.create.step3.action_type.call_api') }}</option>
-                                <option value="condition">{{ __('cb::api_builder.create.step3.action_type.condition') }}</option>
-                                <option value="throw_error">{{ __('cb::api_builder.create.step3.action_type.throw_error') }}</option>
+                                <option value="select">{{ __('api_builder::api_builder.create.step3.action_type.select') }}</option>
+                                <option value="insert">{{ __('api_builder::api_builder.create.step3.action_type.insert') }}</option>
+                                <option value="update">{{ __('api_builder::api_builder.create.step3.action_type.update') }}</option>
+                                <option value="delete">{{ __('api_builder::api_builder.create.step3.action_type.delete') }}</option>
+                                <option value="call_api">{{ __('api_builder::api_builder.create.step3.action_type.call_api') }}</option>
+                                <option value="condition">{{ __('api_builder::api_builder.create.step3.action_type.condition') }}</option>
+                                <option value="throw_error">{{ __('api_builder::api_builder.create.step3.action_type.throw_error') }}</option>
                             </select>
                         </div>
                     </div>
 
                     @if(in_array($actionForm['action_type'], ['select','insert','update','delete']))
                         <div>
-                            <label class="text-sm font-semibold mb-1 block">{{ __('cb::api_builder.create.step3.modal.target_table') }}</label>
+                            <label class="text-sm font-semibold mb-1 block">{{ __('api_builder::api_builder.create.step3.modal.target_table') }}</label>
                             <select class="form-control" wire:model.live="actionForm.target_table">
-                                <option value="">{{ __('cb::api_builder.create.step3.modal.target_table_placeholder') }}</option>
+                                <option value="">{{ __('api_builder::api_builder.create.step3.modal.target_table_placeholder') }}</option>
                                 @foreach($tableOptions as $table)
                                     <option value="{{ $table }}">{{ $table }}</option>
                                 @endforeach
@@ -385,35 +385,35 @@
                     @if($actionForm['action_type'] === 'select')
                         <div class="space-y-4 pt-4 border-t border-slate-100">
                             <div class="flex justify-between items-center">
-                                <div class="text-sm font-semibold text-slate-600">{{ __('cb::api_builder.create.step3.modal.join_desc') }}</div>
-                                <button type="button" class="btn btn-default btn-sm" wire:click="addJoin">{{ __('cb::api_builder.create.step3.modal.add_join') }}</button>
+                                <div class="text-sm font-semibold text-slate-600">{{ __('api_builder::api_builder.create.step3.modal.join_desc') }}</div>
+                                <button type="button" class="btn btn-default btn-sm" wire:click="addJoin">{{ __('api_builder::api_builder.create.step3.modal.add_join') }}</button>
                             </div>
                             <div class="space-y-3">
                                 @forelse($actionForm['joins'] ?? [] as $index => $join)
                                     <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
                                         <div class="md:col-span-2">
-                                            <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('cb::api_builder.create.step3.modal.headers.join_type') }}</label>
+                                            <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('api_builder::api_builder.create.step3.modal.headers.join_type') }}</label>
                                             <select class="form-control shadow-sm" wire:model.defer="actionForm.joins.{{ $index }}.type">
-                                                <option value="left">{{ __('cb::api_builder.create.step3.modal.join_types.left') }}</option>
-                                                <option value="inner">{{ __('cb::api_builder.create.step3.modal.join_types.inner') }}</option>
-                                                <option value="right">{{ __('cb::api_builder.create.step3.modal.join_types.right') }}</option>
+                                                <option value="left">{{ __('api_builder::api_builder.create.step3.modal.join_types.left') }}</option>
+                                                <option value="inner">{{ __('api_builder::api_builder.create.step3.modal.join_types.inner') }}</option>
+                                                <option value="right">{{ __('api_builder::api_builder.create.step3.modal.join_types.right') }}</option>
                                             </select>
                                         </div>
                                         <div class="md:col-span-3">
-                                            <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('cb::api_builder.create.step3.modal.headers.join_table') }}</label>
+                                            <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('api_builder::api_builder.create.step3.modal.headers.join_table') }}</label>
                                             <select class="form-control shadow-sm" wire:model.defer="actionForm.joins.{{ $index }}.target_table">
-                                                <option value="">{{ __('cb::api_builder.create.step3.modal.target_table_placeholder') }}</option>
+                                                <option value="">{{ __('api_builder::api_builder.create.step3.modal.target_table_placeholder') }}</option>
                                                 @foreach($tableOptions as $table)
                                                     <option value="{{ $table }}">{{ $table }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="md:col-span-2">
-                                            <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('cb::api_builder.create.step3.modal.headers.join_alias') }}</label>
+                                            <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('api_builder::api_builder.create.step3.modal.headers.join_alias') }}</label>
                                             <input class="form-control shadow-sm" wire:model.defer="actionForm.joins.{{ $index }}.alias" placeholder="e.g. t1">
                                         </div>
                                         <div class="md:col-span-4">
-                                            <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('cb::api_builder.create.step3.modal.headers.join_on') }}</label>
+                                            <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('api_builder::api_builder.create.step3.modal.headers.join_on') }}</label>
                                             <div class="flex items-center gap-2">
                                                 <input class="form-control shadow-sm" wire:model.defer="actionForm.joins.{{ $index }}.on_primary" placeholder="primary_key">
                                                 <span class="text-slate-400">=</span>
@@ -425,8 +425,8 @@
                                                 type="button"
                                                 class="btn btn-default btn-sm w-full border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300"
                                                 wire:click="removeJoin({{ $index }})"
-                                                title="{{ __('cb::api_builder.actions.delete') }}"
-                                                aria-label="{{ __('cb::api_builder.actions.delete') }}"
+                                                title="{{ __('api_builder::api_builder.actions.delete') }}"
+                                                aria-label="{{ __('api_builder::api_builder.actions.delete') }}"
                                             >
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0l1 12h6l1-12M10 11v6M14 11v6" />
@@ -435,7 +435,7 @@
                                         </div>
                                     </div>
                                 @empty
-                                    <div class="text-center py-6 text-slate-400 text-sm border-2 border-dashed border-slate-100 rounded-xl">{{ __('cb::api_builder.create.step3.modal.no_join') }}</div>
+                                    <div class="text-center py-6 text-slate-400 text-sm border-2 border-dashed border-slate-100 rounded-xl">{{ __('api_builder::api_builder.create.step3.modal.no_join') }}</div>
                                 @endforelse
                             </div>
                         </div>
@@ -445,14 +445,14 @@
                         <div class="space-y-4 pt-4 border-t border-slate-100">
                             <div class="flex justify-between items-center">
                                 <div class="text-sm font-semibold text-slate-600">
-                                    {{ $actionForm['action_type'] === 'select' ? __('cb::api_builder.create.step3.modal.columns_to_select') : __('cb::api_builder.create.step3.modal.mapping_desc') }}
+                                    {{ $actionForm['action_type'] === 'select' ? __('api_builder::api_builder.create.step3.modal.columns_to_select') : __('api_builder::api_builder.create.step3.modal.mapping_desc') }}
                                 </div>
                                 <div class="flex gap-2 items-center">
                                     <button type="button" class="btn {{ ($actionForm['column_mappings_raw'] ?? false) ? 'btn-primary' : 'btn-default' }} btn-sm" wire:click="$toggle('actionForm.column_mappings_raw')">
-                                        {{ __('cb::api_builder.create.step3.modal.raw_sql') }}
+                                        {{ __('api_builder::api_builder.create.step3.modal.raw_sql') }}
                                     </button>
                                     @if(!($actionForm['column_mappings_raw'] ?? false) && $actionForm['action_type'] === 'insert')
-                                        <button type="button" class="btn btn-primary btn-sm" wire:click="addColumnMapping">{{ __('cb::api_builder.actions.add_mapping') }}</button>
+                                        <button type="button" class="btn btn-primary btn-sm" wire:click="addColumnMapping">{{ __('api_builder::api_builder.actions.add_mapping') }}</button>
                                     @endif
                                 </div>
                             </div>
@@ -460,7 +460,7 @@
                             @if($actionForm['column_mappings_raw'] ?? false)
                                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
                                     <textarea wire:model.defer="actionForm.column_mappings_raw_sql" rows="4" class="form-control font-mono text-sm" placeholder="e.g. id, name, email as user_email"></textarea>
-                                    <div class="text-xs text-slate-500 mt-1 italic">{{ __('cb::api_builder.create.step3.modal.raw_sql_columns_hint') }}</div>
+                                    <div class="text-xs text-slate-500 mt-1 italic">{{ __('api_builder::api_builder.create.step3.modal.raw_sql_columns_hint') }}</div>
                                 </div>
                             @else
                                 <div class="space-y-3">
@@ -476,7 +476,7 @@
                                             @if($actionForm['action_type'] === 'insert' || $actionForm['action_type'] === 'update')
                                                 <div class="flex-grow">
                                                     <select class="form-control" wire:model.live="actionForm.column_mappings.{{ $index }}.source_ref">
-                                                        <option value="">{{ __('cb::api_builder.create.step3.modal.source_ref_placeholder') }}</option>
+                                                        <option value="">{{ __('api_builder::api_builder.create.step3.modal.source_ref_placeholder') }}</option>
                                                         @foreach($sourceReferenceOptions as $group => $options)
                                                             <optgroup label="{{ $group }}">
                                                                 @foreach($options as $sourceReferenceOption)
@@ -496,8 +496,8 @@
                                                 type="button"
                                                 class="btn btn-default btn-sm border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 min-w-[38px]"
                                                 wire:click="removeColumnMapping({{ $index }})"
-                                                title="{{ __('cb::api_builder.actions.delete') }}"
-                                                aria-label="{{ __('cb::api_builder.actions.delete') }}"
+                                                title="{{ __('api_builder::api_builder.actions.delete') }}"
+                                                aria-label="{{ __('api_builder::api_builder.actions.delete') }}"
                                             >
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0l1 12h6l1-12M10 11v6M14 11v6" />
@@ -505,7 +505,7 @@
                                             </button>
                                         </div>
                                     @empty
-                                        <div class="text-center py-6 text-slate-400 text-sm border-2 border-dashed border-slate-100 rounded-xl">{{ __('cb::api_builder.create.step3.modal.empty_mapping') }}</div>
+                                        <div class="text-center py-6 text-slate-400 text-sm border-2 border-dashed border-slate-100 rounded-xl">{{ __('api_builder::api_builder.create.step3.modal.empty_mapping') }}</div>
                                     @endforelse
                                 </div>
                             @endif
@@ -515,13 +515,13 @@
                     @if(in_array($actionForm['action_type'], ['select','update','delete']))
                         <div class="space-y-4 pt-4 border-t border-slate-100">
                             <div class="flex justify-between items-center">
-                                <div class="text-sm font-semibold text-slate-600">{{ __('cb::api_builder.create.step3.modal.condition_desc') }}</div>
+                                <div class="text-sm font-semibold text-slate-600">{{ __('api_builder::api_builder.create.step3.modal.condition_desc') }}</div>
                                 <div class="flex gap-2 items-center">
                                     <button type="button" class="btn {{ ($actionForm['conditions_raw'] ?? false) ? 'btn-primary' : 'btn-default' }} btn-sm" wire:click="$toggle('actionForm.conditions_raw')">
-                                        {{ __('cb::api_builder.create.step3.modal.raw_sql') }}
+                                        {{ __('api_builder::api_builder.create.step3.modal.raw_sql') }}
                                     </button>
                                     @if(!($actionForm['conditions_raw'] ?? false))
-                                        <button type="button" class="btn btn-primary btn-sm" wire:click="addCondition">{{ __('cb::api_builder.actions.add_condition') }}</button>
+                                        <button type="button" class="btn btn-primary btn-sm" wire:click="addCondition">{{ __('api_builder::api_builder.actions.add_condition') }}</button>
                                     @endif
                                 </div>
                             </div>
@@ -529,7 +529,7 @@
                             @if($actionForm['conditions_raw'] ?? false)
                                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
                                     <textarea wire:model.defer="actionForm.conditions_raw_sql" rows="4" class="form-control font-mono text-sm" placeholder="e.g. status = 'active' AND (price > 100 OR category_id = 5)"></textarea>
-                                    <div class="text-xs text-slate-500 mt-1 italic">{{ __('cb::api_builder.create.step3.modal.raw_sql_where_hint') }}</div>
+                                    <div class="text-xs text-slate-500 mt-1 italic">{{ __('api_builder::api_builder.create.step3.modal.raw_sql_where_hint') }}</div>
                                 </div>
                             @else
                                 <div class="space-y-3">
@@ -537,7 +537,7 @@
                                         <div class="p-3 bg-slate-50 rounded-xl border border-slate-100" style="display:grid;grid-template-columns: 1.8fr 0.7fr 2fr auto;gap:12px;align-items:start;">
                                             <div>
                                                 <select class="form-control" wire:model.defer="actionForm.conditions.{{ $index }}.field">
-                                                    <option value="">{{ __('cb::api_builder.create.step3.modal.conditions.field_placeholder') }}</option>
+                                                    <option value="">{{ __('api_builder::api_builder.create.step3.modal.conditions.field_placeholder') }}</option>
                                                     @foreach($tableColumns as $column)
                                                         <option value="{{ $column }}">{{ $column }}</option>
                                                     @endforeach
@@ -556,7 +556,7 @@
                                             </div>
                                             <div>
                                                 <select class="form-control" wire:model.live="actionForm.conditions.{{ $index }}.value_ref">
-                                                    <option value="">{{ __('cb::api_builder.create.step3.modal.source_ref_placeholder') }}</option>
+                                                    <option value="">{{ __('api_builder::api_builder.create.step3.modal.source_ref_placeholder') }}</option>
                                                     @foreach($sourceReferenceOptions as $group => $options)
                                                         <optgroup label="{{ $group }}">
                                                             @foreach($options as $sourceReferenceOption)
@@ -567,7 +567,7 @@
                                                 </select>
                                                 @if(($actionForm['conditions'][$index]['value_ref'] ?? '') === '__manual__')
                                                     <div class="mt-2">
-                                                        <input type="text" class="form-control" wire:model.defer="actionForm.conditions.{{ $index }}.manual_value" placeholder="{{ __('cb::api_builder.create.step3.modal.manual_value_placeholder') }}">
+                                                        <input type="text" class="form-control" wire:model.defer="actionForm.conditions.{{ $index }}.manual_value" placeholder="{{ __('api_builder::api_builder.create.step3.modal.manual_value_placeholder') }}">
                                                     </div>
                                                 @endif
                                             </div>
@@ -576,8 +576,8 @@
                                                     type="button"
                                                     class="btn btn-default btn-sm border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 min-w-[38px]"
                                                     wire:click="removeCondition({{ $index }})"
-                                                    title="{{ __('cb::api_builder.actions.delete') }}"
-                                                    aria-label="{{ __('cb::api_builder.actions.delete') }}"
+                                                    title="{{ __('api_builder::api_builder.actions.delete') }}"
+                                                    aria-label="{{ __('api_builder::api_builder.actions.delete') }}"
                                                 >
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0l1 12h6l1-12M10 11v6M14 11v6" />
@@ -586,7 +586,7 @@
                                             </div>
                                         </div>
                                     @empty
-                                        <div class="text-center py-6 text-slate-400 text-sm border-2 border-dashed border-slate-100 rounded-xl">{{ __('cb::api_builder.create.step3.modal.conditions.empty') }}</div>
+                                        <div class="text-center py-6 text-slate-400 text-sm border-2 border-dashed border-slate-100 rounded-xl">{{ __('api_builder::api_builder.create.step3.modal.conditions.empty') }}</div>
                                     @endforelse
                                 </div>
                             @endif
@@ -597,22 +597,22 @@
                         <div class="space-y-4 pt-4 border-t border-slate-100">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('cb::api_builder.create.step3.modal.endpoint_url') }}</label>
+                                    <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('api_builder::api_builder.create.step3.modal.endpoint_url') }}</label>
                                     <input class="form-control" wire:model.defer="actionForm.http_url" placeholder="https://api.example.com/v1/user">
                                 </div>
                                 <div>
-                                    <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('cb::api_builder.create.step3.modal.method') }}</label>
+                                    <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('api_builder::api_builder.create.step3.modal.method') }}</label>
                                     <select class="form-control" wire:model.defer="actionForm.http_method">
                                         <option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option>
                                     </select>
                                 </div>
                             </div>
                             <div>
-                                <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('cb::api_builder.create.step3.modal.authorization_token') }}</label>
+                                <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('api_builder::api_builder.create.step3.modal.authorization_token') }}</label>
                                 <input class="form-control" wire:model.defer="actionForm.http_auth_token" placeholder="payload.token">
                             </div>
                             <div>
-                                <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('cb::api_builder.create.step3.modal.headers_json') }}</label>
+                                <label class="text-xs font-semibold text-slate-500 mb-1 block">{{ __('api_builder::api_builder.create.step3.modal.headers_json') }}</label>
                                 <textarea rows="3" class="form-control font-mono text-sm" wire:model.defer="actionForm.http_headers_json" placeholder='{"X-Header": "Value"}'></textarea>
                             </div>
                         </div>
@@ -693,8 +693,8 @@
                     @if($editingActionIndex !== null)
                         <button type="button" class="btn btn-danger" wire:click="deleteAction({{ $editingActionIndex }})">Delete</button>
                     @endif
-                    <button type="button" class="btn btn-default" wire:click="closeActionModal">{{ __('cb::api_builder.actions.cancel') }}</button>
-                    <button type="button" class="btn btn-primary px-8" wire:click="saveActionModal">{{ __('cb::api_builder.actions.save') }}</button>
+                    <button type="button" class="btn btn-default" wire:click="closeActionModal">{{ __('api_builder::api_builder.actions.cancel') }}</button>
+                    <button type="button" class="btn btn-primary px-8" wire:click="saveActionModal">{{ __('api_builder::api_builder.actions.save') }}</button>
                 </div>
             </div>
         </div>

@@ -17,7 +17,7 @@ class CbApiBuilderServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__ . '/views', 'cb.api-builder');
-        $this->loadTranslationsFrom(__DIR__ . '/Lang', 'cb');
+        $this->loadTranslationsFrom(__DIR__ . '/Lang', 'api_builder');
         $this->loadRoutesFrom(__DIR__ . '/router.php');
         $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
         if ($this->app->runningInConsole()) {

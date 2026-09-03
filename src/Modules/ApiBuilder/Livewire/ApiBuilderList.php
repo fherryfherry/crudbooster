@@ -68,7 +68,7 @@ class ApiBuilderList extends Component
             return;
         }
 
-        $this->showAlertMessage(__('cb::api_builder.alerts.unknown_tab'), 'warning');
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.unknown_tab'), 'warning');
     }
 
     public function setSortBy(string $sort): void
@@ -119,10 +119,10 @@ class ApiBuilderList extends Component
     {
         $api = CbApiBuilder::query()->findOrFail($id);
         $this->showConfirmMessage(
-            __('cb::api_builder.alerts.confirm_delete_title'),
-            __('cb::api_builder.alerts.confirm_delete_message', ['name' => $api->name]),
+            __('api_builder::api_builder.alerts.confirm_delete_title'),
+            __('api_builder::api_builder.alerts.confirm_delete_message', ['name' => $api->name]),
             ['deleteApiConfirmed', $id],
-            __('cb::api_builder.actions.delete'),
+            __('api_builder::api_builder.actions.delete'),
             'danger'
         );
     }
@@ -132,7 +132,7 @@ class ApiBuilderList extends Component
         ApiBuilderController::invalidateCache($id);
         CbApiBuilder::query()->where('id', $id)->delete();
         $this->confirmMessageClose();
-        $this->showAlertMessage(__('cb::api_builder.alerts.api_deleted'), 'success');
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.api_deleted'), 'success');
         $this->resetPage();
     }
 
@@ -188,7 +188,7 @@ class ApiBuilderList extends Component
 
         $this->latestGeneratedToken = $rawToken;
         $this->showTokenModal = false;
-        $this->showAlertMessage(__('cb::api_builder.alerts.token_created'), 'success');
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.token_created'), 'success');
     }
 
     private function normalizeScopeEndpoint(string $scope): string
@@ -210,17 +210,17 @@ class ApiBuilderList extends Component
         $token = CbApiToken::query()->findOrFail($id);
         $token->status = 'disabled';
         $token->save();
-        $this->showAlertMessage(__('cb::api_builder.alerts.token_inactive'), 'success');
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.token_inactive'), 'success');
     }
 
     public function deleteToken(string $id): void
     {
         $token = CbApiToken::query()->findOrFail($id);
         $this->showConfirmMessage(
-            __('cb::api_builder.alerts.confirm_delete_token_title'),
-            __('cb::api_builder.alerts.confirm_delete_token_message', ['name' => $token->name]),
+            __('api_builder::api_builder.alerts.confirm_delete_token_title'),
+            __('api_builder::api_builder.alerts.confirm_delete_token_message', ['name' => $token->name]),
             ['deleteTokenConfirmed', $id],
-            __('cb::api_builder.actions.delete'),
+            __('api_builder::api_builder.actions.delete'),
             'danger'
         );
     }
@@ -229,7 +229,7 @@ class ApiBuilderList extends Component
     {
         CbApiToken::query()->where('id', $id)->delete();
         $this->confirmMessageClose();
-        $this->showAlertMessage(__('cb::api_builder.alerts.token_deleted'), 'success');
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.token_deleted'), 'success');
     }
 
     public function copyApiKey(string $id): void
@@ -237,12 +237,12 @@ class ApiBuilderList extends Component
         $token = CbApiToken::query()->findOrFail($id);
         $value = $token->token_encrypted;
         if (! $value) {
-            $this->showAlertMessage(__('cb::api_builder.alerts.api_key_unavailable'), 'warning');
+            $this->showAlertMessage(__('api_builder::api_builder.alerts.api_key_unavailable'), 'warning');
             return;
         }
 
         $this->dispatch('cb-copy-api-key', value: $value);
-        $this->showAlertMessage(__('cb::api_builder.alerts.api_key_copied'), 'success');
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.api_key_copied'), 'success');
     }
 
     public function openSnippetModal(string $id): void
@@ -312,7 +312,7 @@ echo \$response;", $fullUrl, $this->selectedApiToken, $method);
 
         if ($snippet) {
             $this->dispatch('cb-copy-api-key', value: $snippet);
-            $this->showAlertMessage(__('cb::api_builder.alerts.snippet_copied'), 'success');
+            $this->showAlertMessage(__('api_builder::api_builder.alerts.snippet_copied'), 'success');
         }
     }
 
@@ -500,7 +500,7 @@ echo \$response;", $fullUrl, $this->selectedApiToken, $method);
             'response_mapper' => ['mode' => 'last_action', 'mapping' => []],
         ]);
 
-        $this->showAlertMessage(__('cb::api_builder.alerts.api_draft_saved'), 'success');
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.api_draft_saved'), 'success');
         return true;
     }
 
@@ -616,10 +616,10 @@ echo \$response;", $fullUrl, $this->selectedApiToken, $method);
     public function authMethodLabel(string $method): string
     {
         return match ($method) {
-            'bearer_token' => __('cb::api_builder.credential.auth_method.bearer_token'),
-            'api_key' => __('cb::api_builder.credential.auth_method.api_key'),
-            'oauth2' => __('cb::api_builder.credential.auth_method.oauth2'),
-            default => __('cb::api_builder.credential.auth_method.unknown'),
+            'bearer_token' => __('api_builder::api_builder.credential.auth_method.bearer_token'),
+            'api_key' => __('api_builder::api_builder.credential.auth_method.api_key'),
+            'oauth2' => __('api_builder::api_builder.credential.auth_method.oauth2'),
+            default => __('api_builder::api_builder.credential.auth_method.unknown'),
         };
     }
 
@@ -637,7 +637,7 @@ echo \$response;", $fullUrl, $this->selectedApiToken, $method);
     {
         $value = $token->token_encrypted;
         if (! $value) {
-            return ($token->token_prefix ?: __('cb::api_builder.alerts.api_key_unavailable')) . '...';
+            return ($token->token_prefix ?: __('api_builder::api_builder.alerts.api_key_unavailable')) . '...';
         }
 
         $head = Str::substr($value, 0, 10);
@@ -649,7 +649,7 @@ echo \$response;", $fullUrl, $this->selectedApiToken, $method);
     public function formatLastUsed(?Carbon $lastUsedAt): string
     {
         if (! $lastUsedAt) {
-            return __('cb::api_builder.credential.last_used_never');
+            return __('api_builder::api_builder.credential.last_used_never');
         }
 
         return $lastUsedAt->diffForHumans();
@@ -668,10 +668,10 @@ echo \$response;", $fullUrl, $this->selectedApiToken, $method);
     public function clearLogs(): void
     {
         $this->showConfirmMessage(
-            __('cb::api_builder.alerts.confirm_clear_logs_title'),
-            __('cb::api_builder.alerts.confirm_clear_logs_message'),
+            __('api_builder::api_builder.alerts.confirm_clear_logs_title'),
+            __('api_builder::api_builder.alerts.confirm_clear_logs_message'),
             'clearLogsConfirmed',
-            __('cb::api_builder.actions.clear'),
+            __('api_builder::api_builder.actions.clear'),
             'danger'
         );
     }
@@ -680,7 +680,7 @@ echo \$response;", $fullUrl, $this->selectedApiToken, $method);
     {
         CbApiRequestLog::query()->truncate();
         $this->confirmMessageClose();
-        $this->showAlertMessage(__('cb::api_builder.alerts.logs_cleared'), 'success');
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.logs_cleared'), 'success');
     }
 
     public function exportLogsCsv()
@@ -712,7 +712,7 @@ echo \$response;", $fullUrl, $this->selectedApiToken, $method);
         $content = implode("\n", $lines);
         $filename = 'api-logs-' . now()->format('Ymd-His') . '.csv';
         $this->dispatch('cb-download-csv', content: $content, filename: $filename);
-        $this->showAlertMessage(__('cb::api_builder.alerts.csv_prepared'), 'success');
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.csv_prepared'), 'success');
     }
 
     public function logStatusClass(int $statusCode): string

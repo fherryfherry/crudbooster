@@ -769,6 +769,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
+            margin: 0 !important;
             background: rgba(15, 23, 42, 0.35);
             display: flex;
             align-items: center;
@@ -941,25 +942,25 @@
     <div class="cb-api-frame space-y-6">
         <div class="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
             <div>
-                <h1 class="cb-api-title">{{ __('cb::api_builder.list.title') }}</h1>
-                <p class="cb-api-subtitle">{{ __('cb::api_builder.list.subtitle') }}</p>
+                <h1 class="cb-api-title">{{ __('api_builder::api_builder.list.title') }}</h1>
+                <p class="cb-api-subtitle">{{ __('api_builder::api_builder.list.subtitle') }}</p>
             </div>
             <div class="relative flex items-center gap-3">
                 @if($activeTab === 'credential')
                     <button type="button" class="btn btn-primary inline-flex items-center gap-2" wire:click="generateToken">
                         <span>+</span>
-                        <span>{{ __('cb::api_builder.actions.generate_new_token') }}</span>
+                        <span>{{ __('api_builder::api_builder.actions.generate_new_token') }}</span>
                     </button>
                 @else
                     <a href="{{ route('cb.api.swagger') }}" target="_blank" class="btn btn-outline">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
-                        <span>{{ __('cb::api_builder.actions.swagger_apidocs') }}</span>
+                        <span>{{ __('api_builder::api_builder.actions.swagger_apidocs') }}</span>
                     </a>
                     <button type="button" class="btn btn-primary inline-flex items-center gap-2" wire:click="openNewApiModal" x-ref="generateApiButton" data-coach-target="generate-api-button">
                         <span>+</span>
-                        <span>{{ __('cb::api_builder.actions.generate_new_api') }}</span>
+                        <span>{{ __('api_builder::api_builder.actions.generate_new_api') }}</span>
                     </button>
                 @endif
             </div>
@@ -974,10 +975,10 @@
                     <div class="cb-coachmark-title" x-text="currentCoach.title"></div>
                     <div class="cb-coachmark-desc" x-text="currentCoach.desc"></div>
                     <div class="cb-coachmark-actions">
-                        <button type="button" class="cb-coachmark-dismiss" @click="dismissQuickCoachmark()">{{ __('cb::api_builder.coachmark.dismiss') }}</button>
-                        <button type="button" class="cb-coachmark-dismiss" x-show="coachStep > 0" @click="prevCoachStep()">{{ __('cb::api_builder.coachmark.back') }}</button>
+                        <button type="button" class="cb-coachmark-dismiss" @click="dismissQuickCoachmark()">{{ __('api_builder::api_builder.coachmark.dismiss') }}</button>
+                        <button type="button" class="cb-coachmark-dismiss" x-show="coachStep > 0" @click="prevCoachStep()">{{ __('api_builder::api_builder.coachmark.back') }}</button>
                         <button type="button" class="btn btn-primary inline-flex items-center gap-2" @click="nextCoachStep()">
-                            <span x-text="isLastCoachStep ? @js(__('cb::api_builder.coachmark.finish')) : @js(__('cb::api_builder.coachmark.next'))"></span>
+                            <span x-text="isLastCoachStep ? @js(__('api_builder::api_builder.coachmark.finish')) : @js(__('api_builder::api_builder.coachmark.next'))"></span>
                         </button>
                     </div>
                 </div>
@@ -985,42 +986,42 @@
         </template>
 
         <div class="cb-tab-wrap">
-            <button type="button" class="cb-tab-btn {{ $activeTab === 'list' ? 'active' : '' }}" wire:click="setTab('list')">{{ __('cb::api_builder.tabs.list') }}</button>
-            <button type="button" class="cb-tab-btn {{ $activeTab === 'credential' ? 'active' : '' }}" wire:click="setTab('credential')" data-coach-target="tab-credential">{{ __('cb::api_builder.tabs.credential') }}</button>
-            <button type="button" class="cb-tab-btn {{ $activeTab === 'logs' ? 'active' : '' }}" wire:click="setTab('logs')" data-coach-target="tab-logs">{{ __('cb::api_builder.tabs.logs') }}</button>
+            <button type="button" class="cb-tab-btn {{ $activeTab === 'list' ? 'active' : '' }}" wire:click="setTab('list')">{{ __('api_builder::api_builder.tabs.list') }}</button>
+            <button type="button" class="cb-tab-btn {{ $activeTab === 'credential' ? 'active' : '' }}" wire:click="setTab('credential')" data-coach-target="tab-credential">{{ __('api_builder::api_builder.tabs.credential') }}</button>
+            <button type="button" class="cb-tab-btn {{ $activeTab === 'logs' ? 'active' : '' }}" wire:click="setTab('logs')" data-coach-target="tab-logs">{{ __('api_builder::api_builder.tabs.logs') }}</button>
         </div>
 
         @if($activeTab === 'list')
             <div class="cb-list-stat-grid">
                 <div class="cb-list-stat-card" data-coach-target="stats-total-apis">
-                    <div class="cb-list-stat-label">{{ __('cb::api_builder.list.total_apis') }}</div>
+                    <div class="cb-list-stat-label">{{ __('api_builder::api_builder.list.total_apis') }}</div>
                     <div class="cb-list-stat-value">{{ $stats['totalApis'] }}</div>
                     <div class="cb-list-stat-note {{ $stats['totalApis'] > 0 ? 'text-green-600' : '' }}">
-                        {{ $stats['totalApis'] > 0 ? '+' . $stats['totalApis'] . __('cb::api_builder.list.registered_suffix') : __('cb::api_builder.list.no_apis_yet') }}
+                        {{ $stats['totalApis'] > 0 ? '+' . $stats['totalApis'] . __('api_builder::api_builder.list.registered_suffix') : __('api_builder::api_builder.list.no_apis_yet') }}
                     </div>
                 </div>
 
                 <div class="cb-list-stat-card" data-coach-target="stats-active-endpoints">
-                    <div class="cb-list-stat-label">{{ __('cb::api_builder.list.active_endpoints') }}</div>
+                    <div class="cb-list-stat-label">{{ __('api_builder::api_builder.list.active_endpoints') }}</div>
                     <div class="cb-list-stat-value">{{ $stats['activeEndpoints'] }}</div>
                     <div class="cb-list-stat-note">
-                        {{ $stats['totalApis'] > 0 ? number_format(($stats['activeEndpoints'] / max(1, $stats['totalApis'])) * 100, 1) . __('cb::api_builder.list.availability_suffix') : __('cb::api_builder.list.zero_availability') }}
+                        {{ $stats['totalApis'] > 0 ? number_format(($stats['activeEndpoints'] / max(1, $stats['totalApis'])) * 100, 1) . __('api_builder::api_builder.list.availability_suffix') : __('api_builder::api_builder.list.zero_availability') }}
                     </div>
                 </div>
 
                 <div class="cb-list-stat-card" data-coach-target="stats-avg-response">
-                    <div class="cb-list-stat-label">{{ __('cb::api_builder.list.avg_response') }}</div>
+                    <div class="cb-list-stat-label">{{ __('api_builder::api_builder.list.avg_response') }}</div>
                     <div class="cb-list-stat-value">{{ $stats['avgResponse'] }}ms</div>
                     <div class="cb-list-stat-note text-blue-600">
-                        {{ $stats['avgResponse'] > 0 && $stats['avgResponse'] <= 200 ? __('cb::api_builder.list.optimal_range') : __('cb::api_builder.list.need_runtime_data') }}
+                        {{ $stats['avgResponse'] > 0 && $stats['avgResponse'] <= 200 ? __('api_builder::api_builder.list.optimal_range') : __('api_builder::api_builder.list.need_runtime_data') }}
                     </div>
                 </div>
 
                 <div class="cb-list-stat-card" data-coach-target="stats-error-rate">
-                    <div class="cb-list-stat-label">{{ __('cb::api_builder.list.error_rate') }}</div>
+                    <div class="cb-list-stat-label">{{ __('api_builder::api_builder.list.error_rate') }}</div>
                     <div class="cb-list-stat-value">{{ number_format($stats['errorRate'], 2) }}%</div>
                     <div class="cb-list-stat-note {{ $stats['errorRate'] <= 1 ? 'text-green-600' : '' }}">
-                        {{ $stats['errorRate'] <= 1 ? __('cb::api_builder.list.healthy') : __('cb::api_builder.list.needs_attention') }}
+                        {{ $stats['errorRate'] <= 1 ? __('api_builder::api_builder.list.healthy') : __('api_builder::api_builder.list.needs_attention') }}
                     </div>
                 </div>
             </div>
@@ -1029,11 +1030,11 @@
                 <table class="cb-table">
                     <thead>
                     <tr>
-                        <th>{{ __('cb::api_builder.list.headers.api_name') }}</th>
-                        <th>{{ __('cb::api_builder.list.headers.endpoint_path') }}</th>
-                        <th>{{ __('cb::api_builder.list.headers.method') }}</th>
-                        <th>{{ __('cb::api_builder.list.headers.status') }}</th>
-                        <th>{{ __('cb::api_builder.list.headers.actions') }}</th>
+                        <th>{{ __('api_builder::api_builder.list.headers.api_name') }}</th>
+                        <th>{{ __('api_builder::api_builder.list.headers.endpoint_path') }}</th>
+                        <th>{{ __('api_builder::api_builder.list.headers.method') }}</th>
+                        <th>{{ __('api_builder::api_builder.list.headers.status') }}</th>
+                        <th>{{ __('api_builder::api_builder.list.headers.actions') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -1041,7 +1042,7 @@
                         <tr>
                             <td>
                                 <div class="cb-api-name">{{ $api->name }}</div>
-                                <div class="cb-api-meta">{{ __('cb::api_builder.list.created', ['time' => $api->created_at?->diffForHumans() ?? __('cb::api_builder.misc.dash')]) }}</div>
+                                <div class="cb-api-meta">{{ __('api_builder::api_builder.list.created', ['time' => $api->created_at?->diffForHumans() ?? __('api_builder::api_builder.misc.dash')]) }}</div>
                             </td>
                             <td>
                                 <span class="cb-endpoint-pill">{{ $api->endpoint_path }}</span>
@@ -1052,23 +1053,23 @@
                             <td>
                                 <span class="cb-status {{ $this->statusDotClass($api->status) }}">
                                     <span class="cb-status-dot"></span>
-                                    <span>{{ __('cb::api_builder.list.status.' . $api->status) }}</span>
+                                    <span>{{ __('api_builder::api_builder.list.status.' . $api->status) }}</span>
                                 </span>
                             </td>
                             <td>
                                 <div class="cb-row-actions" @if($loop->first) data-coach-target="list-row-actions" @endif>
-                                    <button type="button" class="cb-row-action-btn primary" wire:click="openTestModal('{{ $api->id }}')">{{ __('cb::api_builder.actions.test_api') }}</button>
-                                    <button type="button" class="cb-row-action-btn" wire:click="openSnippetModal('{{ $api->id }}')">{{ __('cb::api_builder.actions.copy') }}</button>
-                                    <button type="button" class="cb-row-action-btn" wire:click="editApi('{{ $api->id }}')">{{ __('cb::api_builder.actions.edit') }}</button>
-                                    <button type="button" class="cb-row-action-btn danger" wire:click="deleteApi('{{ $api->id }}')">{{ __('cb::api_builder.actions.delete') }}</button>
+                                    <button type="button" class="cb-row-action-btn primary" wire:click="openTestModal('{{ $api->id }}')">{{ __('api_builder::api_builder.actions.test_api') }}</button>
+                                    <button type="button" class="cb-row-action-btn" wire:click="openSnippetModal('{{ $api->id }}')">{{ __('api_builder::api_builder.actions.copy') }}</button>
+                                    <button type="button" class="cb-row-action-btn" wire:click="editApi('{{ $api->id }}')">{{ __('api_builder::api_builder.actions.edit') }}</button>
+                                    <button type="button" class="cb-row-action-btn danger" wire:click="deleteApi('{{ $api->id }}')">{{ __('api_builder::api_builder.actions.delete') }}</button>
                                 </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
                             <td colspan="5" class="text-center py-12">
-                                <div class="text-xl font-bold text-slate-700">{{ __('cb::api_builder.list.no_apis_title') }}</div>
-                                <div class="mt-1 text-slate-500">{{ __('cb::api_builder.list.no_apis_desc') }}</div>
+                                <div class="text-xl font-bold text-slate-700">{{ __('api_builder::api_builder.list.no_apis_title') }}</div>
+                                <div class="mt-1 text-slate-500">{{ __('api_builder::api_builder.list.no_apis_desc') }}</div>
                             </td>
                         </tr>
                     @endforelse
@@ -1077,13 +1078,13 @@
 
                 <div class="cb-footer">
                     <div class="cb-result-count">
-                        {{ __('cb::api_builder.list.showing_results', ['from' => $apis->firstItem() ?? 0, 'to' => $apis->lastItem() ?? 0, 'total' => $apis->total()]) }}
+                        {{ __('api_builder::api_builder.list.showing_results', ['from' => $apis->firstItem() ?? 0, 'to' => $apis->lastItem() ?? 0, 'total' => $apis->total()]) }}
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <span class="text-xs tracking-[0.15em] text-slate-500">{{ __('cb::api_builder.list.sort_by') }}</span>
-                        <button type="button" wire:click="setSortBy('newest')" class="cb-sort-btn {{ $sortBy === 'newest' ? 'active' : '' }}">{{ __('cb::api_builder.list.newest_first') }}</button>
-                        <button type="button" wire:click="setSortBy('oldest')" class="cb-sort-btn {{ $sortBy === 'oldest' ? 'active' : '' }}">{{ __('cb::api_builder.list.oldest_first') }}</button>
+                        <span class="text-xs tracking-[0.15em] text-slate-500">{{ __('api_builder::api_builder.list.sort_by') }}</span>
+                        <button type="button" wire:click="setSortBy('newest')" class="cb-sort-btn {{ $sortBy === 'newest' ? 'active' : '' }}">{{ __('api_builder::api_builder.list.newest_first') }}</button>
+                        <button type="button" wire:click="setSortBy('oldest')" class="cb-sort-btn {{ $sortBy === 'oldest' ? 'active' : '' }}">{{ __('api_builder::api_builder.list.oldest_first') }}</button>
                     </div>
                 </div>
             </div>
@@ -1091,36 +1092,36 @@
             <div class="space-y-4">
                 @if($latestGeneratedToken)
                     <div class="cb-token-panel" style="border-color:#c6d8f4;background:#f5f9ff;">
-                        <div class="text-sm font-semibold text-slate-700">{{ __('cb::api_builder.credential.latest_token') }}</div>
+                        <div class="text-sm font-semibold text-slate-700">{{ __('api_builder::api_builder.credential.latest_token') }}</div>
                         <code class="cb-token-token">{{ $latestGeneratedToken }}</code>
                     </div>
                 @endif
 
                 <div class="cb-security-top">
                     <div class="cb-token-panel" data-coach-target="credential-security-module">
-                        <span class="cb-token-kicker">{{ __('cb::api_builder.credential.module_badge') }}</span>
-                        <h2 class="cb-token-title">{{ __('cb::api_builder.credential.title') }}</h2>
+                        <span class="cb-token-kicker">{{ __('api_builder::api_builder.credential.module_badge') }}</span>
+                        <h2 class="cb-token-title">{{ __('api_builder::api_builder.credential.title') }}</h2>
                         <p class="cb-token-desc">
-                            {{ __('cb::api_builder.credential.desc') }}
+                            {{ __('api_builder::api_builder.credential.desc') }}
                         </p>
-                        <button type="button" class="btn btn-primary mt-3" wire:click="generateToken" data-coach-target="credential-generate-token-btn">+ {{ __('cb::api_builder.actions.generate_new_token') }}</button>
+                        <button type="button" class="btn btn-primary mt-3" wire:click="generateToken" data-coach-target="credential-generate-token-btn">+ {{ __('api_builder::api_builder.actions.generate_new_token') }}</button>
                     </div>
 
                     <div class="cb-token-insight-card" data-coach-target="credential-security-insights">
-                        <div class="cb-token-insight-title">{{ __('cb::api_builder.credential.insights') }}</div>
+                        <div class="cb-token-insight-title">{{ __('api_builder::api_builder.credential.insights') }}</div>
                         <div class="cb-token-insight-box">
                             <div>
-                                <div class="text-sm text-slate-500">{{ __('cb::api_builder.credential.active_tokens') }}</div>
+                                <div class="text-sm text-slate-500">{{ __('api_builder::api_builder.credential.active_tokens') }}</div>
                                 <div class="text-xl font-bold text-slate-800">{{ $securityInsights['activeTokens'] }}</div>
                             </div>
-                            <div class="text-blue-600 font-semibold">{{ __('cb::api_builder.credential.up') }}</div>
+                            <div class="text-blue-600 font-semibold">{{ __('api_builder::api_builder.credential.up') }}</div>
                         </div>
                         <div class="cb-token-insight-box">
                             <div>
-                                <div class="text-sm text-slate-500">{{ __('cb::api_builder.credential.failed_24h') }}</div>
+                                <div class="text-sm text-slate-500">{{ __('api_builder::api_builder.credential.failed_24h') }}</div>
                                 <div class="text-xl font-bold text-slate-800">{{ $securityInsights['failed24h'] }}</div>
                             </div>
-                            <div class="text-orange-600 font-semibold">{{ __('cb::api_builder.credential.alert') }}</div>
+                            <div class="text-orange-600 font-semibold">{{ __('api_builder::api_builder.credential.alert') }}</div>
                         </div>
                     </div>
                 </div>
@@ -1129,13 +1130,13 @@
                         <table class="cb-table">
                             <thead>
                             <tr>
-                                <th>{{ __('cb::api_builder.credential.headers.token_name') }}</th>
-                                <th>{{ __('cb::api_builder.credential.headers.api_key') }}</th>
-                                <th>{{ __('cb::api_builder.credential.headers.scope') }}</th>
-                                <th>{{ __('cb::api_builder.credential.headers.status') }}</th>
-                                <th>{{ __('cb::api_builder.credential.headers.created_date') }}</th>
-                                <th>{{ __('cb::api_builder.credential.headers.last_used') }}</th>
-                                <th>{{ __('cb::api_builder.credential.headers.actions') }}</th>
+                                <th>{{ __('api_builder::api_builder.credential.headers.token_name') }}</th>
+                                <th>{{ __('api_builder::api_builder.credential.headers.api_key') }}</th>
+                                <th>{{ __('api_builder::api_builder.credential.headers.scope') }}</th>
+                                <th>{{ __('api_builder::api_builder.credential.headers.status') }}</th>
+                                <th>{{ __('api_builder::api_builder.credential.headers.created_date') }}</th>
+                                <th>{{ __('api_builder::api_builder.credential.headers.last_used') }}</th>
+                                <th>{{ __('api_builder::api_builder.credential.headers.actions') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -1147,29 +1148,29 @@
                                     </td>
                                     <td @if($loop->first) data-coach-target="credential-api-key" @endif>
                                         <span class="cb-api-key-cell" title="{{ $this->apiKeyMasked($token) }}">{{ $this->apiKeyMasked($token) }}</span>
-                                        <button type="button" class="cb-copy-btn" wire:click="copyApiKey('{{ $token->id }}')">{{ __('cb::api_builder.actions.copy') }}</button>
+                                        <button type="button" class="cb-copy-btn" wire:click="copyApiKey('{{ $token->id }}')">{{ __('api_builder::api_builder.actions.copy') }}</button>
                                     </td>
                                     <td @if($loop->first) data-coach-target="credential-scope" @endif><span class="cb-endpoint-pill">{{ $token->scope_endpoint }}</span></td>
                                     <td @if($loop->first) data-coach-target="credential-status" @endif>
                                         <span class="cb-token-status {{ $this->tokenStatusClass($token->status) }}">
                                             <span class="dot"></span>
-                                            <span>{{ __('cb::api_builder.credential.status.' . $token->status) }}</span>
+                                            <span>{{ __('api_builder::api_builder.credential.status.' . $token->status) }}</span>
                                         </span>
                                     </td>
                                     <td class="text-slate-600 font-medium" @if($loop->first) data-coach-target="credential-created-date" @endif>{{ $token->created_at?->format('M d, Y') ?? '-' }}</td>
                                     <td class="text-slate-600 font-medium" @if($loop->first) data-coach-target="credential-last-used" @endif>{{ $this->formatLastUsed($token->last_used_at) }}</td>
                                     <td @if($loop->first) data-coach-target="credential-token-actions" @endif>
                                         <div class="cb-token-actions">
-                                            <button type="button" class="cb-token-action-btn" wire:click="deactivateToken('{{ $token->id }}')">{{ __('cb::api_builder.actions.inactive') }}</button>
-                                            <button type="button" class="cb-token-action-btn danger" wire:click="deleteToken('{{ $token->id }}')">{{ __('cb::api_builder.actions.delete') }}</button>
+                                            <button type="button" class="cb-token-action-btn" wire:click="deactivateToken('{{ $token->id }}')">{{ __('api_builder::api_builder.actions.inactive') }}</button>
+                                            <button type="button" class="cb-token-action-btn danger" wire:click="deleteToken('{{ $token->id }}')">{{ __('api_builder::api_builder.actions.delete') }}</button>
                                         </div>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
                                     <td colspan="7" class="text-center py-10">
-                                        <div class="text-lg font-bold text-slate-700">{{ __('cb::api_builder.credential.no_tokens_title') }}</div>
-                                        <div class="mt-1 text-slate-500">{{ __('cb::api_builder.credential.no_tokens_desc') }}</div>
+                                        <div class="text-lg font-bold text-slate-700">{{ __('api_builder::api_builder.credential.no_tokens_title') }}</div>
+                                        <div class="mt-1 text-slate-500">{{ __('api_builder::api_builder.credential.no_tokens_desc') }}</div>
                                     </td>
                                 </tr>
                             @endforelse
@@ -1178,11 +1179,11 @@
 
                         <div class="cb-footer">
                             <div class="cb-result-count">
-                                {{ __('cb::api_builder.credential.showing_tokens', ['from' => $tokens->firstItem() ?? 0, 'to' => $tokens->lastItem() ?? 0, 'total' => $tokens->total()]) }}
+                                {{ __('api_builder::api_builder.credential.showing_tokens', ['from' => $tokens->firstItem() ?? 0, 'to' => $tokens->lastItem() ?? 0, 'total' => $tokens->total()]) }}
                             </div>
                             <div class="cb-token-footer-nav">
-                                <button type="button" wire:click="previousPage('tokenPage')" class="cb-page-btn" @disabled($tokens->onFirstPage())>{{ __('cb::api_builder.actions.previous') }}</button>
-                                <button type="button" wire:click="nextPage('tokenPage')" class="cb-page-btn" @disabled(!$tokens->hasMorePages())>{{ __('cb::api_builder.actions.next') }}</button>
+                                <button type="button" wire:click="previousPage('tokenPage')" class="cb-page-btn" @disabled($tokens->onFirstPage())>{{ __('api_builder::api_builder.actions.previous') }}</button>
+                                <button type="button" wire:click="nextPage('tokenPage')" class="cb-page-btn" @disabled(!$tokens->hasMorePages())>{{ __('api_builder::api_builder.actions.next') }}</button>
                             </div>
                         </div>
                 </div>
@@ -1191,36 +1192,36 @@
             <div class="space-y-4">
                 <div class="cb-log-metric-grid">
                     <div class="cb-log-metric-card" data-coach-target="logs-metric-total">
-                        <div class="cb-log-metric-label">{{ __('cb::api_builder.logs.total_calls') }}</div>
+                        <div class="cb-log-metric-label">{{ __('api_builder::api_builder.logs.total_calls') }}</div>
                         <div class="cb-log-metric-value">{{ number_format($logsOverview['totalCalls']) }}</div>
-                        <div class="cb-log-metric-note">{{ __('cb::api_builder.logs.metric_note_total') }}</div>
+                        <div class="cb-log-metric-note">{{ __('api_builder::api_builder.logs.metric_note_total') }}</div>
                     </div>
                     <div class="cb-log-metric-card" data-coach-target="logs-metric-error">
-                        <div class="cb-log-metric-label">{{ __('cb::api_builder.logs.error_rate') }}</div>
+                        <div class="cb-log-metric-label">{{ __('api_builder::api_builder.logs.error_rate') }}</div>
                         <div class="cb-log-metric-value">{{ number_format($logsOverview['errorRate'], 2) }}%</div>
-                        <div class="cb-log-metric-note">{{ $logsOverview['errorRate'] < 1 ? __('cb::api_builder.logs.metric_note_error_low') : __('cb::api_builder.logs.metric_note_error_attention') }}</div>
+                        <div class="cb-log-metric-note">{{ $logsOverview['errorRate'] < 1 ? __('api_builder::api_builder.logs.metric_note_error_low') : __('api_builder::api_builder.logs.metric_note_error_attention') }}</div>
                     </div>
                     <div class="cb-log-metric-card" data-coach-target="logs-metric-latency">
-                        <div class="cb-log-metric-label">{{ __('cb::api_builder.logs.avg_latency') }}</div>
+                        <div class="cb-log-metric-label">{{ __('api_builder::api_builder.logs.avg_latency') }}</div>
                         <div class="cb-log-metric-value">{{ $logsOverview['avgLatency'] }}ms</div>
-                        <div class="cb-log-metric-note">{{ __('cb::api_builder.logs.metric_note_latency') }}</div>
+                        <div class="cb-log-metric-note">{{ __('api_builder::api_builder.logs.metric_note_latency') }}</div>
                     </div>
                     <div class="cb-log-metric-card cb-log-metric-highlight" data-coach-target="logs-metric-success">
-                        <div class="cb-log-metric-label">{{ __('cb::api_builder.logs.success_rate') }}</div>
+                        <div class="cb-log-metric-label">{{ __('api_builder::api_builder.logs.success_rate') }}</div>
                         <div class="cb-log-metric-value">{{ number_format($logsOverview['successRate'], 2) }}%</div>
-                        <div class="cb-log-metric-note">{{ __('cb::api_builder.logs.metric_note_success') }}</div>
+                        <div class="cb-log-metric-note">{{ __('api_builder::api_builder.logs.metric_note_success') }}</div>
                     </div>
                 </div>
 
                 <div class="cb-log-grid">
                     <div class="cb-log-panel" data-coach-target="logs-activity-panel">
                         <div class="cb-log-header">
-                            <div class="cb-log-title">{{ __('cb::api_builder.logs.activity_title') }}</div>
+                            <div class="cb-log-title">{{ __('api_builder::api_builder.logs.activity_title') }}</div>
                             <div class="cb-log-header-actions" data-coach-target="logs-activity-actions">
-                                <button type="button" class="cb-log-btn-ghost" wire:click="exportLogsCsv">{{ __('cb::api_builder.actions.export_csv') }}</button>
-                                <button type="button" class="cb-log-btn-ghost text-red-600 hover:text-red-800" wire:click="clearLogs">{{ __('cb::api_builder.actions.clear') }}</button>
+                                <button type="button" class="cb-log-btn-ghost" wire:click="exportLogsCsv">{{ __('api_builder::api_builder.actions.export_csv') }}</button>
+                                <button type="button" class="cb-log-btn-ghost text-red-600 hover:text-red-800" wire:click="clearLogs">{{ __('api_builder::api_builder.actions.clear') }}</button>
                                 <button type="button" class="btn btn-primary" wire:click="toggleStream">
-                                    {{ $streamPaused ? __('cb::api_builder.actions.resume_stream') : __('cb::api_builder.actions.pause_stream') }}
+                                    {{ $streamPaused ? __('api_builder::api_builder.actions.resume_stream') : __('api_builder::api_builder.actions.pause_stream') }}
                                 </button>
                             </div>
                         </div>
@@ -1229,17 +1230,17 @@
                             <table class="cb-table">
                                 <thead>
                                 <tr>
-                                    <th>{{ __('cb::api_builder.logs.headers.timestamp') }}</th>
-                                    <th>{{ __('cb::api_builder.logs.headers.method') }}</th>
-                                    <th>{{ __('cb::api_builder.logs.headers.endpoint') }}</th>
-                                    <th>{{ __('cb::api_builder.logs.headers.status') }}</th>
-                                    <th>{{ __('cb::api_builder.logs.headers.latency') }}</th>
+                                    <th>{{ __('api_builder::api_builder.logs.headers.timestamp') }}</th>
+                                    <th>{{ __('api_builder::api_builder.logs.headers.method') }}</th>
+                                    <th>{{ __('api_builder::api_builder.logs.headers.endpoint') }}</th>
+                                    <th>{{ __('api_builder::api_builder.logs.headers.status') }}</th>
+                                    <th>{{ __('api_builder::api_builder.logs.headers.latency') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($logs as $log)
                                     <tr>
-                                        <td class="text-slate-600 font-medium">{{ $log->created_at?->format('H:i:s.v') ?? __('cb::api_builder.misc.dash') }}</td>
+                                        <td class="text-slate-600 font-medium">{{ $log->created_at?->format('H:i:s.v') ?? __('api_builder::api_builder.misc.dash') }}</td>
                                         <td><span class="cb-log-method {{ strtoupper($log->method) }}">{{ strtoupper($log->method) }}</span></td>
                                         <td class="font-medium text-slate-700">{{ $log->endpoint }}</td>
                                         <td class="cb-log-status {{ $this->logStatusClass($log->status_code) }}">
@@ -1249,7 +1250,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center py-8 text-slate-500">{{ __('cb::api_builder.logs.no_logs') }}</td>
+                                        <td colspan="5" class="text-center py-8 text-slate-500">{{ __('api_builder::api_builder.logs.no_logs') }}</td>
                                     </tr>
                                 @endforelse
                                 </tbody>
@@ -1258,14 +1259,14 @@
 
                         @if($hasMoreLogs)
                             <div class="text-center">
-                                <button type="button" class="cb-load-more" wire:click="loadMoreLogs">{{ __('cb::api_builder.actions.load_more_logs') }}</button>
+                                <button type="button" class="cb-load-more" wire:click="loadMoreLogs">{{ __('api_builder::api_builder.actions.load_more_logs') }}</button>
                             </div>
                         @endif
                     </div>
 
                     <div class="cb-log-panel" data-coach-target="logs-error-distribution">
                         <div class="cb-log-header">
-                            <div class="cb-log-title">{{ __('cb::api_builder.logs.error_distribution') }}</div>
+                            <div class="cb-log-title">{{ __('api_builder::api_builder.logs.error_distribution') }}</div>
                         </div>
 
                         <div>
@@ -1280,12 +1281,12 @@
                                     </div>
                                 </div>
                             @empty
-                                <div class="text-slate-500">{{ __('cb::api_builder.logs.no_logs') }}</div>
+                                <div class="text-slate-500">{{ __('api_builder::api_builder.logs.no_logs') }}</div>
                             @endforelse
                         </div>
 
                         <div class="cb-error-note">
-                            {{ __('cb::api_builder.logs.error_distribution_note') }}
+                            {{ __('api_builder::api_builder.logs.error_distribution_note') }}
                         </div>
                     </div>
                 </div>
@@ -1297,25 +1298,25 @@
         <div class="cb-token-modal-overlay">
             <div class="cb-token-modal">
                 <div>
-                    <div class="cb-token-modal-title">{{ __('cb::api_builder.modal.generate_token_title') }}</div>
-                    <div class="cb-token-modal-subtitle">{{ __('cb::api_builder.modal.generate_token_subtitle') }}</div>
+                    <div class="cb-token-modal-title">{{ __('api_builder::api_builder.modal.generate_token_title') }}</div>
+                    <div class="cb-token-modal-subtitle">{{ __('api_builder::api_builder.modal.generate_token_subtitle') }}</div>
                 </div>
 
                 <div class="mt-4 space-y-3">
                     <div>
-                        <label class="cb-form-label">{{ __('cb::api_builder.modal.token_name') }}</label>
-                        <input type="text" class="cb-form-input" wire:model.defer="newTokenName" placeholder="{{ __('cb::api_builder.modal.placeholder_token_name') }}">
+                        <label class="cb-form-label">{{ __('api_builder::api_builder.modal.token_name') }}</label>
+                        <input type="text" class="cb-form-input" wire:model.defer="newTokenName" placeholder="{{ __('api_builder::api_builder.modal.placeholder_token_name') }}">
                         @error('name')
                             <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div>
-                        <label class="cb-form-label">{{ __('cb::api_builder.modal.status') }}</label>
+                        <label class="cb-form-label">{{ __('api_builder::api_builder.modal.status') }}</label>
                         <select class="cb-form-select" wire:model.defer="newTokenStatus">
-                            <option value="active">{{ __('cb::api_builder.credential.status.active') }}</option>
-                            <option value="expired">{{ __('cb::api_builder.credential.status.expired') }}</option>
-                            <option value="disabled">{{ __('cb::api_builder.credential.status.disabled') }}</option>
+                            <option value="active">{{ __('api_builder::api_builder.credential.status.active') }}</option>
+                            <option value="expired">{{ __('api_builder::api_builder.credential.status.expired') }}</option>
+                            <option value="disabled">{{ __('api_builder::api_builder.credential.status.disabled') }}</option>
                         </select>
                         @error('status')
                             <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
@@ -1323,9 +1324,9 @@
                     </div>
 
                     <div>
-                        <label class="cb-form-label">{{ __('cb::api_builder.modal.scope_endpoint') }}</label>
-                        <input type="text" class="cb-form-input" wire:model.defer="newTokenScope" placeholder="{{ __('cb::api_builder.modal.placeholder_scope_endpoint') }}">
-                        <div class="text-xs text-slate-500 mt-1">{{ __('cb::api_builder.modal.scope_endpoint_help') }}</div>
+                        <label class="cb-form-label">{{ __('api_builder::api_builder.modal.scope_endpoint') }}</label>
+                        <input type="text" class="cb-form-input" wire:model.defer="newTokenScope" placeholder="{{ __('api_builder::api_builder.modal.placeholder_scope_endpoint') }}">
+                        <div class="text-xs text-slate-500 mt-1">{{ __('api_builder::api_builder.modal.scope_endpoint_help') }}</div>
                         @error('scope')
                             <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
                         @enderror
@@ -1333,8 +1334,8 @@
                 </div>
 
                 <div class="cb-token-modal-actions">
-                    <button type="button" class="cb-token-modal-cancel" wire:click="closeTokenModal">{{ __('cb::api_builder.actions.cancel') }}</button>
-                    <button type="button" class="btn btn-primary cb-token-modal-submit" wire:click="submitGenerateToken">{{ __('cb::api_builder.actions.generate_new_token') }}</button>
+                    <button type="button" class="cb-token-modal-cancel" wire:click="closeTokenModal">{{ __('api_builder::api_builder.actions.cancel') }}</button>
+                    <button type="button" class="btn btn-primary cb-token-modal-submit" wire:click="submitGenerateToken">{{ __('api_builder::api_builder.actions.generate_new_token') }}</button>
                 </div>
             </div>
         </div>
@@ -1345,8 +1346,8 @@
             <div class="cb-token-modal">
                 <div class="flex justify-between items-center mb-6">
                     <div>
-                        <div class="cb-token-modal-title text-xl">{{ __('cb::api_builder.modal.new_api_title') }}</div>
-                        <div class="cb-token-modal-subtitle">{{ __('cb::api_builder.modal.new_api_subtitle') }}</div>
+                        <div class="cb-token-modal-title text-xl">{{ __('api_builder::api_builder.modal.new_api_title') }}</div>
+                        <div class="cb-token-modal-subtitle">{{ __('api_builder::api_builder.modal.new_api_subtitle') }}</div>
                     </div>
                     <button type="button" class="text-gray-400 hover:text-gray-600 transition-colors" wire:click="closeNewApiModal">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1364,24 +1365,24 @@
                                 data-coach-target="quick-mode-card"
                                 @click="newApiMode = 'quick'">
                             <div class="text-3xl mb-3">⚡</div>
-                            <div class="font-bold text-gray-800">{{ __('cb::api_builder.modal.quick_mode') }}</div>
-                            <div class="text-xs text-gray-500 mt-2 leading-relaxed px-2">{{ __('cb::api_builder.modal.quick_mode_desc') }}</div>
+                            <div class="font-bold text-gray-800">{{ __('api_builder::api_builder.modal.quick_mode') }}</div>
+                            <div class="text-xs text-gray-500 mt-2 leading-relaxed px-2">{{ __('api_builder::api_builder.modal.quick_mode_desc') }}</div>
                         </button>
                         <button type="button" 
                                 class="cb-api-mode-card p-6 rounded-xl text-center"
                                 :class="{ 'selected': newApiMode === 'advanced' }"
                                 @click="newApiMode = 'advanced'">
                             <div class="text-3xl mb-3">🔧</div>
-                            <div class="font-bold text-gray-800">{{ __('cb::api_builder.modal.advanced_mode') }}</div>
-                            <div class="text-xs text-gray-500 mt-2 leading-relaxed px-2">{{ __('cb::api_builder.modal.advanced_mode_desc') }}</div>
+                            <div class="font-bold text-gray-800">{{ __('api_builder::api_builder.modal.advanced_mode') }}</div>
+                            <div class="text-xs text-gray-500 mt-2 leading-relaxed px-2">{{ __('api_builder::api_builder.modal.advanced_mode_desc') }}</div>
                         </button>
                     </div>
 
                     <div x-show="newApiMode === 'quick'" x-transition class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                        <label class="block text-sm font-bold text-slate-700 mb-3">{{ __('cb::api_builder.modal.select_table') }}</label>
+                        <label class="block text-sm font-bold text-slate-700 mb-3">{{ __('api_builder::api_builder.modal.select_table') }}</label>
                         <div class="cb-table-select">
                             <select wire:model.defer="quickModeTable" class="cb-form-select shadow-sm" x-ref="quickModeTableSelect" data-coach-target="quick-mode-table-select">
-                                <option value="">-- {{ __('cb::api_builder.modal.select_table_placeholder') }} --</option>
+                                <option value="">-- {{ __('api_builder::api_builder.modal.select_table_placeholder') }} --</option>
                                 @if(!empty($availableTables))
                                     @foreach($availableTables as $table)
                                         <option value="{{ $table }}">{{ $table }}</option>
@@ -1395,9 +1396,9 @@
                 </div>
 
                 <div class="cb-token-modal-actions mt-8 pt-6 border-top border-slate-100">
-                    <button type="button" class="cb-token-modal-cancel" wire:click="closeNewApiModal">{{ __('cb::api_builder.actions.cancel') }}</button>
+                    <button type="button" class="cb-token-modal-cancel" wire:click="closeNewApiModal">{{ __('api_builder::api_builder.actions.cancel') }}</button>
                     <button type="button" class="btn btn-primary px-8" wire:click="proceedNewApi" x-ref="quickModeCreateButton" data-coach-target="quick-mode-create-button">
-                        <span x-text="newApiMode === 'quick' ? '{{ __('cb::api_builder.actions.create_api') }}' : '{{ __('cb::api_builder.actions.continue') }}'"></span>
+                        <span x-text="newApiMode === 'quick' ? '{{ __('api_builder::api_builder.actions.create_api') }}' : '{{ __('api_builder::api_builder.actions.continue') }}'"></span>
                     </button>
                 </div>
             </div>
@@ -1530,8 +1531,8 @@
             <div class="cb-token-modal cb-snippet-modal !max-w-3xl">
                 <div class="flex justify-between items-start mb-6">
                     <div>
-                        <div class="cb-token-modal-title text-2xl font-bold text-slate-800">{{ __('cb::api_builder.modal.snippet_title') }}</div>
-                        <div class="cb-token-modal-subtitle text-slate-500 mt-1">{{ __('cb::api_builder.modal.snippet_subtitle') }}</div>
+                        <div class="cb-token-modal-title text-2xl font-bold text-slate-800">{{ __('api_builder::api_builder.modal.snippet_title') }}</div>
+                        <div class="cb-token-modal-subtitle text-slate-500 mt-1">{{ __('api_builder::api_builder.modal.snippet_subtitle') }}</div>
                     </div>
                     <button type="button" class="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-all" wire:click="closeSnippetModal">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1581,7 +1582,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                                 </svg>
-                                <span>{{ __('cb::api_builder.actions.copy') }}</span>
+                                <span>{{ __('api_builder::api_builder.actions.copy') }}</span>
                             </button>
                         </div>
 
@@ -1678,8 +1679,8 @@
             <div class="cb-token-modal !max-w-5xl !w-[95vw]" style="max-height: 90vh; overflow-y: auto;">
                 <div class="flex justify-between items-start mb-6 pb-4 border-b border-slate-100 sticky top-0 bg-white z-20" style="margin-top: -24px; padding-top: 24px;">
                     <div>
-                        <div class="cb-token-modal-title text-2xl font-bold text-slate-800">{{ __('cb::api_builder.modal.test_title') }}</div>
-                        <div class="cb-token-modal-subtitle text-slate-500 mt-1">{{ __('cb::api_builder.modal.test_subtitle') }}</div>
+                        <div class="cb-token-modal-title text-2xl font-bold text-slate-800">{{ __('api_builder::api_builder.modal.test_title') }}</div>
+                        <div class="cb-token-modal-subtitle text-slate-500 mt-1">{{ __('api_builder::api_builder.modal.test_subtitle') }}</div>
                     </div>
                     <button type="button" class="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-all" wire:click="closeTestModal">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1691,7 +1692,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                     <div class="space-y-6 min-w-0">
                         <div>
-                            <label class="cb-form-label">{{ __('cb::api_builder.modal.test_endpoint') }}</label>
+                            <label class="cb-form-label">{{ __('api_builder::api_builder.modal.test_endpoint') }}</label>
                             <div class="flex">
                                 <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-slate-300 bg-slate-50 text-slate-500 text-xs font-bold">
                                     {{ $testMethod }}
@@ -1725,13 +1726,13 @@
                                     </svg>
                                 </span>
                                 <span x-show="loading" class="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" x-cloak></span>
-                                <span class="font-bold uppercase tracking-wide text-sm" x-text="loading ? '{{ __('cb::api_builder.modal.test_loading') }}' : '{{ __('cb::api_builder.modal.test_send') }}'"></span>
+                                <span class="font-bold uppercase tracking-wide text-sm" x-text="loading ? '{{ __('api_builder::api_builder.modal.test_loading') }}' : '{{ __('api_builder::api_builder.modal.test_send') }}'"></span>
                             </button>
                         </div>
                     </div>
 
                     <div class="flex flex-col min-w-0">
-                        <label class="cb-form-label">{{ __('cb::api_builder.modal.test_response') }}</label>
+                        <label class="cb-form-label">{{ __('api_builder::api_builder.modal.test_response') }}</label>
                         <div class="flex flex-col cb-snippet-container relative" style="height: 500px;">
                             
                             <div class="cb-code-header shrink-0">
@@ -1792,23 +1793,23 @@
                         {
                             targetRef: 'generateApiButton',
                             targetSelector: '[data-coach-target="generate-api-button"]',
-                            title: @js(__('cb::api_builder.coachmark.step_1_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_1_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_1_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_1_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="quick-mode-card"]',
-                            title: @js(__('cb::api_builder.coachmark.step_2_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_2_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_2_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_2_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="quick-mode-table-select"]',
-                            title: @js(__('cb::api_builder.coachmark.step_3_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_3_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_3_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_3_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="quick-mode-create-button"]',
-                            title: @js(__('cb::api_builder.coachmark.step_4_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_4_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_4_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_4_desc')),
                         }
                     ]
                 },
@@ -1817,28 +1818,28 @@
                     steps: [
                         {
                             targetSelector: '[data-coach-target="stats-total-apis"]',
-                            title: @js(__('cb::api_builder.coachmark.step_5_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_5_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_5_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_5_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="stats-active-endpoints"]',
-                            title: @js(__('cb::api_builder.coachmark.step_6_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_6_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_6_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_6_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="stats-avg-response"]',
-                            title: @js(__('cb::api_builder.coachmark.step_7_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_7_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_7_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_7_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="stats-error-rate"]',
-                            title: @js(__('cb::api_builder.coachmark.step_8_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_8_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_8_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_8_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="list-row-actions"]',
-                            title: @js(__('cb::api_builder.coachmark.step_9_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_9_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_9_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_9_desc')),
                         }
                     ]
                 },
@@ -1847,58 +1848,58 @@
                     steps: [
                         {
                             targetSelector: '[data-coach-target="tab-credential"]',
-                            title: @js(__('cb::api_builder.coachmark.step_10_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_10_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_10_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_10_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="credential-security-module"]',
-                            title: @js(__('cb::api_builder.coachmark.step_11_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_11_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_11_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_11_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="credential-generate-token-btn"]',
-                            title: @js(__('cb::api_builder.coachmark.step_12_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_12_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_12_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_12_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="credential-security-insights"]',
-                            title: @js(__('cb::api_builder.coachmark.step_13_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_13_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_13_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_13_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="credential-token-name"]',
-                            title: @js(__('cb::api_builder.coachmark.step_14_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_14_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_14_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_14_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="credential-api-key"]',
-                            title: @js(__('cb::api_builder.coachmark.step_15_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_15_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_15_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_15_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="credential-scope"]',
-                            title: @js(__('cb::api_builder.coachmark.step_16_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_16_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_16_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_16_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="credential-status"]',
-                            title: @js(__('cb::api_builder.coachmark.step_17_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_17_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_17_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_17_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="credential-created-date"]',
-                            title: @js(__('cb::api_builder.coachmark.step_18_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_18_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_18_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_18_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="credential-last-used"]',
-                            title: @js(__('cb::api_builder.coachmark.step_19_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_19_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_19_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_19_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="credential-token-actions"]',
-                            title: @js(__('cb::api_builder.coachmark.step_20_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_20_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_20_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_20_desc')),
                         }
                     ]
                 },
@@ -1907,38 +1908,38 @@
                     steps: [
                         {
                             targetSelector: '[data-coach-target="tab-logs"]',
-                            title: @js(__('cb::api_builder.coachmark.step_21_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_21_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_21_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_21_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="logs-metric-total"]',
-                            title: @js(__('cb::api_builder.coachmark.step_22_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_22_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_22_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_22_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="logs-metric-error"]',
-                            title: @js(__('cb::api_builder.coachmark.step_23_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_23_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_23_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_23_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="logs-metric-latency"]',
-                            title: @js(__('cb::api_builder.coachmark.step_24_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_24_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_24_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_24_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="logs-metric-success"]',
-                            title: @js(__('cb::api_builder.coachmark.step_25_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_25_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_25_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_25_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="logs-activity-actions"]',
-                            title: @js(__('cb::api_builder.coachmark.step_26_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_26_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_26_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_26_desc')),
                         },
                         {
                             targetSelector: '[data-coach-target="logs-error-distribution"]',
-                            title: @js(__('cb::api_builder.coachmark.step_27_title')),
-                            desc: @js(__('cb::api_builder.coachmark.step_27_desc')),
+                            title: @js(__('api_builder::api_builder.coachmark.step_27_title')),
+                            desc: @js(__('api_builder::api_builder.coachmark.step_27_desc')),
                         }
                     ]
                 }

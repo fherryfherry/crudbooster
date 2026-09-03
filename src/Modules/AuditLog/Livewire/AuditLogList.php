@@ -164,7 +164,7 @@ class AuditLogList extends Component
             'logs' => $logs,
             'moduleOptions' => $moduleOptions,
             'actionOptions' => $actionOptions,
-        ])->layout('cb.themes::layout-app')->title(__('cb::audit_log.title'));
+        ])->layout('cb.themes::layout-app')->title(__('audit_log::audit_log.title'));
     }
 
     private function buildQuery()

@@ -24,7 +24,7 @@ class CbAuditLogServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__ . '/views', 'cb.audit-log');
-        $this->loadTranslationsFrom(__DIR__ . '/Lang', 'cb');
+        $this->loadTranslationsFrom(__DIR__ . '/Lang', 'audit_log');
         $this->loadRoutesFrom(__DIR__ . '/router.php');
         $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
 

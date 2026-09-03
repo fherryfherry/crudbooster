@@ -132,7 +132,7 @@ class ApiBuilderLivewireTest extends BaseTestCase
 
         Livewire::test(ApiBuilderList::class)
             ->call('deleteApi', $api->id)
-            ->assertSet('confirmTitle', __('cb::api_builder.alerts.confirm_delete_title'))
+            ->assertSet('confirmTitle', __('api_builder::api_builder.alerts.confirm_delete_title'))
             ->call('deleteApiConfirmed', $api->id);
 
         $this->assertDatabaseMissing('cb_api_builders', [

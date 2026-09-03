@@ -44,7 +44,7 @@ class ApiBuilderCreate extends Component
     {
         $this->tableOptions = $this->getTableOptions();
         $this->payloadFields = [
-            ['key' => 'email', 'type' => 'string', 'required' => true, 'description' => __('cb::api_builder.create.step2.sample_email_input')],
+            ['key' => 'email', 'type' => 'string', 'required' => true, 'description' => __('api_builder::api_builder.create.step2.sample_email_input')],
         ];
         $this->actionForm = $this->defaultActionForm();
 
@@ -458,7 +458,7 @@ class ApiBuilderCreate extends Component
             CbApiBuilder::query()->create($payload);
         }
 
-        $this->showAlertMessage(__('cb::api_builder.alerts.api_draft_saved'), 'success');
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.api_draft_saved'), 'success');
         $this->redirect(getCmsUrl('api-builder'), navigate: true);
     }
 
@@ -494,7 +494,7 @@ class ApiBuilderCreate extends Component
             CbApiBuilder::query()->create($payload);
         }
 
-        $this->showAlertMessage(__('cb::api_builder.alerts.api_published'), 'success');
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.api_published'), 'success');
         $this->redirect(getCmsUrl('api-builder'), navigate: true);
     }
 
@@ -518,7 +518,7 @@ class ApiBuilderCreate extends Component
         foreach ($this->payloadFields as $field) {
             if (blank($field['key'])) {
                 throw \Illuminate\Validation\ValidationException::withMessages([
-                    'payload' => __('cb::api_builder.create.step2.payload_key_required'),
+                    'payload' => __('api_builder::api_builder.create.step2.payload_key_required'),
                 ]);
             }
         }
@@ -783,7 +783,7 @@ class ApiBuilderCreate extends Component
 
         $sourceReferenceOptions['Manual'][] = [
             'value' => '__manual__',
-            'label' => __('cb::api_builder.create.step3.modal.other_manual'),
+            'label' => __('api_builder::api_builder.create.step3.modal.other_manual'),
         ];
 
         foreach ($sourceReferenceOptions as $group => $options) {
