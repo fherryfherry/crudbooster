@@ -11,3 +11,5 @@ build.css
 .DS_Store
 .cursor/*
 dist/*
+cb-test/*
+CLAUDE.md
