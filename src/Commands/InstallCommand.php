@@ -105,8 +105,8 @@ class InstallCommand extends Command
 
     private function interviewForceInstall()
     {
-        $this->forceInstall = $this->choice('Do you want to force install?', ['Yes', 'No'], 1);
-        $this->freshTable = $this->choice('Do you want to refresh the database?', ['Yes', 'No'], 1);
+        $this->forceInstall = $this->choice('Do you want to force install?', ['Yes', 'No'], 1) === 'Yes';
+        $this->freshTable = $this->choice('Do you want to refresh the database?', ['Yes', 'No'], 1) === 'Yes';
     }
 
     private function interviewUserCredential()
@@ -424,14 +424,14 @@ class InstallCommand extends Command
             $env = preg_replace('/^\s*#?\s*DB_HOST=.*$/m', 'DB_HOST=' . $this->dbHost, $env);
             $env = preg_replace('/^\s*#?\s*DB_PORT=.*$/m', 'DB_PORT=' . $this->dbPort, $env);
             file_put_contents(base_path('.env'), $env);
-        }
 
-        putenv('DB_CONNECTION=' . $this->dbPlatform);
-        putenv('DB_HOST=' . $this->dbHost);
-        putenv('DB_PORT=' . $this->dbPort);
-        putenv('DB_DATABASE=' . $this->dbDatabase);
-        putenv('DB_USERNAME=' . $this->dbUsername);
-        putenv('DB_PASSWORD=' . $this->dbPassword);
+            putenv('DB_CONNECTION=' . $this->dbPlatform);
+            putenv('DB_HOST=' . $this->dbHost);
+            putenv('DB_PORT=' . $this->dbPort);
+            putenv('DB_DATABASE=' . $this->dbDatabase);
+            putenv('DB_USERNAME=' . $this->dbUsername);
+            putenv('DB_PASSWORD=' . $this->dbPassword);
+        }
 
         $this->callSilent('config:clear');
         $this->callSilent('config:cache');
