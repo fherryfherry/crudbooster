@@ -1706,7 +1706,7 @@
                 }
              }">
             <div class="cb-token-modal cb-test-api-modal" style="max-height: 90vh; overflow-y: auto;">
-                <div x-show="showTokenPrompt" x-cloak class="absolute inset-0 bg-white/95 backdrop-blur-sm flex items-center justify-center rounded-xl" style="z-index: 50;">
+                <div x-show="showTokenPrompt" x-cloak class="absolute inset-0 flex items-center justify-center rounded-xl" style="z-index: 50; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(4px);">
                     <div class="text-center max-w-sm mx-auto p-6">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
