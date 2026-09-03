@@ -1,7 +1,7 @@
 {
     "name": "crudbooster/crudbooster",
     "description": "The best laravel crud generator in entire planet",
-    "version": "8.0.1",
+    "version": "8.0.2",
     "type": "library",
     "require": {
         "laravel/framework": "^11.9|^12.0",

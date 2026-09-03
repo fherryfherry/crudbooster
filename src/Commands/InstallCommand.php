@@ -154,18 +154,8 @@ class InstallCommand extends Command
         }
     }
 
-    private function preInstall()
-    {
-        // Additional pre installation step here
-        $env = file_get_contents(base_path('.env'));
-        $env = preg_replace('/^APP_URL=.*$/m', 'APP_URL=http://localhost:8000', $env);
-        file_put_contents(base_path('.env'), $env);
-    }
-
     private function install(): void
     {
-        $this->preInstall();
-
         $this->settingEnv();
         usleep(500000); // 0.5 second sleep
 
