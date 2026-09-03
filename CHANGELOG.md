@@ -1,5 +1,44 @@
 # Changelog
 
+## Unreleased
+
+### CRUDBooster (Unreleased)
+- **[NEW]** BlatUI Phase 0 - Migrated to Tailwind v4 (`@source`/`@custom-variant` in `app.css`, `tailwind.config.js` removed) and introduced the BlatUI JS engine, pre-bundled and registered onto Livewire's Alpine via `alpine:init`.
+
+## v8.x
+
+### CRUDBooster v8.3.0
+- **[NEW]** Module Builder: pick a relation directly on the Database Table Schema step - auto-populates the Relationship join, a joined display column in Browse Grid, and a `select` field in Form Design.
+- **[NEW]** Module Builder: re-saving the table schema now syncs new columns into existing Browse Grid / Form Design defaults without wiping prior customizations.
+- **[NEW]** Module Builder: autosuggestion for the "Key" and "Label" fields in the Select "Option Configuration" modal.
+- **[NEW]** Page Builder: inline Query Builder picker (modal) for query-based elements.
+- **[NEW]** Dark mode support for API Builder and Audit Log modules.
+- **[FIX]** SQLite: `SchemaUtil::getTableListing()` no longer returns schema-qualified table names (e.g. `main.table`), which broke relation joins.
+- **[FIX]** Form: "Save & Add More" now shows the success alert like "Save" does.
+
+### CRUDBooster v8.2.1
+- **[FIX]** API Builder: fixed transparent overlay on the no-active-token modal.
+
+### CRUDBooster v8.2.0
+- **[NEW]** API Builder: auto-generate test token, polished Test API modal and edit form.
+
+### CRUDBooster v8.1.0
+- **[NEW]** Added Laravel 13 support.
+
+### CRUDBooster v8.0.3
+- **[FIX]** API Builder, Audit Log: fixed translation namespace collision and modal backdrop gap.
+
+### CRUDBooster v8.0.2
+- **[FIX]** Install: stopped hardcoding `APP_URL` to port 8000.
+
+### CRUDBooster v8.0.1
+- **[FIX]** Install: `cb:install` no longer ignores "No" answers during the interview.
+
+### CRUDBooster v8.0.0
+- **[BREAKING]** Public re-release: license system fully removed (`CbLicense`, `LicenseUtil`, `FeatureValidationService`, `PackageFeatureMiddleware`, `cb.feature` middleware, and the AI module-generation feature). `cb:install` is now purely interactive, no `--license`/`--reactivate` flags.
+
+## v7.x
+
 ### CRUDBooster v7.9.12
 - **[NEW]** File Upload Progress Bar - Added minimalist progress bar with real-time percentage for file and image uploads using Livewire events and Alpine.js
 - **[NEW]** Summernote WYSIWYG Editor - Added Summernote rich text editor with image upload, auto-reformat, and CSS scoped styling to prevent conflicts with existing frameworks
