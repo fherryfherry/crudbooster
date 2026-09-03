@@ -1,15 +1,20 @@
 {
-  "scripts": {},
-  "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "cssnano": "^7.0.6",
-    "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.14"
+  "scripts": {
+    "build:js": "esbuild src/Themes/assets/js/blatui-src/entry.js --bundle --minify --format=iife --outfile=src/Themes/assets/js/blatui.min.js"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@alpinejs/anchor": "^3.17.1",
+    "@alpinejs/collapse": "^3.17.1",
+    "@alpinejs/focus": "^3.17.1",
+    "@floating-ui/dom": "^1.8.0",
+    "@tailwindcss/cli": "^4.3.3",
+    "@tailwindcss/postcss": "^4.3.3",
+    "alpinejs": "^3.17.1",
+    "cssnano": "^7.0.6",
+    "esbuild": "^0.25.0",
     "gulp": "^5.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-postcss": "^10.0.0",
-    "tailwindcss-rtl": "^0.9.0"
+    "tailwindcss": "^4.3.3"
   }
 }

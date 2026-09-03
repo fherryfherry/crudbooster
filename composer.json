@@ -10,11 +10,13 @@
         "maatwebsite/excel": "^3.1",
         "barryvdh/laravel-dompdf": "^3.0",
         "doctrine/dbal": "^4.2",
+        "mallardduck/blade-lucide-icons": "^2.0",
         "ext-curl": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.3.6",
-        "orchestra/testbench": "^9.9|^10.0|^11.0"
+        "orchestra/testbench": "^9.9|^10.0|^11.0",
+        "gehrisandro/tailwind-merge-laravel": "^1.2|^1.4"
     },
     "license": "MIT",
     "autoload": {

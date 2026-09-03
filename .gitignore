@@ -8,6 +8,8 @@ package-lock.json
 php.xml
 *.sh
 build.css
+build/
+src/Themes/assets/css/app.tailwind.css
 .DS_Store
 .cursor/*
 dist/*

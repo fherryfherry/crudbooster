@@ -18,6 +18,10 @@ class CbThemeServiceProvider extends ServiceProvider
         $this->cbModalBulkConfirmationDirective();
         $this->cbDetailContent();
 
+        // BlatUI engine (Alpine plugins + theme store), pre-bundled.
+        // Registers onto Livewire's Alpine via the `alpine:init` hook.
+        CbThemeAssetRegistrar::addJs('vendor/crudbooster/themes/assets/js/blatui.min.js');
+
         if($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/assets' => public_path('vendor/crudbooster/themes/assets'),
