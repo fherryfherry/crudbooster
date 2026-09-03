@@ -73,6 +73,23 @@ class ApiBuilderLivewireTest extends BaseTestCase
         $this->assertEquals(1, CbApiToken::count());
     }
 
+    public function test_generate_default_test_token_creates_active_token_and_sets_test_token()
+    {
+        $component = Livewire::test(ApiBuilderList::class)
+            ->assertSet('testToken', null)
+            ->call('generateDefaultTestToken')
+            ->assertHasNoErrors();
+
+        $this->assertNotNull($component->get('testToken'));
+        $this->assertEquals(1, CbApiToken::count());
+        $this->assertDatabaseHas('cb_api_tokens', [
+            'name' => 'Test Token',
+            'status' => 'active',
+            'scope_endpoint' => '/v1/*',
+        ]);
+        $this->assertEquals($component->get('testToken'), CbApiToken::first()->token_encrypted);
+    }
+
     public function test_token_validation_fails_on_empty_name()
     {
         Livewire::test(ApiBuilderList::class)

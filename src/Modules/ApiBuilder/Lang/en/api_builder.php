@@ -29,6 +29,7 @@ return [
             'cancel' => 'Cancel',
             'copy' => 'Copy',
             'test_api' => 'Test API',
+            'generate_default_token' => 'Generate Default Token',
             'inactive' => 'Inactive',
             'export_csv' => 'Export CSV',
             'pause_stream' => 'Pause Stream',
@@ -226,6 +227,8 @@ return [
         'test_success' => 'Request successful',
         'test_error' => 'Request failed',
         'test_loading' => 'Sending request...',
+        'test_token_missing_title' => 'No active API token found',
+        'test_token_missing_desc' => 'You need an active token to call this endpoint. Generate a default token to continue testing.',
     ],
     'create' => [
         'title' => 'Create New API',

@@ -787,6 +787,11 @@
             padding: 24px;
             box-shadow: 0 18px 48px rgba(15, 23, 42, 0.18);
         }
+        .cb-test-api-modal {
+            max-width: 1200px;
+            width: 95vw;
+            position: relative;
+        }
 
         .cb-api-mode-grid {
             display: grid;
@@ -1490,6 +1495,13 @@
             overflow: auto;
             background: #0d1117;
             flex-grow: 1;
+            min-width: 0;
+        }
+        .cb-snippet-container {
+            min-width: 0;
+        }
+        #cb-test-modal-grid > div {
+            min-width: 0;
         }
         .cb-code-content pre {
             margin: 0 !important;
@@ -1609,20 +1621,37 @@
              x-cloak
              x-data="{
                 loading: false,
+                tokenGenerating: false,
+                showTokenPrompt: false,
                 statusCode: @entangle('testStatusCode'),
                 statusText: @entangle('testStatusText'),
                 response: @entangle('testResponse'),
+                token: @entangle('testToken'),
+                async generateTokenAndRun() {
+                    this.tokenGenerating = true;
+                    try {
+                        await this.$wire.generateDefaultTestToken();
+                        this.showTokenPrompt = false;
+                        await this.runTest();
+                    } finally {
+                        this.tokenGenerating = false;
+                    }
+                },
                 async runTest() {
+                    if (!this.token) {
+                        this.showTokenPrompt = true;
+                        return;
+                    }
+                    this.showTokenPrompt = false;
                     this.loading = true;
                     this.response = null;
                     this.statusCode = null;
-                    
+
                     try {
                         const method = '{{ $testMethod }}';
                         let url = '{{ $testEndpoint }}';
                         const payload = @entangle('testPayload');
-                        const token = '{{ $testToken }}';
-                        
+
                         const options = {
                             method: method,
                             headers: {
@@ -1630,9 +1659,9 @@
                                 'Accept': 'application/json'
                             }
                         };
-                        
-                        if (token) {
-                            options.headers['Authorization'] = 'Bearer ' + token;
+
+                        if (this.token) {
+                            options.headers['Authorization'] = 'Bearer ' + this.token;
                         }
                         
                         if (method !== 'GET' && method !== 'HEAD') {
@@ -1676,7 +1705,23 @@
                     });
                 }
              }">
-            <div class="cb-token-modal !max-w-5xl !w-[95vw]" style="max-height: 90vh; overflow-y: auto;">
+            <div class="cb-token-modal cb-test-api-modal" style="max-height: 90vh; overflow-y: auto;">
+                <div x-show="showTokenPrompt" x-cloak class="absolute inset-0 bg-white/95 backdrop-blur-sm flex items-center justify-center rounded-xl" style="z-index: 50;">
+                    <div class="text-center max-w-sm mx-auto p-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        <div class="text-lg font-bold text-slate-800 mb-2">{{ __('api_builder::api_builder.modal.test_token_missing_title') }}</div>
+                        <div class="text-sm text-slate-500 mb-6">{{ __('api_builder::api_builder.modal.test_token_missing_desc') }}</div>
+                        <div class="flex items-center justify-center gap-3">
+                            <button type="button" class="btn btn-secondary" @click="showTokenPrompt = false">{{ __('api_builder::api_builder.actions.cancel') }}</button>
+                            <button type="button" class="btn btn-primary flex items-center gap-2" @click="generateTokenAndRun()" :disabled="tokenGenerating">
+                                <span x-show="tokenGenerating" class="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" x-cloak></span>
+                                <span x-text="tokenGenerating ? '{{ __('api_builder::api_builder.modal.test_loading') }}' : '{{ __('api_builder::api_builder.actions.generate_default_token') }}'"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="flex justify-between items-start mb-6 pb-4 border-b border-slate-100 sticky top-0 bg-white z-20" style="margin-top: -24px; padding-top: 24px;">
                     <div>
                         <div class="cb-token-modal-title text-2xl font-bold text-slate-800">{{ __('api_builder::api_builder.modal.test_title') }}</div>
@@ -1689,7 +1734,7 @@
                     </button>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div id="cb-test-modal-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                     <div class="space-y-6 min-w-0">
                         <div>
                             <label class="cb-form-label">{{ __('api_builder::api_builder.modal.test_endpoint') }}</label>
@@ -1733,7 +1778,7 @@
 
                     <div class="flex flex-col min-w-0">
                         <label class="cb-form-label">{{ __('api_builder::api_builder.modal.test_response') }}</label>
-                        <div class="flex flex-col cb-snippet-container relative" style="height: 500px;">
+                        <div class="flex flex-col cb-snippet-container relative min-w-0" style="height: 380px;">
                             
                             <div class="cb-code-header shrink-0">
                                 <div class="flex items-center gap-3">
@@ -1750,7 +1795,7 @@
                                 </div>
                             </div>
                             
-                            <div class="cb-code-content !p-0 flex-1 relative overflow-auto min-h-0">
+                            <div class="cb-code-content !p-0 flex-1 relative overflow-auto min-h-0 min-w-0">
                                 <div x-show="loading" class="absolute inset-0 bg-slate-900/50 flex items-center justify-center z-10" x-cloak>
                                     <span class="animate-spin rounded-full h-8 w-8 border-4 border-white border-t-transparent"></span>
                                 </div>

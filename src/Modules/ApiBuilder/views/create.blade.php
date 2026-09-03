@@ -1,5 +1,5 @@
 <div class="p-6">
-    <div class="cb-api-builder-create">
+    <div class="cb-api-builder-create" style="max-width: 1024px; margin-left: auto; margin-right: auto;">
         {{-- Breadcrumb & Header --}}
         <div class="mb-8 flex justify-between items-start">
             <div>

@@ -1,9 +1,10 @@
 {
     "name": "crudbooster/crudbooster",
     "description": "The best laravel crud generator in entire planet",
-    "version": "8.1.0",
+    "version": "8.2.0",
     "type": "library",
     "require": {
+        "php": "^8.2",
         "laravel/framework": "^11.9|^12.0|^13.0",
         "livewire/livewire": "^3.5",
         "maatwebsite/excel": "^3.1",

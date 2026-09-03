@@ -171,14 +171,29 @@ class ApiBuilderList extends Component
             'scope' => ['required', 'string', 'min:2', 'max:255', 'regex:/^\/[A-Za-z0-9\-\_\.\*\/]*$/'],
         ])->validate();
 
+        $rawToken = $this->createApiToken($this->newTokenName, $this->newTokenStatus, $this->normalizeScopeEndpoint($this->newTokenScope));
+
+        $this->latestGeneratedToken = $rawToken;
+        $this->showTokenModal = false;
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.token_created'), 'success');
+    }
+
+    public function generateDefaultTestToken(): void
+    {
+        $this->testToken = $this->createApiToken('Test Token', 'active', '/v1/*');
+        $this->showAlertMessage(__('api_builder::api_builder.alerts.token_created'), 'success');
+    }
+
+    private function createApiToken(string $name, string $status, string $scopeEndpoint): string
+    {
         $rawToken = 'cb_' . Str::random(42);
         $prefix = Str::substr($rawToken, 0, 12);
 
         CbApiToken::query()->create([
-            'name' => $this->newTokenName,
-            'scope_endpoint' => $this->normalizeScopeEndpoint($this->newTokenScope),
+            'name' => $name,
+            'scope_endpoint' => $scopeEndpoint,
             'auth_method' => 'api_key',
-            'status' => $this->newTokenStatus,
+            'status' => $status,
             'token_prefix' => $prefix,
             'token_hash' => Hash::make($rawToken),
             'token_encrypted' => $rawToken,
@@ -186,9 +201,7 @@ class ApiBuilderList extends Component
             'last_used_at' => null,
         ]);
 
-        $this->latestGeneratedToken = $rawToken;
-        $this->showTokenModal = false;
-        $this->showAlertMessage(__('api_builder::api_builder.alerts.token_created'), 'success');
+        return $rawToken;
     }
 
     private function normalizeScopeEndpoint(string $scope): string

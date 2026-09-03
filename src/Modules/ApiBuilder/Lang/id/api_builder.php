@@ -27,6 +27,7 @@ return [
             'cancel' => 'Batal',
             'copy' => 'Salin',
             'test_api' => 'Test API',
+            'generate_default_token' => 'Buat Token Default',
             'inactive' => 'Nonaktifkan',
             'export_csv' => 'Export CSV',
             'pause_stream' => 'Pause Stream',
@@ -215,6 +216,8 @@ return [
         'advanced_mode_desc' => 'Konfigurasi setiap aspek API secara manual.',
         'select_table' => 'Pilih Tabel',
         'select_table_placeholder' => 'Pilih tabel',
+        'test_token_missing_title' => 'Belum ada token API aktif',
+        'test_token_missing_desc' => 'Anda memerlukan token aktif untuk memanggil endpoint ini. Buat token default untuk melanjutkan pengujian.',
     ],
     'create' => [
         'title' => 'Buat API Baru',
