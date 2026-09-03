@@ -1,0 +1,39 @@
+{
+    "name": "crudbooster/crudbooster",
+    "description": "The best laravel crud generator in entire planet",
+    "version": "7.18.0",
+    "type": "library",
+    "require": {
+        "laravel/framework": "^11.9|^12.0",
+        "livewire/livewire": "^3.5",
+        "maatwebsite/excel": "^3.1",
+        "barryvdh/laravel-dompdf": "^3.0",
+        "doctrine/dbal": "^4.2",
+        "ext-curl": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.3.6",
+        "orchestra/testbench": "^9.9"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "CrudBooster\\": "src/",
+            "CrudBooster\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ferry Ariawan",
+            "email": "ferdevelop15@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CrudBooster\\CBServiceProvider"
+            ]
+        }
+    }
+}

@@ -1,0 +1,27 @@
+<?php
+
+namespace {namespace};
+
+use CrudBooster\Modules\ModuleRegistrar;
+use Illuminate\Support\ServiceProvider;
+use CrudBooster\Modules\Role\Enum\RolePermission;
+
+class {className} extends ServiceProvider
+{
+    public function boot()
+    {
+        $this->loadRoutesFrom(__DIR__ . '/router.php');
+        $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
+        ModuleRegistrar::registerModule(
+                key:'{key}',
+                name:'{name}',
+                browseModuleClass: \App\Cb\Modules\{moduleClass}\Livewire\{moduleClass}::class,
+                formModuleClass: \App\Cb\Modules\{moduleClass}\Livewire\{moduleClass}Form::class,
+                serviceProvider: self::class,
+                additional: [
+                    'permissionAvailable' => [
+                        {permissionAvailable}
+                    ],
+                ]);
+    }
+}

@@ -1,0 +1,39 @@
+<?php
+
+namespace {namespace};
+
+use {serviceClassName};
+use {modelClassName};
+use CrudBooster\Livewire\BaseFormComponent;
+use CrudBooster\Livewire\FormBuilder\Form;
+use CrudBooster\Attributes\OnFormSaved;
+use CrudBooster\Attributes\OnFormSaving;
+{importClass}
+
+class {className} extends BaseFormComponent
+{
+    public $pageTitle = "{name}";
+    protected $modelService = {serviceName}::class;
+    protected $modelName = {modelName}::class;
+
+    public function init()
+    {
+        $this->makeForm([
+            {fields}
+        ]);
+    }
+
+    #[OnFormSaving]
+    public function onFormSaving($model, $data, $id = null)
+    {
+        // You may add your own logic here
+        {onFormSaving}
+    }
+
+    #[OnFormSaved]
+    public function onFormSaved($model, $data, $id)
+    {
+        // You may add your own logic here
+        {onFormSaved}
+    }
+}

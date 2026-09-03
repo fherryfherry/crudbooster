@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Cb\Modules\User\Livewire;
+
+use App\Cb\Modules\User\Services\UserService;
+use CrudBooster\Components\Type\Image\Function\Image;
+use CrudBooster\Components\Type\SelectChips\Function\SelectChips;
+use CrudBooster\Livewire\BaseFormComponent;
+use CrudBooster\Livewire\FormBuilder\Form;
+use CrudBooster\Modules\Role\Models\CBRole;
+use CrudBooster\Modules\Role\Models\CBRoleUser;
+use App\Cb\Modules\User\Models\User as UserModel;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
+
+class UserForm extends BaseFormComponent
+{
+    public $pageTitle = "User Management";
+    protected $modelService = UserService::class;
+    protected $modelName = UserModel::class;
+
+    public function init()
+    {
+        $this->makeForm([
+            Form::add(label: 'Photo', key: 'photo', type: 'image', validation: 'nullable', helpText: 'Max 2MB. Supported format: jpeg, png, bmp, gif, svg, or webp'),
+            Form::add(label: 'Name', key: 'name', type: 'text', validation: 'required'),
+            [
+                Form::add(label: 'Email', key: 'email', type: 'email', validation: 'required|email'. ((!$this->formId)?'|unique:users,email':''), placeholder: 'Enter a valid email'),
+                Form::add(label: 'Phone', key: 'phone', type: 'text', validation: 'required|numeric')
+            ],
+            Form::add(label: 'Position', key: 'position', type: 'text', validation: 'required', helpText: 'e.g. Manager, Staff, etc.'),
+            [
+                Form::add(label: 'Password', key: 'password', type: 'password', validation: $this->formId ? 'nullable|confirmed|min:6' : 'required|confirmed|min:6', placeholder: $this->formId ? 'Leave empty if not changed' : 'Required')->showDetail(false),
+                Form::add(label: 'Password Confirmation', key: 'password_confirmation', type: 'password', placeholder: $this->formId ? 'Leave empty if not changed' : 'Required')->showDetail(false)
+            ],
+            Form::add(label: 'Role', key: 'roleAssigned', type: 'selectChips',
+                validation: 'required',
+                option: SelectChips::option()
+                    ->model(pivotModel: CBRoleUser::class,
+                        firstPivotFk: 'user_id',
+                        secondPivotFk: 'role_id',
+                        displayModel: CBRole::class,
+                        displayColumn: 'name',
+                        displayQueryCallback: fn($query) => $this->avoidShowSuperAdmin($query))
+            )
+        ]);
+    }
+
+    /**
+     * We want to avoid showing super admin role to other users
+     * @param Builder $query
+     */
+    private function avoidShowSuperAdmin(Builder $query)
+    {
+        if(!Gate::check('is_super_admin')) {
+            $query->where('name', '!=', config('cb.super_admin_role'));
+        }
+    }
+}

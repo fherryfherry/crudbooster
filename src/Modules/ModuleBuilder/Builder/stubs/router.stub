@@ -1,0 +1,9 @@
+<?php
+
+use CrudBooster\Helpers\CBRoute;
+use {namespace}\Livewire\{className};
+use {namespace}\Livewire\{className}Form;
+
+CBRoute::createRoute('{path}',
+                        {className}::class,
+                        {className}Form::class);

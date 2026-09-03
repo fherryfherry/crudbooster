@@ -1,0 +1,42 @@
+<?php
+
+namespace {namespace};
+
+use {modelClassName};
+use {serviceClassName};
+use CrudBooster\Livewire\BaseBrowseComponent;
+use CrudBooster\Livewire\ColumnBuilder\Column;
+use Illuminate\Database\Eloquent\Builder;
+
+class {className} extends BaseBrowseComponent
+{
+    public $pageTitle           = "{name}";
+    protected $modelService     = {serviceName}::class;
+    protected $modelName        = {modelName}::class;
+    public $buttonSearch        = {buttonSearch};
+    public $buttonCreate        = {buttonCreate};
+    public $buttonImport        = {buttonImport};
+    public $buttonExportXls     = {buttonExportXls};
+    public $buttonExportCsv     = {buttonExportCsv};
+    public $buttonExportPdf     = {buttonExportPdf};
+    public $buttonDelete        = {buttonDelete};
+    public $buttonEdit          = {buttonEdit};
+    public $buttonDetail        = {buttonDetail};
+    public $buttonFilter        = {buttonFilter};
+    public $buttonBulkAction    = {buttonBulkAction};
+    public $buttonActionStyle   = '{buttonActionStyle}';
+    public $perPage             = 10;
+
+    public function init()
+    {
+        {relationship}
+        {hookQuery}
+
+        $this->makeColumns([
+            {columns}
+        ]);
+
+        {bulkAction}
+        {rowActionButton}
+    }
+}

@@ -1,0 +1,505 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none !important;
+}
+
+body {
+    @apply font-sans antialiased bg-gray-100 dark:bg-gray-900 dark:text-white;
+}
+
+.browse-search-bar {
+    @apply p-2 flex-1 bg-gray-200 dark:bg-gray-700 focus:ring-0 focus:outline-none rounded-md text-sm w-20 lg:w-full;
+}
+
+/** Button **/
+.btn {
+    @apply px-4 py-2 rounded-md font-light border border-gray-500 text-sm dark:border-gray-600 text-center flex justify-center gap-1 items-center;
+}
+
+.btn svg {
+    @apply inline-block size-4;
+}
+
+.btn-outline-light {
+    @apply bg-white border-gray-300 text-gray-500 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 hover:border-gray-600;
+}
+
+.btn-outline-light.active {
+    @apply bg-gray-500 text-white dark:bg-gray-700 dark:text-white;
+}
+
+.btn-outline-success {
+    @apply bg-white border-green-300 text-green-500 hover:bg-green-100 dark:bg-gray-800 dark:border-green-600 dark:text-green-500 dark:hover:bg-green-700;
+}
+
+.btn-outline-primary {
+    @apply bg-white border-sky-300 text-sky-500 hover:bg-sky-100 dark:bg-gray-800 dark:border-sky-600 dark:text-sky-500 dark:hover:bg-sky-700;
+}
+
+.btn-outline-danger {
+    @apply bg-white border-red-300 text-red-500 hover:bg-red-100 dark:bg-gray-800 dark:border-red-600 dark:text-red-500 dark:hover:bg-red-700;
+}
+
+.btn-outline-info {
+    @apply bg-white border-blue-300 text-blue-500 hover:bg-blue-600 dark:bg-gray-800 dark:border-blue-600 dark:text-blue-500 dark:hover:bg-blue-700;
+}
+
+.btn-block {
+    @apply w-full;
+}
+
+.btn-success {
+    @apply bg-green-500 text-white hover:bg-green-400 dark:bg-green-600 dark:hover:bg-green-500;
+}
+
+.btn-danger {
+    @apply bg-red-500 text-white hover:bg-red-400 dark:bg-red-600 dark:hover:bg-red-500;
+}
+
+.btn-warning {
+    @apply bg-yellow-500 text-white hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-500;
+}
+
+.btn-info {
+    @apply bg-blue-500 text-white hover:bg-blue-400 dark:bg-blue-600 dark:hover:bg-blue-500;
+}
+
+.btn-primary {
+    @apply bg-sky-500 text-white hover:bg-sky-400 dark:bg-sky-600 dark:hover:bg-sky-500;
+}
+
+.btn-default {
+    @apply bg-gray-400 text-white hover:bg-gray-500 dark:bg-gray-600 dark:hover:bg-gray-700;
+}
+
+.btn:disabled {
+    @apply bg-gray-300 border-gray-400 text-gray-500 hover:bg-gray-300 cursor-not-allowed dark:bg-gray-500 dark:border-gray-600 dark:text-gray-600 dark:hover:bg-gray-500 !important;
+}
+
+.browse-action-button svg {
+    @apply inline-block size-4;
+}
+
+/** Panel **/
+.panel {
+    @apply bg-white text-gray-800 shadow shadow-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-200 dark:shadow-gray-700;
+}
+
+.panel .panel-header {
+    @apply p-4 border-b border-gray-300 flex flex-wrap justify-between items-center dark:border-gray-700;
+}
+
+.panel .panel-header-title h2 {
+    @apply text-lg text-gray-500 dark:text-gray-400;
+}
+
+.panel .panel-content {
+    @apply p-4 overflow-auto;
+}
+
+.panel .panel-fluid {
+    @apply p-1;
+}
+
+.panel .panel-fluid-max {
+    @apply p-0;
+}
+
+/** Table **/
+.table {
+    @apply w-full max-w-full border-collapse;
+}
+
+.table .table-bordered {
+    @apply border border-gray-300 dark:border-gray-600;
+}
+
+.table thead {
+    @apply bg-gray-50 dark:bg-gray-700;
+}
+
+.table thead tr th {
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer whitespace-normal dark:text-gray-300;
+}
+.table thead tr th:hover {
+    @apply text-gray-900 dark:text-gray-100;
+}
+
+.table-bordered thead tr th {
+    @apply border-b border-gray-300 dark:border-gray-600;
+}
+
+.table tbody {
+    @apply bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700;
+}
+
+.table tbody tr td {
+    @apply px-6 py-4 whitespace-normal text-sm text-gray-500 dark:text-gray-300;
+}
+
+.table-bordered tbody tr td {
+    @apply border-b border-gray-300 dark:border-gray-600;
+}
+
+.table tbody tr td.td-no-headingwrap {
+    @apply whitespace-nowrap;
+}
+
+img.thumbnail {
+    @apply bg-gray-300 text-gray-500 rounded-full flex items-center justify-center dark:bg-gray-600 dark:text-gray-400;
+}
+
+.form-image-preview {
+    @apply max-w-56 rounded-md hover:cursor-zoom-in;
+}
+
+/** Form **/
+.form-group {
+    @apply mb-4;
+}
+
+.form-group-no-padding {
+    @apply mb-0 !important;
+}
+
+.form-group label {
+    @apply block text-sm text-gray-500 mb-3 dark:text-gray-400;
+}
+
+.form-control {
+    @apply text-sm block w-full p-2 border border-gray-300 rounded-md text-gray-500 focus:outline-0 focus:border-sky-600 bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300;
+}
+
+.form-control-prepend {
+    @apply flex items-center justify-between;
+}
+.form-control-prepend .prefix {
+    @apply bg-gray-100 dark:bg-gray-600 text-sm p-2 border-l border-t border-b rounded-tl rounded-bl text-gray-400 dark:border-gray-600 dark:text-gray-400 selection:cursor-default;
+}
+.form-control-prepend .form-control {
+    @apply w-full p-2 rounded-l-none focus:outline-0 focus:border-sky-600 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 border-t border-b border-r border-l rounded-tr rounded-br border-gray-300;
+}
+
+.form-control-append {
+    @apply flex items-center justify-between;
+}
+.form-control-append .suffix {
+    @apply bg-gray-100 dark:bg-gray-600 text-sm p-2 border-r border-t border-b rounded-tr rounded-br text-gray-400 dark:border-gray-600 dark:text-gray-400 selection:cursor-default;
+}
+.form-control-append .form-control {
+    @apply w-full p-2 rounded-r-none focus:outline-0 focus:border-sky-600 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 border-t border-b border-l border-r rounded-tl rounded-bl border-gray-300;
+}
+
+.form-control[readonly] {
+    @apply bg-gray-100 cursor-default outline-0 focus:outline-0 dark:bg-gray-600;
+}
+
+.form-control[disabled] {
+    @apply bg-gray-100 cursor-default outline-0 focus:outline-0 dark:bg-gray-600;
+}
+
+select.form-control {
+    @apply cursor-pointer;
+}
+
+.form-control-mini {
+    @apply text-gray-600 border focus:ring-sky-200 p-1 border-gray-300 rounded w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300;
+}
+
+.form-control-mini[readonly] {
+    @apply bg-gray-100 cursor-default outline-0 focus:outline-0 dark:bg-gray-600;
+}
+
+select.form-control-mini {
+    @apply cursor-pointer;
+}
+
+.form-group .form-error {
+    @apply my-1 block w-full text-red-400 text-xs;
+}
+
+.form-group .form-help {
+    @apply text-gray-400 text-xs p-1 dark:text-gray-500;
+}
+
+.form-feedback {
+    @apply text-red-400 text-xs;
+}
+
+/** Top Bar **/
+.top-bar {
+    @apply w-full bg-white p-4 flex justify-between items-center dark:bg-gray-800;
+}
+
+/** Main Area **/
+.main-area {
+    @apply flex-1 bg-gray-100 overflow-y-auto dark:bg-gray-900;
+}
+
+/** Sidebar **/
+.sidebar {
+    @apply w-[250px] bg-sky-800 text-sky-300 p-4 overflow-y-auto dark:bg-gray-800 dark:text-gray-400;
+}
+
+.sidebar .logo {
+    @apply w-full font-bold text-white text-center text-2xl;
+}
+
+.sidebar .section-title {
+    @apply text-xs font-bold my-5 text-sky-400 dark:text-gray-400;
+}
+
+.sidebar ul.menu li.menu-item {
+    @apply mb-5 ml-1;
+}
+
+.sidebar ul.menu li.menu-item a {
+    @apply text-sky-300 hover:text-sky-200 flex items-center dark:text-gray-300 hover:dark:text-gray-200;
+}
+
+.sidebar ul.menu li.menu-item a svg {
+    @apply size-5 inline-block mr-3;
+}
+
+/** Browse List Model **/
+.browse-list .list-item {
+    @apply border border-gray-300 p-3 mb-3 rounded-md flex w-full justify-between items-center text-gray-600 text-sm dark:border-gray-600 dark:text-gray-300;
+}
+
+.browse-list .list-item:hover {
+    @apply shadow dark:shadow-gray-700;
+}
+
+.browse-list .list-item .action {
+    @apply flex items-center justify-center gap-1;
+}
+
+.browse-list .browse-list {
+    @apply ml-8;
+}
+
+.badge-green {
+    @apply text-xs bg-green-100 rounded-lg px-1 border border-green-200 flex justify-center items-center text-green-500 dark:bg-green-600 dark:border-green-700 dark:text-green-200;
+}
+
+.badge-red {
+    @apply text-xs bg-red-100 rounded-lg px-1 border border-red-200 flex justify-center items-center text-red-500 dark:bg-red-600 dark:border-red-700 dark:text-red-200;
+}
+
+/** Widget **/
+.widget {
+    @apply text-white rounded-lg shadow-lg p-5 w-full;
+}
+
+.widget-light {
+    @apply bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-300 border dark:border-gray-700;
+}
+
+.widget-primary {
+    @apply bg-blue-500 dark:bg-blue-600;
+}
+
+.widget-success {
+    @apply bg-green-500 dark:bg-green-600;
+}
+
+.widget-danger {
+    @apply bg-red-500 dark:bg-red-600;
+}
+
+.widget-warning {
+    @apply bg-yellow-500 dark:bg-yellow-600;
+}
+
+.widget-info {
+    @apply bg-sky-500 dark:bg-sky-600;
+}
+
+/** Modal **/
+.modal {
+    @apply fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-gray-900 bg-opacity-10 z-10;
+}
+
+.modal-content {
+    @apply relative bg-white rounded-lg shadow-lg p-6 max-h-screen overflow-y-auto dark:bg-gray-800 z-20;
+}
+
+.modal-title {
+    @apply text-lg text-gray-500 my-2 font-semibold mb-4 dark:text-gray-400;
+}
+
+.input-radio-group {
+    @apply flex items-center gap-1 cursor-pointer !important;
+}
+
+.input-checkbox-group {
+    @apply flex items-center gap-1 cursor-pointer !important;
+}
+
+/** Toggle Button **/
+.toggle-button {
+    @apply flex items-center cursor-pointer;
+}
+
+.toggle-button .bg-line {
+    @apply block bg-gray-400 w-12 h-6 rounded-full dark:bg-gray-600;
+}
+
+.toggle-button .bg-dot {
+    @apply absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition dark:bg-gray-300;
+}
+
+.toggle-button .toggle-input:checked~.toggle-dot {
+    @apply transform translate-x-6;
+}
+
+.toggle-button .toggle-input:checked~.toggle-line {
+    @apply bg-green-500 dark:bg-green-600;
+}
+
+/** FRAME **/
+.frame {
+    @apply relative border p-5 pt-6 rounded-md dark:border-gray-700;
+}
+
+.frame:not(:last-child) {
+    @apply mb-8;
+}
+
+.frame .frame-title {
+    @apply absolute top-0 left-0 bg-white px-2 -mt-2.5 ml-2 font-medium text-xs text-gray-500 uppercase tracking-wider dark:bg-gray-800 dark:text-gray-400;
+}
+.frame .frame-content {
+    @apply p-4;
+}
+
+.form-checkbox {
+    @apply h-4 w-4 text-blue-600 transition duration-150 ease-in-out cursor-pointer dark:text-blue-400;
+}
+
+/** Animate Ping **/
+.ping-bullet-wave {
+    @apply animate-ping absolute -top-1 -right-1 inline-block w-2 h-2 bg-red-600 rounded-full;
+}
+
+.ping-bullet {
+    @apply absolute -top-1 -right-1 inline-block w-2 h-2 bg-red-600 rounded-full;
+}
+
+code {
+    @apply text-red-500;
+}
+
+/** Thumbnail Preview **/
+.thumbnail-preview {
+    @apply fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-black/70 bg-opacity-10 z-20;
+}
+
+.thumbnail-preview .close {
+    @apply fixed z-50 top-6 right-8 text-white text-5xl font-bold;
+}
+
+.thumbnail-preview img.preview {
+    @apply max-w-[800px] max-h-[600px] object-cover;
+}
+
+/** Page Builder **/
+.studio-sidebar .tool-item-active {
+    @apply cursor-grab active:cursor-grabbing text-gray-600 hover:text-gray-800 p-2 rounded-md hover:bg-gray-200 flex justify-start items-center gap-2 dark:text-gray-300 dark:hover:text-gray-400 dark:hover:bg-gray-700;
+}
+
+.studio-sidebar .tool-item-inactive {
+    @apply cursor-not-allowed text-gray-400 p-2 rounded-md flex justify-start items-center gap-2 dark:text-gray-500;
+}
+
+/** Alert **/
+.alert {
+    @apply border-t-4 border-teal-500 bg-teal-50 text-teal-700 px-4 py-3 rounded-b-md mb-3 shadow-sm dark:border-teal-600 dark:bg-teal-900/20 dark:text-teal-200;
+}
+
+.alert-danger {
+    @apply border-t-4 border-red-500 bg-red-50 text-red-700 px-4 py-3 rounded-b-md mb-3 shadow-sm dark:border-red-600 dark:bg-red-900/20 dark:text-red-200;
+}
+
+.alert-success {
+    @apply border-t-4 border-green-500 bg-green-50 text-green-700 px-4 py-3 rounded-b-md mb-3 shadow-sm dark:border-green-600 dark:bg-green-900/20 dark:text-green-200;
+}
+
+.alert-warning {
+    @apply border-t-4 border-yellow-500 bg-yellow-50 text-yellow-700 px-4 py-3 rounded-b-md mb-3 shadow-sm dark:border-yellow-600 dark:bg-yellow-900/20 dark:text-yellow-200;
+}
+
+.alert-info {
+    @apply border-t-4 border-sky-500 bg-sky-50 text-sky-700 px-4 py-3 rounded-b-md mb-3 shadow-sm dark:border-sky-600 dark:bg-sky-900/20 dark:text-sky-200;
+}
+
+.alert-simple {
+    @apply border border-gray-300 bg-white text-gray-700 px-3 py-2 rounded-md text-sm relative dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300;
+}
+
+.alert a {
+    @apply text-blue-600 hover:text-blue-800 hover:underline dark:text-blue-400 dark:hover:text-blue-300;
+}
+
+/** Simple global scroll bar with tailwind **/
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    opacity: 0.7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    opacity: 0.7;
+}
+
+::-webkit-scrollbar-corner {
+    background: #f1f1f1;
+}
+
+/** File Upload Progress Bar **/
+@keyframes cb-upload-progress-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .8;
+    }
+}
+
+.cb-upload-progress {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background-color: #e5e7eb;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.cb-upload-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    animation: cb-upload-progress-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.cb-upload-progress-text {
+    position: absolute;
+    right: 0;
+    top: -18px;
+    font-size: 11px;
+    color: #6b7280;
+    font-weight: 500;
+}

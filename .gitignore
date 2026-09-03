@@ -1,0 +1,13 @@
+vendor/*
+.idea/*
+*.lock
+.phpunit.result.cache
+node_modules/*
+npm-debug.log
+package-lock.json
+php.xml
+*.sh
+build.css
+.DS_Store
+.cursor/*
+dist/*

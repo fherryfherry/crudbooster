@@ -1,0 +1,752 @@
+/* CSS yang di-scope hanya untuk area Summernote */
+.summernote-container {
+    /* Reset untuk menghindari konflik */
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+
+.summernote-container *,
+.summernote-container *:before,
+.summernote-container *:after {
+    box-sizing: border-box;
+}
+
+/* Button styles untuk Summernote toolbar */
+.summernote-container .btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid #ccc;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.summernote-container .btn:hover,
+.summernote-container .btn:focus {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+    text-decoration: none;
+}
+
+.summernote-container .btn:active {
+    outline: 0;
+    background-image: none;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.summernote-container .btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.summernote-container .btn-default:hover,
+.summernote-container .btn-default:focus {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+.summernote-container .btn-default:active {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+.summernote-container .btn-group {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.summernote-container .btn-group > .btn {
+    position: relative;
+    float: left;
+}
+
+.summernote-container .btn-group > .btn:not(:first-child):not(:last-child) {
+    border-radius: 0;
+}
+
+.summernote-container .btn-group > .btn:first-child:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.summernote-container .btn-group > .btn:last-child:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.summernote-container .btn-group > .btn + .btn {
+    margin-left: -1px;
+}
+
+.summernote-container .btn-group > .btn:hover,
+.summernote-container .btn-group > .btn:focus,
+.summernote-container .btn-group > .btn:active {
+    z-index: 2;
+}
+
+/* Dropdown styles */
+.summernote-container .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+}
+
+.summernote-container .dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.summernote-container .dropdown-menu > li > a:hover,
+.summernote-container .dropdown-menu > li > a:focus {
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+.summernote-container .dropdown-menu > .active > a,
+.summernote-container .dropdown-menu > .active > a:hover,
+.summernote-container .dropdown-menu > .active > a:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: #337ab7;
+    outline: 0;
+}
+
+.summernote-container .open > .dropdown-menu {
+    display: block;
+}
+
+/* Modal styles untuk Summernote */
+.summernote-container .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    outline: 0;
+}
+
+.summernote-container .modal.fade .modal-dialog {
+    transform: translate(0, -25%);
+    transition: transform 0.3s ease-out;
+}
+
+.summernote-container .modal.in .modal-dialog {
+    transform: translate(0, 0);
+}
+
+.summernote-container .modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10px;
+}
+
+.summernote-container .modal-content {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #999;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+    outline: 0;
+}
+
+.summernote-container .modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+}
+
+.summernote-container .modal-backdrop.fade {
+    opacity: 0;
+}
+
+.summernote-container .modal-backdrop.in {
+    opacity: 0.5;
+}
+
+/* Form control styles */
+.summernote-container .form-control {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.summernote-container .form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.summernote-container .form-group {
+    margin-bottom: 15px;
+}
+
+/* Summernote specific styles */
+.summernote-container .note-editor {
+    border: 1px solid #a9a9a9;
+}
+
+.summernote-container .note-editor .note-dropzone {
+    position: absolute;
+    z-index: 1;
+    display: none;
+    color: #87ceeb;
+    background-color: #fff;
+    border: 2px dashed #87ceeb;
+    opacity: 0.95;
+    pointer-events: none;
+}
+
+.summernote-container .note-editor .note-dropzone .note-dropzone-message {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.summernote-container .note-editor .note-dropzone.hover {
+    color: #098ddf;
+    border-color: #098ddf;
+}
+
+.summernote-container .note-editor.dragover .note-dropzone {
+    display: table;
+}
+
+.summernote-container .note-editor .note-editing-area {
+    position: relative;
+}
+
+.summernote-container .note-editor .note-editing-area .note-editable {
+    padding: 10px;
+    overflow: auto;
+    word-wrap: break-word;
+    min-height: 150px;
+}
+
+.summernote-container .note-editor.note-frame {
+    border: 1px solid #a9a9a9;
+}
+
+.summernote-container .note-editor.note-frame .note-editing-area {
+    background-color: #fff;
+}
+
+.summernote-container .note-editor.note-frame .note-editing-area .note-editable {
+    background-color: #fff;
+    color: #000;
+}
+
+.summernote-container .note-editor.note-frame .note-editing-area .note-editable[contenteditable="false"] {
+    background-color: #e5e5e5;
+}
+
+.summernote-container .note-editor.note-frame.codeview .note-editing-area .note-editable {
+    font-family: Menlo, Monaco, monospace, sans-serif;
+}
+
+.summernote-container .note-editor.note-frame.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1050;
+}
+
+.summernote-container .note-editor.note-frame.fullscreen .note-editing-area {
+    height: calc(100% - 40px);
+}
+
+.summernote-container .note-editor.note-frame.fullscreen .note-editing-area .note-editable {
+    height: 100%;
+}
+
+.summernote-container .note-editor.note-frame .note-statusbar {
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    height: 20px;
+}
+
+.summernote-container .note-editor.note-frame .note-statusbar .note-resizebar {
+    width: 100%;
+    height: 20px;
+    cursor: s-resize;
+}
+
+.summernote-container .note-editor.note-frame .note-statusbar .note-resizebar .note-icon-bar {
+    width: 20px;
+    margin: 1px auto;
+    border-top: 1px solid #a9a9a9;
+}
+
+.summernote-container .note-editor.note-frame .note-toolbar {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+}
+
+.summernote-container .note-editor .note-toolbar {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.summernote-container .note-editor .note-toolbar > .btn-group {
+    margin-right: 5px;
+    margin-left: 0;
+}
+
+.summernote-container .note-editor .note-toolbar .btn {
+    border: 1px solid #ddd;
+    background: transparent;
+    color: #333;
+    border-radius: 4px;
+    padding: 5px 8px;
+    margin: 0 1px;
+}
+
+.summernote-container .note-editor .note-toolbar .btn:hover,
+.summernote-container .note-editor .note-toolbar .btn:focus {
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+.summernote-container .note-editor .note-toolbar .btn.active,
+.summernote-container .note-editor .note-toolbar .btn:active {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.summernote-container .note-popover .popover {
+    max-width: none;
+}
+
+.summernote-container .note-popover .popover .popover-content {
+    padding: 5px;
+}
+
+.summernote-container .note-popover .popover .popover-content .btn-group {
+    margin-right: 5px;
+    margin-left: 0;
+}
+
+.summernote-container .note-popover .popover .arrow {
+    left: 20px;
+}
+
+.summernote-container .note-hint .hint {
+    position: absolute;
+    display: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.summernote-container .note-hint .hint-group {
+    border-bottom: 1px solid #eee;
+    padding: 5px 0;
+}
+
+.summernote-container .note-hint .hint-group:last-child {
+    border-bottom: none;
+}
+
+.summernote-container .note-hint .hint-item {
+    padding: 3px 10px;
+    cursor: pointer;
+}
+
+.summernote-container .note-hint .hint-item:hover {
+    background-color: #f5f5f5;
+}
+
+.summernote-container .note-hint .hint-item.active {
+    background-color: #337ab7;
+    color: #fff;
+}
+
+/* Utility classes */
+.summernote-container .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.summernote-container .pull-left {
+    float: left !important;
+}
+
+.summernote-container .pull-right {
+    float: right !important;
+}
+
+.summernote-container .clearfix:before,
+.summernote-container .clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.summernote-container .clearfix:after {
+    clear: both;
+}
+
+/* Tooltip styles untuk Summernote */
+.summernote-container .tooltip {
+    position: absolute;
+    z-index: 1070;
+    display: block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.4;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    transition: opacity 0.15s ease-in-out;
+}
+
+.summernote-container .tooltip.in {
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+}
+
+.summernote-container .tooltip.top {
+    padding: 5px 0;
+    margin-top: -3px;
+}
+
+.summernote-container .tooltip.right {
+    padding: 0 5px;
+    margin-left: 3px;
+}
+
+.summernote-container .tooltip.bottom {
+    padding: 5px 0;
+    margin-top: 3px;
+}
+
+.summernote-container .tooltip.left {
+    padding: 0 5px;
+    margin-left: -3px;
+}
+
+.summernote-container .tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    background-color: #000;
+    border-radius: 4px;
+}
+
+.summernote-container .tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.summernote-container .tooltip.top .tooltip-arrow {
+    bottom: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px 5px 0;
+    border-top-color: #000;
+}
+
+.summernote-container .tooltip.top-left .tooltip-arrow {
+    bottom: 0;
+    right: 5px;
+    margin-bottom: -5px;
+    border-width: 5px 5px 0;
+    border-top-color: #000;
+}
+
+.summernote-container .tooltip.top-right .tooltip-arrow {
+    bottom: 0;
+    left: 5px;
+    margin-bottom: -5px;
+    border-width: 5px 5px 0;
+    border-top-color: #000;
+}
+
+.summernote-container .tooltip.right .tooltip-arrow {
+    top: 50%;
+    left: 0;
+    margin-top: -5px;
+    border-width: 5px 5px 5px 0;
+    border-right-color: #000;
+}
+
+.summernote-container .tooltip.left .tooltip-arrow {
+    top: 50%;
+    right: 0;
+    margin-top: -5px;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #000;
+}
+
+.summernote-container .tooltip.bottom .tooltip-arrow {
+    top: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 0 5px 5px;
+    border-bottom-color: #000;
+}
+
+.summernote-container .tooltip.bottom-left .tooltip-arrow {
+    top: 0;
+    right: 5px;
+    margin-top: -5px;
+    border-width: 0 5px 5px;
+    border-bottom-color: #000;
+}
+
+.summernote-container .tooltip.bottom-right .tooltip-arrow {
+    top: 0;
+    left: 5px;
+    margin-top: -5px;
+    border-width: 0 5px 5px;
+    border-bottom-color: #000;
+}
+
+/* Popover styles untuk Summernote */
+.summernote-container .popover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1060;
+    display: none;
+    max-width: 276px;
+    padding: 1px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    background-clip: padding-box;
+}
+
+.summernote-container .popover.top {
+    margin-top: -10px;
+}
+
+.summernote-container .popover.right {
+    margin-left: 10px;
+}
+
+.summernote-container .popover.bottom {
+    margin-top: 10px;
+}
+
+.summernote-container .popover.left {
+    margin-left: -10px;
+}
+
+.summernote-container .popover-title {
+    margin: 0;
+    padding: 8px 14px;
+    font-size: 14px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ebebeb;
+    border-radius: 5px 5px 0 0;
+}
+
+.summernote-container .popover-content {
+    padding: 9px 14px;
+}
+
+.summernote-container .popover > .arrow,
+.summernote-container .popover > .arrow:after {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.summernote-container .popover > .arrow {
+    border-width: 11px;
+}
+
+.summernote-container .popover > .arrow:after {
+    border-width: 10px;
+    content: "";
+}
+
+.summernote-container .popover.top > .arrow {
+    left: 50%;
+    margin-left: -11px;
+    border-bottom-width: 0;
+    border-top-color: #999;
+    border-top-color: rgba(0, 0, 0, 0.25);
+    bottom: -11px;
+}
+
+.summernote-container .popover.top > .arrow:after {
+    content: " ";
+    bottom: 1px;
+    margin-left: -10px;
+    border-bottom-width: 0;
+    border-top-color: #fff;
+}
+
+.summernote-container .popover.right > .arrow {
+    top: 50%;
+    left: -11px;
+    margin-top: -11px;
+    border-left-width: 0;
+    border-right-color: #999;
+    border-right-color: rgba(0, 0, 0, 0.25);
+}
+
+.summernote-container .popover.right > .arrow:after {
+    content: " ";
+    left: 1px;
+    bottom: -10px;
+    border-left-width: 0;
+    border-right-color: #fff;
+}
+
+.summernote-container .popover.bottom > .arrow {
+    left: 50%;
+    margin-left: -11px;
+    border-top-width: 0;
+    border-bottom-color: #999;
+    border-bottom-color: rgba(0, 0, 0, 0.25);
+    top: -11px;
+}
+
+.summernote-container .popover.bottom > .arrow:after {
+    content: " ";
+    top: 1px;
+    margin-left: -10px;
+    border-top-width: 0;
+    border-bottom-color: #fff;
+}
+
+.summernote-container .popover.left > .arrow {
+    top: 50%;
+    right: -11px;
+    margin-top: -11px;
+    border-right-width: 0;
+    border-left-color: #999;
+    border-left-color: rgba(0, 0, 0, 0.25);
+}
+
+.summernote-container .popover.left > .arrow:after {
+    content: " ";
+    right: 1px;
+    border-right-width: 0;
+    border-left-color: #fff;
+    bottom: -10px;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .summernote-container .modal-dialog {
+        width: 600px;
+        margin: 30px auto;
+    }
+    
+    .summernote-container .modal-content {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* Table styles inside Summernote */
+.summernote-container .note-editor .note-editable table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+    border: 1px solid #dee2e6;
+}
+
+.summernote-container .note-editor .note-editable table th,
+.summernote-container .note-editor .note-editable table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+}
+
+.summernote-container .note-editor .note-editable table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}

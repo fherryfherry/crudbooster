@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Cb\Modules\User\Livewire;
+
+use App\Cb\Modules\User\Models\User as UserModel;
+use App\Cb\Modules\User\Services\UserService;
+use CrudBooster\Components\Icon\Icon;
+use CrudBooster\Livewire\BaseBrowseComponent;
+use CrudBooster\Livewire\ColumnBuilder\Column;
+use CrudBooster\Modules\Role\Enum\RolePermission;
+use CrudBooster\Modules\Role\Models\CBRole;
+use CrudBooster\Modules\Role\Models\CBRoleUser;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Gate;
+
+class User extends BaseBrowseComponent
+{
+    public $pageTitle = "User Management";
+    protected $modelService = UserService::class;
+    protected $modelName = UserModel::class;
+    public function init()
+    {
+        // Prevent delete the first user, usually this is the super admin, also prevent delete the current user
+        if(!Gate::check('is_super_admin')) {
+            // We want to hide the delete button if the user is super admin and not the current user, or the current user
+            $this->hideDeleteButtonWhen(fn($row) => (str_contains($row->cb_role_users__name, config('cb.super_admin_role')) && $row->id != auth()->id()) || $row->id == auth()->id());
+            // We want to hide the checkbox if the user is super admin and not the current user
+            $this->hideCheckboxWhen(fn($row) => str_contains($row->cb_role_users__name, config('cb.super_admin_role')) && $row->id != auth()->id());
+            // We want to hide the edit button if the user is super admin and not the current user
+            $this->hideEditButtonWhen(function($row) {
+                return str_contains($row->name, config('cb.super_admin_role')) && $row->id != auth()->id();
+            });
+        }
+
+        $this->hookQuery(function (Builder $query) {
+            $query->join('cb_role_users', 'cb_role_users.user_id', '=', 'users.id');
+            $query->join('cb_roles', 'cb_roles.id', '=', 'cb_role_users.role_id');
+            if(!Gate::check('is_super_admin')) $query->where('cb_roles.name', '!=', config('cb.super_admin_role'));
+            $query->addSelect('cb_roles.name as cb_role_users_name');
+        });
+
+        $this->makeColumns([
+            Column::add(label: 'Photo', key: 'users.photo')->image(),
+            Column::add(label: 'Name', key: 'users.name'),
+            Column::add(label: 'Email', key: 'users.email'),
+            Column::add(label: 'Position', key: 'users.position'),
+            Column::add(label: 'Role', key: 'cb_role_users_name')
+        ]);
+
+        // Add capability to delete all selected users
+        $this->addBulkAction('Delete All Selected',
+            Icon::TRASH,
+            fn($ids) => $this->modelService::deleteByIds($ids),
+            'Are you sure?',
+            'You won\'t be able to revert this!',
+            RolePermission::DELETE);
+    }
+}

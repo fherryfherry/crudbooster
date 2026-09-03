@@ -1,0 +1,11 @@
+<?php
+
+namespace {namespace};
+
+use CrudBooster\Domain\Services\BaseService;
+use {modelClass};
+
+class {className} extends BaseService
+{
+    protected static string $model = {modelName}::class;
+}

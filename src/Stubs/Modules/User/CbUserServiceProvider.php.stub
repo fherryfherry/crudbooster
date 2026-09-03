@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Cb\Modules\User;
+
+use CrudBooster\Modules\ModuleRegistrar;
+use Illuminate\Support\ServiceProvider;
+use CrudBooster\Modules\Role\Enum\RolePermission;
+use App\Cb\Modules\User\Livewire\User;
+use App\Cb\Modules\User\Livewire\UserForm;
+
+class CbUserServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
+        $this->loadRoutesFrom(__DIR__ . '/router.php');
+        $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
+        ModuleRegistrar::registerModule('user', 'User', User::class, UserForm::class, self::class, additional: ['permissionAvailable' => RolePermission::all()]);
+    }
+}

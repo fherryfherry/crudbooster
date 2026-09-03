@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Cb\Modules\User\Services;
+
+use CrudBooster\Domain\Services\BaseService;
+use App\Cb\Modules\User\Models\User;
+use Illuminate\Support\Str;
+
+class UserService extends BaseService
+{
+    protected static string $model = User::class;
+
+    public static function createUser($name, $email, $password, $position)
+    {
+        $user = static::new();
+        $user->name = $name;
+        $user->email = $email;
+        $user->password = $password;
+        $user->position = $position;
+        $user->save();
+        return $user;
+    }
+
+    public static function findByEmail($email)
+    {
+        return static::query()->where("email", $email)->first();
+    }
+}

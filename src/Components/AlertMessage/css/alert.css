@@ -1,0 +1,24 @@
+.alert {
+    @apply bg-teal-100 dark:bg-teal-900 border-t-4 border-teal-500 dark:border-teal-700 rounded-b text-teal-900 dark:text-teal-100 px-4 py-3 shadow-md mb-3 font-light text-sm;
+}
+.alert-danger {
+    @apply bg-red-100 dark:bg-red-900 border-t-4 border-red-500 dark:border-red-700 rounded-b text-red-900 dark:text-red-100 px-4 py-3 shadow-md mb-3;
+}
+.alert-success {
+    @apply bg-green-100 dark:bg-green-900 border-t-4 border-green-500 dark:border-green-700 rounded-b text-green-900 dark:text-green-100 px-4 py-3 shadow-md mb-3;
+}
+.alert-warning {
+    @apply bg-yellow-100 dark:bg-yellow-900 border-t-4 border-yellow-500 dark:border-yellow-700 rounded-b text-yellow-900 dark:text-yellow-100 px-4 py-3 shadow-md mb-3;
+}
+.alert-info {
+    @apply bg-sky-100 dark:bg-sky-900 border-t-4 border-sky-500 dark:border-sky-700 rounded-b text-sky-900 dark:text-sky-100 px-4 py-3 shadow-md mb-3;
+}
+.alert-simple {
+    @apply text-sm border px-3 py-2 rounded relative dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200;
+}
+.alert a {
+    @apply text-blue-500 dark:text-blue-300;
+}
+.alert a:hover {
+    @apply text-blue-700 dark:text-blue-500 underline;
+}

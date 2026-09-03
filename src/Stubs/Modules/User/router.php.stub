@@ -1,0 +1,9 @@
+<?php
+
+use CrudBooster\Helpers\CBRoute;
+use App\Cb\Modules\User\Livewire\User;
+use App\Cb\Modules\User\Livewire\UserForm;
+
+CBRoute::createRoute('user',
+                        User::class,
+                        UserForm::class);

@@ -1,0 +1,26 @@
+<?php
+
+namespace {namespace};
+
+use Illuminate\Database\Eloquent\Model;
+{import_hasUuid}
+{import_hasSoftDelete}
+
+class {className} extends Model
+{
+    {hasUuid}
+    {hasSoftDelete}
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = '{table}';
+
+    protected $fillable = {fillable};
+
+    protected $primaryKey = '{primaryKey}';
+
+    protected $hidden = [];
+}
