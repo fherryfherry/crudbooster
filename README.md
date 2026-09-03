@@ -14,6 +14,15 @@ CRUDBooster uses the following dependencies:
 - [Laravel Excel](https://laravel-excel.com/) (Export & Import Excel)
 - [DomPDF](https://github.com/dompdf/dompdf) (Export PDF)
 
+### Prerequisites
+
+- PHP >= 8.2 (PHP >= 8.3 if you're on Laravel 13.x)
+- Laravel 11.x, 12.x, or 13.x
+- Composer
+- Git
+- PHP extensions: Ctype, cURL, DOM, Fileinfo, Filter, GD, Hash, Mbstring, OpenSSL, PCRE, PDO, Session, Tokenizer, XML, Zip
+- A supported database: MySQL 5.7.7+, MariaDB 10.2.2+, PostgreSQL, SQLite, or SQL Server
+
 ### Quick Install
 
 ```bash
