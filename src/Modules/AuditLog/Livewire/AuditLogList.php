@@ -126,6 +126,7 @@ class AuditLogList extends Component
         $this->selectedLogId = $id;
         $this->selectedLog = $log->toArray();
         $this->showDetailModal = true;
+        $this->dispatch('open-dialog-audit-detail');
     }
 
     public function closeDetail(): void
@@ -133,6 +134,7 @@ class AuditLogList extends Component
         $this->showDetailModal = false;
         $this->selectedLogId = null;
         $this->selectedLog = [];
+        $this->dispatch('close-dialog-audit-detail');
     }
 
     public function prettyJson(array|null $value): string

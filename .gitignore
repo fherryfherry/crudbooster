@@ -15,4 +15,9 @@ src/Themes/assets/css/app.tailwind.css
 .cursor/*
 dist/*
 cb-test/*
-CLAUDE.md
+public/
+
+/*.md
+!/README.md
+!/CODEBASE_DOCUMENTATION.md
+!/CHANGELOG.md
